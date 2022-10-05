@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 // images
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/logo-2.png';
 
 type AccountLayoutProps = {
     bottomLinks?: React$Element<any>,
@@ -34,7 +34,7 @@ const AccountLayout = ({ bottomLinks, children }: AccountLayoutProps): React$Ele
                                 <Card.Header className="pt-4 pb-4 text-center bg-primary">
                                     <Link to="/">
                                         <span>
-                                            <img src={Logo} alt="" height="18" />
+                                            <img src={Logo} alt="" height="32" />
                                         </span>
                                     </Link>
                                 </Card.Header>
@@ -47,7 +47,7 @@ const AccountLayout = ({ bottomLinks, children }: AccountLayoutProps): React$Ele
                     </Row>
                 </Container>
             </div>
-            <footer className="footer footer-alt">{t('2018 - 2021 © Hyper - Coderthemes.com')}</footer>
+            <footer className="footer footer-alt">{t('')}</footer>
         </>
     );
 };

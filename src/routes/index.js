@@ -37,10 +37,13 @@ const EWalletDashboard = React.lazy(() => import('../pages/dashboard/E-Wallet'))
 
 // apps
 const CalendarApp = React.lazy(() => import('../pages/apps/Calendar'));
+const Tickets = React.lazy(() => import('../pages/apps/Tickets'));
 const Projects = React.lazy(() => import('../pages/apps/Projects'));
 const ProjectDetail = React.lazy(() => import('../pages/apps/Projects/Detail'));
 const ProjectGannt = React.lazy(() => import('../pages/apps/Projects/Gantt'));
 const ProjectForm = React.lazy(() => import('../pages/apps/Projects/ProjectForm'));
+
+const ChatTicket= React.lazy(() => import('../pages/apps/ChatTicket'));
 
 // - chat
 const ChatApp = React.lazy(() => import('../pages/apps/Chat'));
@@ -52,6 +55,7 @@ const CRMManagement = React.lazy(() => import('../pages/apps/CRM/Management'));
 const CRMClients = React.lazy(() => import('../pages/apps/CRM/Clients'));
 const CRMOrderList = React.lazy(() => import('../pages/apps/CRM/OrderList'));
 
+
 // - ecommece pages
 const EcommerceProducts = React.lazy(() => import('../pages/apps/Ecommerce/Products'));
 const ProductDetails = React.lazy(() => import('../pages/apps/Ecommerce/ProductDetails'));
@@ -61,6 +65,7 @@ const Customers = React.lazy(() => import('../pages/apps/Ecommerce/Customers'));
 const Cart = React.lazy(() => import('../pages/apps/Ecommerce/Cart'));
 const Checkout = React.lazy(() => import('../pages/apps/Ecommerce/Checkout'));
 const Sellers = React.lazy(() => import('../pages/apps/Ecommerce/Sellers'));
+const Others = React.lazy(() => import('../pages/apps/Ecommerce/Others'));
 
 // - email
 const Inbox = React.lazy(() => import('../pages/apps/Email/Inbox'));
@@ -108,6 +113,8 @@ const EmbedVideo = React.lazy(() => import('../pages/uikit/EmbedVideo'));
 const Grid = React.lazy(() => import('../pages/uikit/Grid'));
 const ListGroups = React.lazy(() => import('../pages/uikit/ListGroups'));
 const Modals = React.lazy(() => import('../pages/uikit/Modals'));
+const ModalsOthers = React.lazy(() => import('../pages/uikit/ModalsOthers'));
+const ModalsSellersAction = React.lazy(() => import('../pages/uikit/ModalsSellersAction'));
 const Notifications = React.lazy(() => import('../pages/uikit/Notifications'));
 const Offcanvases = React.lazy(() => import('../pages/uikit/Offcanvas'));
 const Paginations = React.lazy(() => import('../pages/uikit/Paginations'));
@@ -269,6 +276,10 @@ const AllRoutes = () => {
                             element: <LoadComponent component={ChatApp} />,
                         },
                         {
+                            path: 'chatticket',
+                            element: <LoadComponent component={ChatTicket} />,
+                        },
+                        {
                             path: 'crm',
                             children: [
                                 {
@@ -328,7 +339,15 @@ const AllRoutes = () => {
                                     path: 'sellers',
                                     element: <LoadComponent component={Sellers} />,
                                 },
+                                {
+                                    path: 'others',
+                                    element: <LoadComponent component={Others} />,
+                                },
                             ],
+                        },
+                        {
+                            path: 'tickets',
+                            element: <LoadComponent component={Tickets} />,
                         },
                         {
                             path: 'email',
@@ -490,6 +509,14 @@ const AllRoutes = () => {
                                 {
                                     path: 'modals',
                                     element: <LoadComponent component={Modals} />,
+                                },
+                                {
+                                    path: 'modalsothers',
+                                    element: <LoadComponent component={ModalsOthers} />,
+                                },
+                                {
+                                    path: 'modalssellersaction',
+                                    element: <LoadComponent component={ModalsSellersAction} />,
                                 },
                                 {
                                     path: 'notifications',

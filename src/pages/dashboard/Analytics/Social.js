@@ -7,9 +7,9 @@ const Social = (): React$Element<any> => {
     return (
         <Card>
             <Card.Body>
-                <Link to="#" className="p-0 float-end">
+                {/*<Link to="#" className="p-0 float-end">
                     Export <i className="mdi mdi-download ms-1"></i>
-                </Link>
+    </Link>*/}
                 <h4 className="header-title mt-1 mb-3">Social Media Traffic</h4>
 
                 <Table responsive className="table table-sm table-centered mb-0 font-14">

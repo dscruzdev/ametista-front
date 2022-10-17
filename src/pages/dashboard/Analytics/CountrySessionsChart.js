@@ -4,7 +4,7 @@ import Chart from 'react-apexcharts';
 import { Card, Row, Col } from 'react-bootstrap';
 
 // components
-import { WorldVectorMap } from '../../../components/VectorMap/';
+import { WorldVectorMap } from '../../../components/VectorMap';
 import CardTitle from '../../../components/CardTitle';
 
 const CountrySessionsChart = (): React$Element<any> => {

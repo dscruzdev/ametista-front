@@ -35,7 +35,7 @@ const StatisticsWidget = (props: StatisticsWidgetProps): React$Element<any> => {
                 <h5 className={classNames('fw-normal', 'mt-0', textClass)} title={props.description}>
                     {props.title}
                 </h5>
-                <h3 className={classNames('mt-3', 'mb-3', props.textClass ? props.textClass : null)}>{props.stats}</h3>
+                <h2 className={classNames('mt-3', 'mb-3', props.textClass ? props.textClass : null)}>{props.stats}</h2>
 
                 {props.trend && (
                     <p className={classNames('mb-0', textClass)}>

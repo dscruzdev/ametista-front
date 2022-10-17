@@ -3,11 +3,9 @@ import React, { useState } from 'react';
 import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { FormInput } from '../../components/';
-import Select from 'react-select';
 
 // components
-//import PageTitle from '../../components/PageTitle';
+import PageTitle from '../../../components/PageTitle';
 
 // images
 //import logodark from '../../assets/images/logo-dark.png';
@@ -121,7 +119,7 @@ const ModalSizes = () => {
 
 const ModalsWithPages = () => {
     const [signUpModal, setSignUpModal] = useState(false);
-    //const [signInModal, setSignInModal] = useState(false);
+    const [signInModal, setSignInModal] = useState(false);
 
     /**
      * Show/hide the modal
@@ -130,137 +128,87 @@ const ModalsWithPages = () => {
         setSignUpModal(!signUpModal);
     };
 
-    /*const toggleSignIn = () => {
+    const toggleSignIn = () => {
         setSignInModal(!signInModal);
-    };*/
+    };
 
     return (
-        <div>
-                <Row>
-                <Col sm={5}>
-                <Button variant="primary" className="mb-2" onClick={toggleSignUp}>
-                    <i className="mdi mdi-plus-circle me-2"></i> Cadastrar funcionário
-                </Button>
-                </Col>
+        <Card>
+            <Card.Body>
+                <h4 className="header-title">Modal with Pages</h4>
 
-                <Col sm={7}>
-                <div className="text-sm-end">            
-                <Button variant="light" className="mb-2">
-                    Exportar
-                </Button>
-                </div>
-                </Col>
-                </Row>
-              
+                <p className="text-muted">Examples of custom modals.</p>
 
-                {/*<Button variant="info" onClick={toggleSignIn}>
+                <Button variant="primary" className="me-1" onClick={toggleSignUp}>
+                    Sign Up Modal
+                </Button>
+
+                <Button variant="info" onClick={toggleSignIn}>
                     Log In Modal
-                </Button>*/}
+                </Button>
 
                 {/* Sign up Modal */}
                 <Modal show={signUpModal} onHide={toggleSignUp}>
-                    <Modal.Header>
-                            <h4 className="modal-title">Cadastro de funcionário</h4>
-                        </Modal.Header>
                     <Modal.Body>
-                        <form className="ps-3 pe-3 mt-2" action="#">
+                        <form className="ps-3 pe-3" action="#">
                             <div className="mb-3">
-                            <FormInput
-                                    label="Nome"
-                                    type="text"
-                                    name="name"
-                                    containerClass={'mb-3'}
-                                    //register={register}
-                                    key="text"
-                                    //errors={errors}
-                                    //{control}
-                                />
-                            
-
-                            <div className="mb-3">
-                            <FormInput
-                                    label="CPF"
-                                    type="text"
-                                    name="cpf"
-                                    containerClass={'mb-3'}
-                                    //register={register}
-                                    key="text"
-                                    //errors={errors}
-                                    //{control}
+                                <label htmlFor="username" className="form-label">
+                                    Name
+                                </label>
+                                <input
+                                    className="form-control"
+                                    type="email"
+                                    id="username"
+                                    required=""
+                                    placeholder="Michael Zenaty"
                                 />
                             </div>
 
                             <div className="mb-3">
-                            <FormInput
-                                    label="E-mail"
-                                    type="text"
-                                    name="email"
-                                    containerClass={'mb-3'}
-                                    //register={register}
-                                    key="text"
-                                    //errors={errors}
-                                    //{control}
+                                <label htmlFor="emailaddress" className="form-label">
+                                    Email address
+                                </label>
+                                <input
+                                    className="form-control"
+                                    type="email"
+                                    id="emailaddress"
+                                    required=""
+                                    placeholder="john@deo.com"
                                 />
                             </div>
 
                             <div className="mb-3">
-                                <FormInput
-                                    label="Senha"
+                                <label htmlFor="password" className="form-label">
+                                    Password
+                                </label>
+                                <input
+                                    className="form-control"
                                     type="password"
-                                    name="password"
-                                    containerClass={'mb-3'}
-                                    //register={register}
-                                    key="password"
+                                    required=""
+                                    id="password"
+                                    placeholder="Enter your password"
                                 />
                             </div>
 
                             <div className="mb-3">
-                            <p className="mb-1 mt-3 fw-bold">Área</p>
-                            <Select
-                                className="react-select"
-                                classNamePrefix="react-select"
-                                options={[
-                                    { value: 'administrativo', label: 'Administrativa' },
-                                    { value: 'marketing', label: 'Marketing' },
-                                    { value: 'comercial', label: 'Comercial' },
-                                ]}>
-                            </Select>
-                            </div>
-
-                            <div className="mb-3">
-                            <p className="mb-1 mt-3 fw-bold">Idiomas</p>
-                            <Select
-                                isMulti={true}
-                                options={[
-                                    { value: 'pt', label: 'Português' },
-                                    { value: 'en', label: 'Inglês' },
-                                    { value: 'es', label: 'Espanhol' },
-                                ]}
-                                className="react-select"
-                                classNamePrefix="react-select">
-                                </Select>
-                            </div>
-                            </div>
-
-                            {/*<div className="mb-3">
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="customCheck1" />
                                     <label className="form-check-label" htmlFor="customCheck1">
                                         I accept <Link to="#">Terms and Conditions</Link>
                                     </label>
                                 </div>
-            </div>*/}
+                            </div>
 
                             <div className="mb-3 text-center">
                                 <button className="btn btn-primary" type="submit">
-                                    Cadastrar
+                                    Sign Up Free
                                 </button>
                             </div>
                         </form>
                     </Modal.Body>
                 </Modal>
 
-                {/* Sign in Modal 
+                {/* Sign in Modal */}
                 <Modal show={signInModal} onHide={toggleSignIn}>
                     <Modal.Body>
                         <form className="ps-3 pe-3" action="#">
@@ -306,8 +254,9 @@ const ModalsWithPages = () => {
                             </div>
                         </form>
                     </Modal.Body>
-                </Modal>*/}
-            </div>
+                </Modal>
+            </Card.Body>
+        </Card>
     );
 };
 
@@ -335,10 +284,8 @@ const ModalWithAlerts = () => {
             <Card.Body>
                 <h4 className="header-title">Modal based Alerts</h4>
 
-               
-                <Button variant="primary" onClick={() => openModalWithClass('success')}>
-                    <i className="mdi mdi-delete"></i>
-                </Button>
+                <p className="text-muted">Show different contexual alert messages using modal component.</p>
+
                 <Button variant="success" className="me-1" onClick={() => openModalWithClass('success')}>
                     Success Alert
                 </Button>
@@ -773,24 +720,25 @@ const StaticBackdropModal = () => {
 const Modals = (): React$Element<React$FragmentType> => {
     return (
         <>
-            {/*<PageTitle
+            <PageTitle
                 breadCrumbItems={[
                     { label: 'Base UI', path: '/ui/modals' },
                     { label: 'Modals', path: '/ui/modals', active: true },
                 ]}
                 title={'Modals'}
-            />*/}
+            />
 
             <Row>
-                {/*<Col md={6}>
+                <Col md={6}>
                     <ModalSizes />
-        </Col>*/}
+                </Col>
 
-                
+                <Col md={6}>
                     <ModalsWithPages />
+                </Col>
             </Row>
 
-            {/*<Row>
+            <Row>
                 <Col md={6}>
                     <ModalWithAlerts />
                 </Col>
@@ -824,7 +772,7 @@ const Modals = (): React$Element<React$FragmentType> => {
                 <Col md={6}>
                     <StaticBackdropModal />
                 </Col>
-            </Row>*/}
+            </Row>
         </>
     );
 };

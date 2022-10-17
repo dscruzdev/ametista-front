@@ -11,8 +11,7 @@ import { showRightSidebar, changeSidebarType } from '../redux/actions';
 import LanguageDropdown from '../components/LanguageDropdown';
 import NotificationDropdown from '../components/NotificationDropdown';
 import ProfileDropdown from '../components/ProfileDropdown';
-import SearchDropdown from '../components/SearchDropdown';
-import TopbarSearch from '../components/TopbarSearch';
+
 import AppsDropdown from '../components/AppsDropdown/';
 
 // images
@@ -186,31 +185,16 @@ const Topbar = ({ hideLogo, navCssClasses, openLeftMenuCallBack, topbarDark }: T
                     )}
 
                     <ul className="list-unstyled topbar-menu float-end mb-0">
-                        <li className="notification-list topbar-dropdown d-xl-none">
-                            <SearchDropdown />
-                        </li>
-                        <li className="dropdown notification-list topbar-dropdown d-none d-lg-block">
-                            <LanguageDropdown />
-                        </li>
                         <li className="dropdown notification-list">
                             <NotificationDropdown notifications={Notifications} />
                         </li>
-                        <li className="dropdown notification-list d-none d-sm-inline-block">
-                            <AppsDropdown />
-                        </li>
-                        <li className="notification-list">
-                            <button
-                                className="nav-link dropdown-toggle end-bar-toggle arrow-none btn btn-link shadow-none"
-                                onClick={handleRightSideBar}>
-                                <i className="dripicons-gear noti-icon"></i>
-                            </button>
-                        </li>
+
                         <li className="dropdown notification-list">
                             <ProfileDropdown
                                 profilePic={profilePic}
                                 menuItems={ProfileMenus}
-                                username={'Dominic Keller'}
-                                userTitle={'Founder'}
+                                username={'Joyce Ribeiro'}
+                                userTitle={'Administradora'}
                             />
                         </li>
                     </ul>
@@ -246,7 +230,7 @@ const Topbar = ({ hideLogo, navCssClasses, openLeftMenuCallBack, topbarDark }: T
                             </div>
                         </Link>
                     )}
-                    <TopbarSearch />
+           
                 </div>
             </div>
         </>

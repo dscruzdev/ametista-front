@@ -23,9 +23,9 @@ const BottomLink = () => {
         <Row className="mt-3">
             <Col className="text-center">
                 <p className="text-muted">
-                    {t('Back to')}{' '}
+                    {t('Volte para')}{' '}
                     <Link to={'/account/login'} className="text-muted ms-1">
-                        <b>{t('Log In')}</b>
+                        <b>{t('Entrar')}</b>
                     </Link>
                 </p>
             </Col>
@@ -54,7 +54,7 @@ const ForgetPassword = (): React$Element<any> => {
      */
     const schemaResolver = yupResolver(
         yup.object().shape({
-            username: yup.string().required(t('Please enter Username')),
+            username: yup.string().required(t('Por favor, digite seu e-mail.')),
         })
     );
 
@@ -69,10 +69,10 @@ const ForgetPassword = (): React$Element<any> => {
         <>
             <AccountLayout bottomLinks={<BottomLink />}>
                 <div className="text-center m-auto">
-                    <h4 className="text-dark-50 text-center mt-0 font-weight-bold">{t('Reset Password')}</h4>
+                    <h4 className="text-dark-50 text-center mt-0 font-weight-bold">{t('Redefinir senha')}</h4>
                     <p className="text-muted mb-4">
                         {t(
-                            "Enter your email address and we'll send you an email with instructions to reset your password"
+                            "Digite seu e-mail para receber as instruções e redefinir sua senha."
                         )}
                     </p>
                 </div>
@@ -88,16 +88,16 @@ const ForgetPassword = (): React$Element<any> => {
                 {!passwordReset && (
                     <VerticalForm onSubmit={onSubmit} resolver={schemaResolver}>
                         <FormInput
-                            label={t('Username')}
+                            label={t('E-mail')}
                             type="text"
                             name="username"
-                            placeholder={t('Enter your Username')}
+                            placeholder={t('Digite seu e-mail.')}
                             containerClass={'mb-3'}
                         />
 
                         <div className="mb-3 mb-0 text-center">
                             <Button variant="primary" type="submit" disabled={loading}>
-                                {t('Submit')}
+                                {t('Enviar')}
                             </Button>
                         </div>
                     </VerticalForm>

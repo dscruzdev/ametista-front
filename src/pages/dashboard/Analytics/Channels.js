@@ -7,44 +7,51 @@ const Channels = (): React$Element<any> => {
     return (
         <Card>
             <Card.Body>
-                <Link to="#" className="p-0 float-end">
+                {/*<Link to="#" className="p-0 float-end">
                     Export <i className="mdi mdi-download ms-1"></i>
-                </Link>
-                <h4 className="header-title  mt-1 mb-3">Channels</h4>
+    </Link>*/}
+                <h4 className="header-title  mt-3 mb-3">Chamados por canal</h4>
 
-                <Table responsive className="table table-sm table-centered mb-0 font-14">
+                <Table responsive className="table table-sm table-centered mb-3 font-14">
                     <thead className="table-light">
                         <tr>
-                            <th>Channel</th>
-                            <th>Visits</th>
+                            <th>Canal</th>
+                            <th>Chamados</th>
                             <th style={{ width: '40%' }}>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Direct</td>
-                            <td>2,050</td>
+                            <td>WhatsApp</td>
+                            <td>15</td>
                             <td>
-                                <ProgressBar now={65} style={{ height: '3px' }} />
+                                <ProgressBar now={65} style={{ height: '3px' }} variant="success"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>Organic Search</td>
-                            <td>1,405</td>
+                            <td>Instagram Direct</td>
+                            <td>10</td>
                             <td>
-                                <ProgressBar now={45} style={{ height: '3px' }} variant="info" />
+                                <ProgressBar now={45} style={{ height: '3px' }}  />
                             </td>
                         </tr>
                         <tr>
-                            <td>Refferal</td>
-                            <td>750</td>
+                            <td>Facebook Messenger</td>
+                            <td>3</td>
                             <td>
-                                <ProgressBar now={30} style={{ height: '3px' }} variant="warning" />
+                                <ProgressBar now={30} style={{ height: '3px' }} variant="info" />
                             </td>
                         </tr>
                         <tr>
-                            <td>Social</td>
-                            <td>540</td>
+                            <td>E-mail</td>
+                            <td>2</td>
+                            <td>
+                                <ProgressBar now={25} style={{ height: '3px' }} variant="warning" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>SMS</td>
+                            <td>1</td>
                             <td>
                                 <ProgressBar now={25} style={{ height: '3px' }} variant="danger" />
                             </td>

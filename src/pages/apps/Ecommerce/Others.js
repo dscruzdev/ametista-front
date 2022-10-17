@@ -7,11 +7,10 @@ import Chart from 'react-apexcharts';
 // components
 //import PageTitle from '../../../components/PageTitle';
 import Table from '../../../components/Table';
-import Modals from '../../uikit/Modals';
+import ModalsOthers from '../../uikit/ModalsOthers';
 
 // dummy data
 import { sellers } from './Data';
-import ModalsSellersAction from '../../uikit/ModalsSellersAction';
 
 /* name column render */
 const NameColumn = ({ row }) => {
@@ -77,7 +76,14 @@ const RevenueColumn = ({ row }) => {
 const ActionColumn = ({ row }) => {
     return (
         <>
-            <ModalsSellersAction />
+            <Link to="#" className="action-icon">
+                {' '}
+                <i className="mdi mdi-square-edit-outline"></i>
+            </Link>
+            <Link to="#" className="action-icon">
+                {' '}
+                <i className="mdi mdi-delete"></i>
+            </Link>
         </>
     );
 };
@@ -85,20 +91,15 @@ const ActionColumn = ({ row }) => {
 // get all columns
 const columns = [
     {
-        Header: 'Funcionário',
-        accessor: 'name',
+        Header: 'Conteúdo',
+        accessor: 'content',
         sort: true,
         Cell: NameColumn,
         classes: 'table-user',
     },
     {
-        Header: 'CPF',
-        accessor: 'cpf',
-        sort: true,
-    },
-    {
-        Header: 'E-mail',
-        accessor: 'email',
+        Header: 'Tipo',
+        accessor: 'type',
         sort: true,
     },
    /* {
@@ -144,16 +145,9 @@ const sizePerPageList = [
 
 
 // main component
-const Sellers = (): React$Element<React$FragmentType> => {
+const Others = (): React$Element<React$FragmentType> => {
     return (
         <>
-        <Row>
-                <Col>
-                    <div className="page-title-box">
-                        <h4 className="page-title">Funcionários</h4>
-                    </div>
-                </Col>
-            </Row>
            {/*} <PageTitle
                 breadCrumbItems={[
                     { label: 'eCommerce', path: '/apps/ecommerce/sellers' },
@@ -161,13 +155,21 @@ const Sellers = (): React$Element<React$FragmentType> => {
                 ]}
                 title={'Sellers'}
             />*/}
+
+            <Row>
+                <Col>
+                    <div className="page-title-box">
+                        <h4 className="page-title">Outros cadastros</h4>
+                    </div>
+                </Col>
+            </Row>
             
             <Row>
                 <Col xs={12}>
                     <Card>
                         <Card.Body>
                             <Row className="mb-2">
-                                 <Modals />
+                            <ModalsOthers />
                                  {/*<Col sm={5}>
                                     <Button variant="primary" className="mb-2">
                                         <i className="mdi mdi-plus-circle me-2"></i> Cadastrar funcionário
@@ -212,4 +214,4 @@ const Sellers = (): React$Element<React$FragmentType> => {
     );
 };
 
-export default Sellers;
+export default Others;

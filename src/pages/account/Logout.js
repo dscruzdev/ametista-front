@@ -22,9 +22,9 @@ const BottomLink = () => {
         <Row className="mt-3">
             <Col className="text-center">
                 <p className="text-muted">
-                    {t('Back to ')}{' '}
+                    {t('Volte para ')}{' '}
                     <Link to={'/account/login'} className="text-muted ms-1">
-                        <b>{t('Log In')}</b>
+                        <b>{t('Entrar')}</b>
                     </Link>
                 </p>
             </Col>
@@ -44,8 +44,8 @@ const Logout = (): React$Element<any> | React$Element<React$FragmentType> => {
         <>
             <AccountLayout bottomLinks={<BottomLink />}>
                 <div className="text-center w-75 m-auto">
-                    <h4 className="text-dark-50 text-center mt-0 fw-bold">{t('See You Again !')}</h4>
-                    <p className="text-muted mb-4">{t('You are now successfully sign out.')}</p>
+                    <h4 className="text-dark-50 text-center mt-0 fw-bold">{t('Até mais!')}</h4>
+                    <p className="text-muted mb-3">{t('Você foi desconectado.')}</p>
 
                     <div className="logout-icon m-auto">
                         <img src={logoutIcon} alt="" />

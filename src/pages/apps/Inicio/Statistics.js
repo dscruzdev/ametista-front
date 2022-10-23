@@ -40,7 +40,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                         <h3>
                                             <span>70</span>
                                         </h3>
-                                        <p className="text-muted font-15 mb-0">CSAT</p>
+                                        <p className="text-muted font-15 mb-0">Customer Satisfation Score (CSAT)</p>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -52,7 +52,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                         <h3>
                                             <span>89</span>
                                         </h3>
-                                        <p className="text-muted font-15 mb-0">NPS</p>
+                                        <p className="text-muted font-15 mb-0">Net Promoter Score (NPS)</p>
                                     </Card.Body>
                                 </Card>
                             </Col>

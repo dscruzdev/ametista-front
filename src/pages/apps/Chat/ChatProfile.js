@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, Dropdown, Button, Row, Col } from 'react-bootstrap';
 import ModalsComments from '../../uikit/ModalsComments';
 import ModalsWriteComments from '../../uikit/ModalsWriteComments';
-import ModalsDescriptionEdit from '../../uikit/ModalsDescriptionEdit';
+import ModalsTicketEdit from '../../uikit/ModalsTicketEdit';
 
 type ChatProfileProps = {
     selectedUser: {
@@ -61,12 +61,18 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
 
                         <div className="mt-3">
                         <hr className="" />
-                        <p className="mt-4 mb-1">
+                        <Row>
+                        <Col md={8}>
+                            <p className="mt-2 mb-1">
                                 <strong>
                                     <i className="uil uil-at"></i> E-mail:
                                 </strong>
                             </p>
-                            <p>{user.email}</p>
+                            <p className="mb-0">{user.email}</p>
+                            </Col>
+                            <ModalsTicketEdit />
+                            </Row>
+                            
 
                             <p className="mt-3 mb-1">
                                 <strong>
@@ -84,7 +90,7 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
 
                             <p className="mt-3 mb-1">
                                 <strong>
-                                    <i className="uil-tag"></i> Número do chamado:
+                                    <i className="mdi mdi-identifier"></i> Número do chamado:
                                 </strong>
                             </p>
                             <p>{user.phone}</p>
@@ -104,18 +110,13 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                     );
                                 })}
                             </p>
-                            <Row>
-                                <Col>
+                       
                             <p className="mb-2 mt-2">
                                 <strong>
                                     <i className="uil-align-left"></i> Descrição:
                                 </strong>
                             </p>
-                            </Col>
-
-                            <ModalsDescriptionEdit />
-
-                            </Row>
+                           
                             <p>{user.description}</p>
                         
                             <p className="mt-3 mb-2">

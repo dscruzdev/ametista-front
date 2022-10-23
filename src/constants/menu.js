@@ -16,14 +16,14 @@ const MENU_ITEMS = [
             {
                 key: 'staff',
                 label: 'Funcionários',
-                url: 'apps/ecommerce/sellers',
+                url: 'apps/registers/employees',
                 parentKey: 'registers',
             },
 
             {
                 key: 'others',
                 label: 'Outros',
-                url: 'apps/ecommerce/others',
+                url: 'apps/registers/others',
                 parentKey: 'registers',}
         ],
     },

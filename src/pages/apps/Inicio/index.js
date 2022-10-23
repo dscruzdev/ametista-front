@@ -110,7 +110,7 @@ const Inicio = (): React$Element<React$FragmentType> => {
             </Row>
 
             <div className="mt-2 mb-3 text-end">
-                        <Link to="#">
+                        <Link to="/apps/dash">
                             Ver mais<i className="uil uil-arrow-right ms-1"></i>
                         </Link>
                     </div>

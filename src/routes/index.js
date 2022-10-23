@@ -47,6 +47,11 @@ const ProjectForm = React.lazy(() => import('../pages/apps/Projects/ProjectForm'
 
 const ChatTicket= React.lazy(() => import('../pages/apps/ChatTicket'));
 
+//- regsiters
+const Others = React.lazy(() => import('../pages/apps/Registers/Others'));
+const Employees = React.lazy(() => import('../pages/apps/Registers/Employees'));
+
+
 // - chat
 const ChatApp = React.lazy(() => import('../pages/apps/Chat'));
 
@@ -67,7 +72,7 @@ const Customers = React.lazy(() => import('../pages/apps/Ecommerce/Customers'));
 const Cart = React.lazy(() => import('../pages/apps/Ecommerce/Cart'));
 const Checkout = React.lazy(() => import('../pages/apps/Ecommerce/Checkout'));
 const Sellers = React.lazy(() => import('../pages/apps/Ecommerce/Sellers'));
-const Others = React.lazy(() => import('../pages/apps/Ecommerce/Others'));
+//const Others = React.lazy(() => import('../pages/apps/Ecommerce/Others'));
 
 // - email
 const Inbox = React.lazy(() => import('../pages/apps/Email/Inbox'));
@@ -116,7 +121,7 @@ const Grid = React.lazy(() => import('../pages/uikit/Grid'));
 const ListGroups = React.lazy(() => import('../pages/uikit/ListGroups'));
 const Modals = React.lazy(() => import('../pages/uikit/Modals'));
 const ModalsOthers = React.lazy(() => import('../pages/uikit/ModalsOthers'));
-const ModalsSellersAction = React.lazy(() => import('../pages/uikit/ModalsSellersAction'));
+const ModalsEmployeesAction = React.lazy(() => import('../pages/uikit/ModalsEmployeesAction'));
 const ModalsComments = React.lazy(() => import('../pages/uikit/ModalsComments'));
 const ModalsWriteComments = React.lazy(() => import('../pages/uikit/ModalsWriteComments'));
 const Notifications = React.lazy(() => import('../pages/uikit/Notifications'));
@@ -354,6 +359,19 @@ const AllRoutes = () => {
                             element: <LoadComponent component={Tickets} />,
                         },
                         {
+                            path: 'Registers',
+                            children: [
+                                {
+                                    path: 'employees',
+                                    element: <LoadComponent component={Employees} />,
+                                },
+                                {
+                                    path: 'others',
+                                    element: <LoadComponent component={Others} />,
+                                },
+                            ],
+                        },
+                        {
                             path: 'Inicio',
                             element: <LoadComponent component={Inicio} />,
                         },
@@ -527,8 +545,8 @@ const AllRoutes = () => {
                                     element: <LoadComponent component={ModalsOthers} />,
                                 },
                                 {
-                                    path: 'modalssellersaction',
-                                    element: <LoadComponent component={ModalsSellersAction} />,
+                                    path: 'modalsemployeesaction',
+                                    element: <LoadComponent component={ModalsEmployeesAction} />,
                                 },
                                 {
                                     path: 'modalscomments',

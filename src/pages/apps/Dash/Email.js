@@ -1,12 +1,11 @@
 // @flow
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import StatisticsM from './StatisticsM';
-import MetricsSuccessM from './MetricsSuccessM';
-
+import StatisticsE from './StatisticsE';
+import MetricsSuccessE from './MetricsSuccessE';
 
 // Billing
-const MensagensInst = (): React$Element<React$FragmentType> => {
+const Email = (): React$Element<React$FragmentType> => {
     /*
      * form validation schema
      */
@@ -14,17 +13,17 @@ const MensagensInst = (): React$Element<React$FragmentType> => {
         <>
             <Row>
                <Col xl={12} lg={12}>
-                    <StatisticsM />
+                    <StatisticsE />
                 </Col>
             </Row>
 
-             <Row>
+            <Row>
                 <Col>
-                    <MetricsSuccessM />
+                    <MetricsSuccessE />
                 </Col>
             </Row>
         </>
     );
 };
 
-export default MensagensInst;
+export default Email;

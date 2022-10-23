@@ -11,7 +11,7 @@ import Modals from '../../uikit/Modals';
 
 // dummy data
 import { sellers } from './Data';
-//import ModalsSellersAction from '../../uikit/ModalsSellersAction';
+import ModalsEmployeesAction from '../../uikit/ModalsEmployeesAction';
 
 /* name column render */
 const NameColumn = ({ row }) => {
@@ -77,7 +77,7 @@ const RevenueColumn = ({ row }) => {
 const ActionColumn = ({ row }) => {
     return (
         <>
-           {/* <ModalsSellersAction />*/}
+            <ModalsEmployeesAction />
         </>
     );
 };
@@ -144,7 +144,7 @@ const sizePerPageList = [
 
 
 // main component
-const Sellers = (): React$Element<React$FragmentType> => {
+const Employees = (): React$Element<React$FragmentType> => {
     return (
         <>
         <Row>
@@ -212,4 +212,4 @@ const Sellers = (): React$Element<React$FragmentType> => {
     );
 };
 
-export default Sellers;
+export default Employees;

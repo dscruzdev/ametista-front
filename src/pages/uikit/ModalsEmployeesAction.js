@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { FormInput } from '../../components/';
+import { FormInput } from '../../components';
 import Select from 'react-select';
+import Statistics from '../apps/Inicio/Statistics';
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -15,27 +16,25 @@ import Select from 'react-select';
 
 const ModalsWithPagesArea = () => {
     const [AttendantEditModal, setAttendantEditModal] = useState(false);
-    const [AttendantDeleteModal, setAttendantDeleteModal] = useState(false);
+
     //const [signInModal, setSignInModal] = useState(false);
 
     /**
      * Show/hide the modal
      */
+
+
+
     const toggleAttendantEdit = () => {
         setAttendantEditModal(!AttendantEditModal);
     };
-
-    const toggleAttendantDelete = () => {
-        setAttendantDeleteModal(!AttendantDeleteModal);
-    };
-
     /*const toggleSignIn = () => {
         setSignInModal(!signInModal);
     };*/
 
     return (
         <div>
-            
+                <ModalDetails />
                 
                 <Button variant="primary" className="me-2 mb-1" onClick={toggleAttendantEdit}>
                     <i className="mdi mdi-square-edit-outline"></i>
@@ -43,6 +42,7 @@ const ModalsWithPagesArea = () => {
 
 
                 <ModalPositions />
+                
               
 
                 {/*<Button variant="info" onClick={toggleSignIn}>
@@ -51,7 +51,8 @@ const ModalsWithPagesArea = () => {
 
                 {/* Sign up Modal */}
                 <Modal show={AttendantEditModal} onHide={toggleAttendantEdit}>
-                    <Modal.Header>
+                    <Modal.Header onHide={toggleAttendantEdit}
+                            closeButton className='modal-colored-header bg-primary'>
                             <h4 className="modal-title">Cadastro de funcionário</h4>
                         </Modal.Header>
                     <Modal.Body>
@@ -120,7 +121,7 @@ const ModalsWithPagesArea = () => {
                             </div>
 
                             <div className="mb-3">
-                            <p className="mb-1 mt-3 fw-bold">AttendantDeletes</p>
+                            <p className="mb-1 mt-3 fw-bold">Idiomas</p>
                             <Select
                                 isMulti={true}
                                 options={[
@@ -143,13 +144,16 @@ const ModalsWithPagesArea = () => {
                                 </div>
             </div>*/}
 
-                            <div className="mb-3 text-center">
-                                <button className="btn btn-primary" type="submit">
-                                    Cadastrar
-                                </button>
-                            </div>
+                            
                         </form>
+                        
                     </Modal.Body>
+                    <Modal.Footer>
+                    
+                            <Button variant="primary" type="submit" onClick={toggleAttendantEdit}>
+                                Salvar
+                            </Button>
+                        </Modal.Footer>
                 </Modal>
                 
                 
@@ -186,7 +190,7 @@ const ModalPositions = () => {
                     
 
                     <Modal show={modal} onHide={toggle} dialogClassName={className}>
-                        <Modal.Header onHide={toggle} closeButton>
+                        <Modal.Header onHide={toggle} closeButton className='modal-colored-header bg-primary'>
                         </Modal.Header>
                         <Modal.Body className="mt-3 mb-3">
                             <h4 className="text-center">Tem certeza que deseja realizar essa exclusão?</h4>
@@ -204,8 +208,50 @@ const ModalPositions = () => {
     );
 };
 
+const ModalDetails = () => {
+    const [modal, setModal] = useState(false);
+    const [className, setClassName] = useState(null);
 
-const ModalsSellersAction = (): React$Element<React$FragmentType> => {
+    /**
+     * Show/hide the modal
+     */
+    const toggle = () => {
+        setModal(!modal);
+    };
+
+    /**
+     * Opens modal with custom class
+     */
+    const openModalWithClass = (className) => {
+        setClassName(className);
+        toggle();
+    };
+    return (
+        <>
+            
+
+                    <Button variant="primary" className="me-2 mb-1" onClick={() => openModalWithClass('modal-dialog-centered')}>
+                    <i className="mdi mdi-eye"></i>
+                    </Button>
+
+                    <Modal show={modal} onHide={toggle} dialogClassName={className} size="lg">
+                        <Modal.Header onHide={toggle} closeButton className='modal-colored-header bg-primary'><h4 className="modal-title">Detalhes</h4>
+                        </Modal.Header>
+                        <Modal.Body className="mt-2 mb-3">
+                            <Statistics />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={toggle}>
+                                Fechar
+                            </Button>{' '}
+                        </Modal.Footer>
+                    </Modal>
+        </>
+    );
+};
+
+
+const ModalsEmployeesAction = (): React$Element<React$FragmentType> => {
     return (
         <>
             {/*<PageTitle
@@ -266,4 +312,4 @@ const ModalsSellersAction = (): React$Element<React$FragmentType> => {
     );
 };
 
-export default ModalsSellersAction;
+export default ModalsEmployeesAction;

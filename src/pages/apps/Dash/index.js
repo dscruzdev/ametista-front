@@ -5,7 +5,7 @@ import { Row, Col, Nav, Card, Tab } from 'react-bootstrap';
 // components
 import HyperDatepicker from '../../../components/Datepicker';
 import MensagensInst from './MensagensInst';
-import Shipping from './Shipping';
+import Shipping from './Email';
 
 
 const Dash = (): React$Element<React$FragmentType> => {

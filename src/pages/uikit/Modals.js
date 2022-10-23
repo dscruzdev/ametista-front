@@ -160,7 +160,7 @@ const ModalsWithPages = () => {
                 {/* Sign up Modal */}
                 <Modal show={signUpModal} onHide={toggleSignUp}>
                     <Modal.Header onHide={toggleSignUp}
-                            closeButton>
+                            closeButton className='modal-colored-header bg-primary'>
                         
                             <h4 className="modal-title">Cadastro de funcionário</h4>
                         </Modal.Header >

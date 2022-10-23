@@ -1,20 +1,12 @@
 // @flow
 import React, { useState } from 'react';
 import { Row, Col, Nav, Card, Tab } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 // components
 import HyperDatepicker from '../../../components/Datepicker';
-import CampaignsChart from './CampaignsChart';
-
-import Statistics from './Statistics';
-import Status from './Status';
-//import SessionsChart from './SessionsChart';
-import Channels from './Channels';
-import Billing from './Billing';
+import MensagensInst from './MensagensInst';
 import Shipping from './Shipping';
-import Payment from './Payment';
-import Summary from './Summary';
+
 
 const Dash = (): React$Element<React$FragmentType> => {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -56,23 +48,23 @@ const Dash = (): React$Element<React$FragmentType> => {
                                 <Nav as="ul" variant="pills" className="nav nav-pills bg-nav-pills nav-justified mb-3">
                                     <Nav.Item as="li" className="nav-item">
                                         <Nav.Link href="#" eventKey="1" className="nav-link rounded-0">
-                                            <i className='mdi mdi-account-circle font-18'></i>
-                                            <span className="d-none d-lg-block">Billing Info</span>
+                                            <i className='mdi mdi-chat font-18'></i>
+                                            <span className="d-none d-lg-block">Mensagens Instantâneas</span>
                                         </Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item as="li" className="nav-item">
                                         <Nav.Link href="#" eventKey="2" className="nav-link rounded-0">
-                                            <i className='mdi mdi-truck-fast font-18'></i>
-                                            <span className="d-none d-lg-block">Shipping Info</span>
+                                            <i className='mdi mdi-email font-18'></i>
+                                            <span className="d-none d-lg-block">E-mail</span>
                                         </Nav.Link>
                                     </Nav.Item>
                                 </Nav>
 
                                 <Row>
-                                    <Col lg={8}>
+                                    <Col lg={12}>
                                         <Tab.Content>
                                             <Tab.Pane eventKey="1">
-                                                <Billing />
+                                                <MensagensInst />
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="2">
                                                 <Shipping />
@@ -87,97 +79,6 @@ const Dash = (): React$Element<React$FragmentType> => {
             </Tab.Container>
                 </Col>
             </Row>
-
-            <Row>
-               <Col xl={12} lg={12}>
-                    <Statistics />
-                </Col>
-            </Row>
-
-            <Row>
-                <Col xl={4} lg={6}>
-                    <Status />
-                </Col>
-                {/*<Col xl={4} lg={6}>
-                    <Statistics />
-                </Col>*/}
-
-                <Col xl={4} lg={6}>
-                    <Channels />
-                </Col>
-
-                <Col xl={4} lg={6}>
-                    <CampaignsChart />
-                </Col>
-
-                {/*<Col xl={4} sm={12}>
-                    <StatisticsWidget
-                        icon="mdi mdi-progress-star"
-                        description="csat"
-                        title="CSAT"
-                        stats="30.56%"
-                        trend={{
-                            textClass: 'text-success',
-                            icon: 'mdi mdi-arrow-up-bold',
-                            value: '77.87%',
-                            time: 'Desde mês passado',
-                        }}></StatisticsWidget>
-
-                <StatisticsWidget
-                        icon="mdi mdi-star-half-full"
-                        description="nps"
-                        title="NPS"
-                        stats="80"
-                        trend={{
-                            textClass: 'text-success',
-                            icon: 'mdi mdi-arrow-up-bold',
-                            value: '2',
-                            time: 'Desde mês passado',
-                        }}></StatisticsWidget>
-                </Col>*/}
-
-               
-
-                {/*<Col xl={9} lg={8}>
-                    <SessionsChart />
-                                </Col>*/}
-            </Row>
-
-            <div className="mt-2 mb-3 text-end">
-                        <Link to="#">
-                            Ver mais<i className="uil uil-arrow-right ms-1"></i>
-                        </Link>
-                    </div>
-
-            {/*<Row>
-                <Col>
-                    <CountrySessionsChart />
-                </Col>
-            </Row>
-
-             <Row>
-                <Col xl={6} lg={12}>
-                    <ViewsChart />
-                </Col>
-               {/* <Col xl={4} lg={6}>
-                    <BrowsersChart />
-                </Col>
-                <Col xl={6} lg={6}>
-                    <OsChart />
-        </Col>
-            </Row>*/}
-
-            {/*<Row>
-                <Col xl={4} lg={6}>
-                    <Channels />
-                </Col>
-                <Col xl={4} lg={6}>
-                    <Social />
-                </Col>
-                <Col xl={4} lg={6}>
-                    <Engagement />
-                </Col>
-            </Row>*/}
         </>
     );
 };

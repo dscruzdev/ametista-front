@@ -19,9 +19,11 @@ const users = [
         lastMessageOn: '4:30am',
         email: 'support@coderthemes.com',
         phone: '+1 456 9595 9594',
+        subject: 'Financeiro',
         location: 'California, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Favourties',
+        status: 'Em espera',
+        description:'hsJADHlidhILDJdj',
     },
     {
         id: 2,
@@ -31,9 +33,11 @@ const users = [
         lastMessageOn: '5:30am',
         email: 'support@coderthemes.com',
         phone: '+1 456 9595 9594',
+        subject: 'Financeiro',
         location: 'New York, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Friends',
+        status: 'Em andamento',
+        description:'hsJADHlidhILDJdj',
     },
     {
         id: 3,
@@ -46,7 +50,7 @@ const users = [
         phone: '+1 456 9595 9594',
         location: 'New Jersey, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Favourties',
+        status: 'Em espera',
     },
     {
         id: 4,
@@ -58,7 +62,7 @@ const users = [
         phone: '+1 456 9595 9594',
         location: 'California, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Friends',
+        status: 'Em andamento',
     },
     {
         id: 5,
@@ -71,7 +75,7 @@ const users = [
         phone: '+1 456 9595 9594',
         location: 'New York, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Friends',
+        status: 'Em andamento',
     },
     {
         id: 6,
@@ -83,7 +87,7 @@ const users = [
         phone: '+1 456 9595 9594',
         location: 'New Jersey, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Friends',
+        status: 'Em andamento',
     },
     {
         id: 7,
@@ -95,7 +99,7 @@ const users = [
         phone: '+1 456 9595 9594',
         location: 'New York, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Favourties',
+        status: 'Em espera',
     },
     {
         id: 8,
@@ -108,7 +112,7 @@ const users = [
         phone: '+1 456 9595 9594',
         location: 'New Jersey, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Friends',
+        status: 'Em andamento',
     },
 ];
 
@@ -122,7 +126,7 @@ const defaultTo = {
     phone: '+1 456 9595 9594',
     location: 'California, USA',
     languages: 'English, German, Spanish',
-    groups: 'Work, Friends',
+    status: 'Em andamento',
 };
 
 for (const user of users) {

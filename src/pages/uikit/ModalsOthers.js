@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { FormInput } from '../../components';
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -11,48 +12,41 @@ import classNames from 'classnames';
 //import logodark from '../../assets/images/logo-dark.png';
 
 
-const ModalsWithPagesArea = () => {
-    const [AreaModal, setAreaModal] = useState(false);
-    const [IdiomaModal, setIdiomaModal] = useState(false);
-    //const [signInModal, setSignInModal] = useState(false);
+const ModalWithColoredHeader1 = () => {
+    const [modal, setModal] = useState(false);
+    const [headerClassName, setHeaderClassName] = useState('');
 
     /**
      * Show/hide the modal
      */
-    const toggleArea = () => {
-        setAreaModal(!AreaModal);
+    const toggle = () => {
+        setModal(!modal);
     };
 
-    const toggleIdioma = () => {
-        setIdiomaModal(!IdiomaModal);
+    /**
+     * Opens modal with custom header
+     */
+    const openModalWithHeaderClass = (className) => {
+        setHeaderClassName(className);
+        toggle();
     };
-
-    /*const toggleSignIn = () => {
-        setSignInModal(!signInModal);
-    };*/
-
     return (
-        <div>
-                <Row>
-                <Col sm={5}>
-                <Button variant="primary" className="mb-2 me-2" onClick={toggleArea}>
-                    <i className="mdi mdi-plus-circle me-2"></i> Cadastrar área
+        <>
+             
+                <Button variant="primary" className="mb-2 me-2" onClick={() => openModalWithHeaderClass('primary')}>
+                    <i className="mdi mdi-plus-circle me-1"></i> Cadastrar área
                 </Button>
-                <Button variant="primary-light" className="mb-2" onClick={toggleIdioma}>
-                    <i className="mdi mdi-plus-circle me-2"></i> Cadastrar idioma
-                </Button>
-                </Col>
-
-                </Row>
               
 
-                {/*<Button variant="info" onClick={toggleSignIn}>
-                    Log In Modal
-                </Button>*/}
-
-                {/* Sign up Modal */}
-                <Modal show={AreaModal} onHide={toggleArea}>
-                    <Modal.Body>
+                    <Modal show={modal} onHide={toggle}> 
+                        <Modal.Header
+                            onHide={toggle}
+                            closeButton
+                            className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+                           
+                        </Modal.Header>
+                        <Modal.Body>
+                        
                         <form className="ps-3 pe-3 mt-2" action="#">
                             <div className="mb-3">
                                 <label htmlFor="username" className="form-label">
@@ -66,30 +60,56 @@ const ModalsWithPagesArea = () => {
                                     placeholder=""
                                 />
                             </div>
-
-
-                            {/*<div className="mb-3">
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="customCheck1" />
-                                    <label className="form-check-label" htmlFor="customCheck1">
-                                        I accept <Link to="#">Terms and Conditions</Link>
-                                    </label>
-                                </div>
-            </div>*/}
-
-                            <div className="mb-3 text-center">
-                                <button className="btn btn-primary" type="submit">
-                                    Cadastrar
-                                </button>
-                            </div>
                         </form>
-                    </Modal.Body>
-                </Modal>
+                        
                 
-                <Modal show={IdiomaModal} onHide={toggleIdioma}>
-                    <Modal.Body>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant={headerClassName} onClick={toggle}>
+                                Salvar
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+        </>
+    );
+};
+
+const ModalWithColoredHeader2 = () => {
+    const [modal, setModal] = useState(false);
+    const [headerClassName, setHeaderClassName] = useState('');
+
+    /**
+     * Show/hide the modal
+     */
+    const toggle = () => {
+        setModal(!modal);
+    };
+
+    /**
+     * Opens modal with custom header
+     */
+    const openModalWithHeaderClass = (className) => {
+        setHeaderClassName(className);
+        toggle();
+    };
+    return (
+        <>
+                    
+                <Button variant="primary-light" className="mb-2" onClick={() => openModalWithHeaderClass('primary-light')}>
+                    <i className="mdi mdi-plus-circle me-1"></i> Cadastrar idioma
+                </Button>
+
+                    <Modal show={modal} onHide={toggle}> 
+                        <Modal.Header
+                            onHide={toggle}
+                            closeButton
+                            className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+                           
+                        </Modal.Header>
+                        <Modal.Body>
+                        
                         <form className="ps-3 pe-3 mt-2" action="#">
-                            <div className="mb-3">
+                        <div className="mb-3">
                                 <label htmlFor="username" className="form-label">
                                     Idioma
                                 </label>
@@ -101,76 +121,19 @@ const ModalsWithPagesArea = () => {
                                     placeholder=""
                                 />
                             </div>
-
-
-                            {/*<div className="mb-3">
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="customCheck1" />
-                                    <label className="form-check-label" htmlFor="customCheck1">
-                                        I accept <Link to="#">Terms and Conditions</Link>
-                                    </label>
-                                </div>
-            </div>*/}
-
-                            <div className="mb-3 text-center">
-                                <button className="btn btn-primary" type="submit">
-                                    Cadastrar
-                                </button>
-                            </div>
                         </form>
-                    </Modal.Body>
-                </Modal>
-                {/* Sign in Modal 
-                <Modal show={signInModal} onHide={toggleSignIn}>
-                    <Modal.Body>
-                        <form className="ps-3 pe-3" action="#">
-                            <div className="mb-3">
-                                <label htmlFor="emailaddress" className="form-label">
-                                    Email address
-                                </label>
-                                <input
-                                    className="form-control"
-                                    type="email"
-                                    id="emailaddress"
-                                    required=""
-                                    placeholder="john@deo.com"
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <label htmlFor="password" className="form-label">
-                                    Password
-                                </label>
-                                <input
-                                    className="form-control"
-                                    type="password"
-                                    required=""
-                                    id="password"
-                                    placeholder="Enter your password"
-                                />
-                            </div>
-
-                            <div className="mb-3">
-                                <div className="form-check">
-                                    <input type="checkbox" className="form-check-input" id="customCheck1" />
-                                    <label className="form-check-label" htmlFor="customCheck1">
-                                        Remember me
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div className="mb-3 text-center">
-                                <button className="btn btn-rounded btn-primary" type="submit">
-                                    Sign In
-                                </button>
-                            </div>
-                        </form>
-                    </Modal.Body>
-                </Modal>*/}
-            </div>
+                        
+                
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant={headerClassName} onClick={toggle}>
+                                Salvar
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+        </>
     );
 };
-
 
 const ModalsOthers = (): React$Element<React$FragmentType> => {
     return (
@@ -187,9 +150,11 @@ const ModalsOthers = (): React$Element<React$FragmentType> => {
                 {/*<Col md={6}>
                     <ModalSizes />
         </Col>*/}
-
-                
-                    <ModalsWithPagesArea />
+<Col sm={5}>
+<ModalWithColoredHeader1 />
+<ModalWithColoredHeader2 />
+                </Col>
+                    
             </Row>
 
             {/*<Row>

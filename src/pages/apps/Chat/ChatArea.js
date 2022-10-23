@@ -9,7 +9,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // components
-import { FormInput } from '../../../components/';
+import { FormInput } from '../../../components';
 import Loader from '../../../components/Loader';
 
 // default data
@@ -56,7 +56,7 @@ const UserMessage = ({ message, toUser }) => {
                 )}
             </div>
 
-            <Dropdown className="conversation-actions" align="end">
+            {/*<Dropdown className="conversation-actions" align="end">
                 <Dropdown.Toggle variant="link" className="btn btn-sm btn-link arrow-none shadow-none">
                     <i className="uil uil-ellipsis-v"></i>
                 </Dropdown.Toggle>
@@ -65,7 +65,7 @@ const UserMessage = ({ message, toUser }) => {
                     <Dropdown.Item>Edit</Dropdown.Item>
                     <Dropdown.Item>Delete</Dropdown.Item>
                 </Dropdown.Menu>
-            </Dropdown>
+                </Dropdown>*/}
         </li>
     );
 };
@@ -82,7 +82,7 @@ type ChatAreaProps = {
         phone: string,
         location: string,
         languages: string,
-        groups: string,
+        subject: string,
     },
 };
 
@@ -98,7 +98,7 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
         phone: '+1 456 9595 9594',
         location: 'California, USA',
         languages: 'English, German, Spanish',
-        groups: 'Work, Friends',
+        subject: 'Financeiro',
     });
 
     /*

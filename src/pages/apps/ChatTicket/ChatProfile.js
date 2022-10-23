@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
-import { Card, Dropdown, Button } from 'react-bootstrap';
+import { Card, Dropdown, Button, Row, Col } from 'react-bootstrap';
+import ModalsComments from '../../uikit/ModalsComments';
+import ModalsDescriptionEdit from '../../uikit/ModalsDescriptionEdit';
 
 type ChatProfileProps = {
     selectedUser: {
@@ -12,6 +14,7 @@ type ChatProfileProps = {
         lastMessageOn: string,
         email: string,
         phone: string,
+        suject: String;
         location: string,
         languages: string,
         subject: string,
@@ -64,6 +67,13 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                             </p>
                             <p>{user.languages}</p>
 
+                            <p className="mt-3 mb-1">
+                                <strong>
+                                    <i className="uil-tag"></i> Número do chamado:
+                                </strong>
+                            </p>
+                            <p>{user.phone}</p>
+
                             <p className="mt-3 mb-2">
                                 <strong>
                                     <i className=" uil-comment-message"></i> Assuntos:
@@ -79,17 +89,24 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                     );
                                 })}
                             </p>
-
-                            <p className="mt-3 mb-1">
+                            <Row>
+                                <Col>
+                            <p className="mb-2 mt-2">
                                 <strong>
                                     <i className="uil-align-left"></i> Descrição:
                                 </strong>
+                                
+                                
                             </p>
-                            <p>{user.description}</p>
+                            </Col>
 
-                            <Button className="btn-sm mt-1 me-2 " variant="secondary">
-                                <i className="uil-comment-exclamation me-1"></i>Ver comentários
-                            </Button>
+                            <ModalsDescriptionEdit />
+
+                            </Row>
+                            <p>{user.description}</p>
+                            
+                            <ModalsComments />
+                            
                         </div>
                     </Card.Body>
                 </Card>

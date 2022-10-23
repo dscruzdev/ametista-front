@@ -1,25 +1,22 @@
 // @flow
 import React, { useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Nav, Card, Tab } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 // components
 import HyperDatepicker from '../../../components/Datepicker';
-import StatisticsWidget from '../../../components/StatisticsWidget';
 import CampaignsChart from './CampaignsChart';
 
 import Statistics from './Statistics';
 import Status from './Status';
 //import SessionsChart from './SessionsChart';
-import CountrySessionsChart from './CountrySessionsChart';
-import ViewsChart from './ViewsChart';
-import BrowsersChart from './BrowsersChart';
-import OsChart from './OsChart';
 import Channels from './Channels';
-import Social from './Social';
-import Engagement from './Engagement';
+import Billing from './Billing';
+import Shipping from './Shipping';
+import Payment from './Payment';
+import Summary from './Summary';
 
-const AnalyticsDashboardPage = (): React$Element<React$FragmentType> => {
+const Dash = (): React$Element<React$FragmentType> => {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     /*
@@ -51,6 +48,43 @@ const AnalyticsDashboardPage = (): React$Element<React$FragmentType> => {
                         </div>
                         <h4 className="page-title">Início</h4>
                     </div>
+                    <Tab.Container defaultActiveKey="1">
+                <Row>
+                    <Col>
+                        <Card>
+                            <Card.Body>
+                                <Nav as="ul" variant="pills" className="nav nav-pills bg-nav-pills nav-justified mb-3">
+                                    <Nav.Item as="li" className="nav-item">
+                                        <Nav.Link href="#" eventKey="1" className="nav-link rounded-0">
+                                            <i className='mdi mdi-account-circle font-18'></i>
+                                            <span className="d-none d-lg-block">Billing Info</span>
+                                        </Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item as="li" className="nav-item">
+                                        <Nav.Link href="#" eventKey="2" className="nav-link rounded-0">
+                                            <i className='mdi mdi-truck-fast font-18'></i>
+                                            <span className="d-none d-lg-block">Shipping Info</span>
+                                        </Nav.Link>
+                                    </Nav.Item>
+                                </Nav>
+
+                                <Row>
+                                    <Col lg={8}>
+                                        <Tab.Content>
+                                            <Tab.Pane eventKey="1">
+                                                <Billing />
+                                            </Tab.Pane>
+                                            <Tab.Pane eventKey="2">
+                                                <Shipping />
+                                            </Tab.Pane>
+                                        </Tab.Content>
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Tab.Container>
                 </Col>
             </Row>
 
@@ -148,4 +182,4 @@ const AnalyticsDashboardPage = (): React$Element<React$FragmentType> => {
     );
 };
 
-export default AnalyticsDashboardPage;
+export default Dash;

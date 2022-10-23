@@ -19,7 +19,7 @@ type Users = {
     phone: string,
     location: string,
     languages: string,
-    groups: string,
+    status: string,
 };
 
 type ChatUsersProps = {
@@ -28,20 +28,20 @@ type ChatUsersProps = {
 
 // ChatUsers
 const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$FragmentType> => {
-    const groupFilters = ['All', 'Favourties', 'Friends'];
+    const statusFilters = ['Todos','Em espera', 'Em andamento'];
 
     const [user, setUser] = useState([...users]);
     const [selectedUser, setSelectedUser] = useState(users[1]);
-    const [selectedGroup, setSelectedGroup] = useState('All');
+    const [selectedstatus, setSelectedstatus] = useState('Todos');
 
     /**
      * Filter users
      */
-    const filterUsers = (group) => {
-        setSelectedGroup(group);
+   const filterUsers = (status) => {
+        setSelectedstatus(status);
         setUser(
-            group !== 'All'
-                ? [...users].filter((u) => u.groups.toLowerCase().indexOf(group.toLowerCase()) >= 0)
+            status !== 'Todos'
+                ? [...users].filter((u) => u.status.toLowerCase().indexOf(status.toLowerCase()) >= 0)
                 : [...users]
         );
     };
@@ -70,15 +70,15 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
             <Card>
                 <Card.Body className="p-0">
                     <ul className="nav nav-tabs nav-bordered">
-                        {groupFilters.map((group, index) => {
+                        {statusFilters.map((status, index) => {
                             return (
-                                <li key={index} className="nav-item" onClick={() => filterUsers(group)}>
+                                <li key={index} className="nav-item" onClick={() => filterUsers(status)}>
                                     <Link
                                         to="#"
                                         className={classnames('nav-link', 'py-2', {
-                                            active: selectedGroup === group,
+                                            active: selectedstatus === status,
                                         })}>
-                                        {group}
+                                        {status}
                                     </Link>
                                 </li>
                             );
@@ -88,11 +88,11 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
                     <div className="tab-content">
                         <div className="tab-pane show active">
                             <div className="app-search p-3">
-                                <div className="form-group position-relative">
+                                <div className="form-status position-relative">
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="People, groups & messages..."
+                                        placeholder=""
                                         onKeyUp={(e) => search(e.target.value)}
                                     />
                                     <span className="mdi mdi-magnify search-icon"></span>

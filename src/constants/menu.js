@@ -4,7 +4,7 @@ const MENU_ITEMS = [
         label: 'Início',
         isTitle: false,
         icon: 'uil-home-alt',
-        url: 'dashboard/analytics',
+        url: 'apps/inicio',
     },
 
     {
@@ -43,13 +43,13 @@ const MENU_ITEMS = [
         icon: 'uil-comments-alt',
         url: '/apps/chat',
     },
-    
+
     {
-        key: 'reports',
-        label: 'Relatórios',
+        key: 'dash',
+        label: 'Dashboard',
         isTitle: false,
-        icon: 'uil-file-check-alt',
-        url: '/apps/chat'
+        icon: 'uil-tachometer-fast',
+        url: '/apps/dash',
     },
    
 ];

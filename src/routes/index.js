@@ -38,6 +38,8 @@ const EWalletDashboard = React.lazy(() => import('../pages/dashboard/E-Wallet'))
 // apps
 const CalendarApp = React.lazy(() => import('../pages/apps/Calendar'));
 const Tickets = React.lazy(() => import('../pages/apps/Tickets'));
+const Inicio = React.lazy(() => import('../pages/apps/Inicio'));
+const Dash = React.lazy(() => import('../pages/apps/Dash'));
 const Projects = React.lazy(() => import('../pages/apps/Projects'));
 const ProjectDetail = React.lazy(() => import('../pages/apps/Projects/Detail'));
 const ProjectGannt = React.lazy(() => import('../pages/apps/Projects/Gantt'));
@@ -115,6 +117,8 @@ const ListGroups = React.lazy(() => import('../pages/uikit/ListGroups'));
 const Modals = React.lazy(() => import('../pages/uikit/Modals'));
 const ModalsOthers = React.lazy(() => import('../pages/uikit/ModalsOthers'));
 const ModalsSellersAction = React.lazy(() => import('../pages/uikit/ModalsSellersAction'));
+const ModalsComments = React.lazy(() => import('../pages/uikit/ModalsComments'));
+const ModalsWriteComments = React.lazy(() => import('../pages/uikit/ModalsWriteComments'));
 const Notifications = React.lazy(() => import('../pages/uikit/Notifications'));
 const Offcanvases = React.lazy(() => import('../pages/uikit/Offcanvas'));
 const Paginations = React.lazy(() => import('../pages/uikit/Paginations'));
@@ -350,6 +354,14 @@ const AllRoutes = () => {
                             element: <LoadComponent component={Tickets} />,
                         },
                         {
+                            path: 'Inicio',
+                            element: <LoadComponent component={Inicio} />,
+                        },
+                        {
+                            path: 'Dash',
+                            element: <LoadComponent component={Dash} />,
+                        },
+                        {
                             path: 'email',
                             children: [
                                 {
@@ -517,6 +529,14 @@ const AllRoutes = () => {
                                 {
                                     path: 'modalssellersaction',
                                     element: <LoadComponent component={ModalsSellersAction} />,
+                                },
+                                {
+                                    path: 'modalscomments',
+                                    element: <LoadComponent component={ModalsComments} />,
+                                },
+                                {
+                                    path: 'modalswritecomments',
+                                    element: <LoadComponent component={ModalsWriteComments} />,
                                 },
                                 {
                                     path: 'notifications',

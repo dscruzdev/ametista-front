@@ -163,7 +163,7 @@ const Tickets = (): React$Element<React$FragmentType> => {
         let updatedData = orders;
         //  filter
         updatedData =
-            OrderStatusGroup === 'All'
+            OrderStatusGroup === 'Todos'
                 ? orders
                 : [...orders].filter((o) => o.ticket_status?.includes(OrderStatusGroup));
         setOrderList(updatedData);
@@ -189,7 +189,7 @@ const Tickets = (): React$Element<React$FragmentType> => {
                                                     className="form-select"
                                                     id="status-select"
                                                     onChange={(e) => changeOrderStatusGroup(e.target.value)}>
-                                                    <option value="All">All</option>
+                                                    <option value="Todos">Todos</option>
                                                     <option value="Cancelado">Cancelado</option>
                                                     <option value="Em espera">Em espera</option>
                                                     <option value="Em andamento">Em andamento</option>

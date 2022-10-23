@@ -139,7 +139,7 @@ const ModalsWithPages = () => {
                 <Row>
                 <Col sm={5}>
                 <Button variant="primary" className="mb-2" onClick={toggleSignUp}>
-                    <i className="mdi mdi-plus-circle me-2"></i> Cadastrar funcionário
+                    <i className="mdi mdi-plus-circle me-1"></i> Cadastrar funcionário
                 </Button>
                 </Col>
 
@@ -159,9 +159,12 @@ const ModalsWithPages = () => {
 
                 {/* Sign up Modal */}
                 <Modal show={signUpModal} onHide={toggleSignUp}>
-                    <Modal.Header>
+                    <Modal.Header onHide={toggleSignUp}
+                            closeButton>
+                        
                             <h4 className="modal-title">Cadastro de funcionário</h4>
-                        </Modal.Header>
+                        </Modal.Header >
+                        
                     <Modal.Body>
                         <form className="ps-3 pe-3 mt-2" action="#">
                             <div className="mb-3">
@@ -251,13 +254,15 @@ const ModalsWithPages = () => {
                                 </div>
             </div>*/}
 
-                            <div className="mb-3 text-center">
-                                <button className="btn btn-primary" type="submit">
-                                    Cadastrar
-                                </button>
-                            </div>
+                            
                         </form>
                     </Modal.Body>
+                    <Modal.Footer>
+                    
+                            <Button variant="primary" type="submit" onClick={toggleSignUp}>
+                                Salvar
+                            </Button>
+                        </Modal.Footer>
                 </Modal>
 
                 {/* Sign in Modal 

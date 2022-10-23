@@ -33,7 +33,6 @@ const ChatTicket = (): React$Element<React$FragmentType> => {
             </Row>
 
             <Row>
-
                 <Col xxl={9} xl={{ span: 12, order: 2 }}>
                     <ChatArea selectedUser={selectedUser} />
                 </Col>

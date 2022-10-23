@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // components
-import PageTitle from '../../../components/PageTitle';
+//import PageTitle from '../../../components/PageTitle';
 
 import ChatUsers from './ChatUsers';
 import ChatArea from './ChatArea';
@@ -25,20 +25,19 @@ const ChatApp = (): React$Element<React$FragmentType> => {
 
     return (
         <>
-            <PageTitle
-                breadCrumbItems={[
-                    { label: 'Apps', path: '/apps/chat' },
-                    { label: 'Chat', path: '/apps/chat', active: true },
-                ]}
-                title={'Chat'}
-            />
+            <Row>
+                <Col>
+                    <div className="mb-3">
+                    </div>
+                </Col>
+            </Row>
 
             <Row>
-                <Col xxl={3} xl={{ span: 6, order: 1 }}>
+                <Col xxl={4} xl={{ span: 6, order: 1 }}>
                     <ChatUsers onUserSelect={onUserChange} />
                 </Col>
 
-                <Col xxl={6} xl={{ span: 12, order: 2 }}>
+                <Col xxl={5} xl={{ span: 12, order: 2 }}>
                     <ChatArea selectedUser={selectedUser} />
                 </Col>
 

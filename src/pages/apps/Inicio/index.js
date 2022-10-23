@@ -19,7 +19,7 @@ import Channels from './Channels';
 import Social from './Social';
 import Engagement from './Engagement';
 
-const AnalyticsDashboardPage = (): React$Element<React$FragmentType> => {
+const Inicio = (): React$Element<React$FragmentType> => {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     /*
@@ -148,4 +148,4 @@ const AnalyticsDashboardPage = (): React$Element<React$FragmentType> => {
     );
 };
 
-export default AnalyticsDashboardPage;
+export default Inicio;

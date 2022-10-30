@@ -8,6 +8,7 @@ import Chart from 'react-apexcharts';
 //import PageTitle from '../../../components/PageTitle';
 import Table from '../../../components/Table';
 import ModalsOthers from '../../uikit/ModalsOthers';
+import ModalsOthersAction from '../../uikit/ModalsOthersAction';
 
 // dummy data
 import { sellers } from './Data';
@@ -76,14 +77,7 @@ const RevenueColumn = ({ row }) => {
 const ActionColumn = ({ row }) => {
     return (
         <>
-            <Link to="#" className="action-icon">
-                {' '}
-                <i className="mdi mdi-square-edit-outline"></i>
-            </Link>
-            <Link to="#" className="action-icon">
-                {' '}
-                <i className="mdi mdi-delete"></i>
-            </Link>
+            <ModalsOthersAction />
         </>
     );
 };

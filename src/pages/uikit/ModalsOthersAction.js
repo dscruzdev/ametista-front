@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
+import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components';
@@ -35,7 +35,6 @@ const ModalsWithPagesArea = () => {
 
     return (
         <div>
-                <ModalDetails />
                 
                 <Button variant="primary" className="me-2 mb-1" onClick={toggleAttendantEdit}>
                     <i className="mdi mdi-square-edit-outline"></i>
@@ -134,14 +133,6 @@ const ModalsWithPagesArea = () => {
                                 classNamePrefix="react-select">
                                 </Select>
                             </div>
-
-                            <div className="mb-3 mt-3">
-
-                            <Form.Group>
-                                <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
-                                <Form.Control type="file" />
-                            </Form.Group>
-                            </div>
                             </div>
 
                             {/*<div className="mb-3">
@@ -217,51 +208,7 @@ const ModalPositions = () => {
     );
 };
 
-const ModalDetails = () => {
-    const [modal, setModal] = useState(false);
-    const [className, setClassName] = useState(null);
-
-    /**
-     * Show/hide the modal
-     */
-    const toggle = () => {
-        setModal(!modal);
-    };
-
-    /**
-     * Opens modal with custom class
-     */
-    const openModalWithClass = (className) => {
-        setClassName(className);
-        toggle();
-    };
-    return (
-        <>
-            
-
-                    <Button variant="primary" className="me-2 mb-1" onClick={() => openModalWithClass('modal-dialog-centered')}>
-                    <i className="mdi mdi-eye"></i>
-                    </Button>
-
-                    <Modal show={modal} onHide={toggle} dialogClassName={className}>
-                        <Modal.Header onHide={toggle} closeButton className='modal-colored-header bg-primary'><h4 className="modal-title">Detalhes</h4>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <StatusEmployees />
-                            <StatisticsEmployees />
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="primary" onClick={toggle}>
-                                Fechar
-                            </Button>{' '}
-                        </Modal.Footer>
-                    </Modal>
-        </>
-    );
-};
-
-
-const ModalsEmployeesAction = (): React$Element<React$FragmentType> => {
+const ModalsOthersAction = (): React$Element<React$FragmentType> => {
     return (
         <>
             {/*<PageTitle
@@ -322,4 +269,4 @@ const ModalsEmployeesAction = (): React$Element<React$FragmentType> => {
     );
 };
 
-export default ModalsEmployeesAction;
+export default ModalsOthersAction;

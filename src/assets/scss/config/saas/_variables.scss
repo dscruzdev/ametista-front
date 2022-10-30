@@ -42,6 +42,7 @@ $grays: (
 $blue:       #2c8ef8;
 $indigo:     #794c90;
 $purple:     #573668;
+$purple2:    #9b65b7;
 $pink:       #ff679b;
 $red:        #fa5c7c;
 $orange:     #fd7e14;
@@ -56,6 +57,7 @@ $colors: (
   "blue":       $blue,
   "indigo":     $indigo,
   "purple":     $purple,
+  "purple2":    $purple2,
   "pink":       $pink,
   "red":        $red,
   "orange":     $orange,
@@ -79,6 +81,7 @@ $danger:        $red;
 $light:         $gray-200;
 $dark:          $gray-900;
 $primary-light:          $indigo;
+$primary-light2:          $purple2;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
@@ -91,7 +94,8 @@ $theme-colors: (
   "danger":     $danger,
   "light":      $light,
   "dark":       $dark,
-  "primary-light" : $primary-light
+  "primary-light" : $primary-light,
+  "primary-light2" : $primary-light2
 );
 // scss-docs-end theme-colors-map
 

@@ -1,10 +1,11 @@
 // @flow
 import React, { useState } from 'react';
-import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components/';
 import Select from 'react-select';
+import { useForm } from 'react-hook-form';
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -242,6 +243,16 @@ const ModalsWithPages = () => {
                                 className="react-select"
                                 classNamePrefix="react-select">
                                 </Select>
+
+                           
+                                <div className="mb-3 mt-3">
+
+                            <Form.Group>
+                                <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
+                                <Form.Control type="file" />
+                            </Form.Group>
+                            </div>
+                       
                             </div>
                             </div>
 

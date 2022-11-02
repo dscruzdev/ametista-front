@@ -1,9 +1,10 @@
 // @flow
 import React, { useState } from 'react';
-import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { Row, Col, Card, Button, Modal, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components';
+import Select from 'react-select';
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -121,6 +122,21 @@ const ModalWithColoredHeader2 = () => {
                                     placeholder=""
                                 />
                             </div>
+
+                            <div className="mb-3">
+                            <p className="mb-1 mt-3 fw-bold">Áreas relacionadas</p>
+                            <Select
+                                isMulti={true}
+                                options={[
+                                    { value: 'pt', label: 'Marketing' },
+                                    { value: 'en', label: 'Financeiro' },
+                                    { value: 'es', label: 'Vendas' },
+                                ]}
+                                className="react-select"
+                                classNamePrefix="react-select">
+                                </Select>
+                            </div>
+
                         </form>
                         
                 

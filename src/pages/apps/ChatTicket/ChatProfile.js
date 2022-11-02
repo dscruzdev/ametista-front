@@ -70,6 +70,13 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
 
                             <p className="mt-3 mb-1">
                                 <strong>
+                                    <i className="mdi mdi-badge-account-horizontal-outline"></i> CPF:
+                                </strong>
+                            </p>
+                            <p>{user.phone}</p>
+
+                            <p className="mt-3 mb-1">
+                                <strong>
                                     <i className="uil uil-globe"></i> Idioma:
                                 </strong>
                             </p>

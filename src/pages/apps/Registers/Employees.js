@@ -101,6 +101,12 @@ const columns = [
         accessor: 'email',
         sort: true,
     },
+
+    {
+        Header: 'Área',
+        accessor: 'area',
+        sort: true,
+    },
    /* {
         Header: 'Wallet Balance',
         accessor: 'balance',
@@ -111,6 +117,7 @@ const columns = [
         accessor: 'created_on',
         sort: true,
     },
+   
     /*{
         Header: 'Revenue',
         accessor: 'revenue',

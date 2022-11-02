@@ -64,11 +64,7 @@ const FileUploader = (props: FileUploaderProps): React$Element<any> => {
                         <div className="dz-message needsclick" {...getRootProps()}>
                             <input {...getInputProps()} />
                             <i className="h3 text-muted dripicons-cloud-upload"></i>
-                            <h5>Drop files here or click to upload.</h5>
-                            <span className="text-muted font-13">
-                                (This is just a demo dropzone. Selected files are <strong>not</strong> actually
-                                uploaded.)
-                            </span>
+                            <h5>Arraste os arquivos aqui ou clique para fazer o upload.</h5>
                         </div>
                     </div>
                 )}

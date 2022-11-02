@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // components
 import { FormInput } from '../../../components';
 import Loader from '../../../components/Loader';
+import ModalsUploadFile from '../../uikit/ModalsUploadFile';
 
 // default data
 import { messages } from './data';
@@ -198,9 +199,7 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
                                         </div>
                                         <div className="col-sm-auto">
                                             <div className="btn-group">
-                                                <Link to="#" className="btn btn-light">
-                                                    <i className="uil uil-paperclip"></i>
-                                                </Link>
+                                            <ModalsUploadFile/>
                                                 <Link to="#" className="btn btn-light">
                                                     {' '}
                                                     <i className="uil uil-smile"></i>{' '}

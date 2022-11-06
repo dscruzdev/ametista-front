@@ -35,10 +35,10 @@ const Dash = (): React$Element<React$FragmentType> => {
                                         }}
                                     />
                                     </div>
-
+<h4 className="page-title">Dashboard</h4>
                             </form>
                         </div>
-                        <h4 className="page-title">Início</h4>
+                        <h4 className="page-title">Dashboard</h4>
                     </div>
                     <Tab.Container defaultActiveKey="1">
                 <Row>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card } from 'react-bootstrap';
 
 // components
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/logo-2.png';
 
 // images
 import notFoundImg from '../../assets/images/startman.svg';
@@ -21,26 +21,22 @@ const ServerError = (): React$Element<React$FragmentType> => {
                                 <Card.Header className="pt-4 pb-4 text-center bg-primary">
                                     <Link to="/">
                                         <span>
-                                            <img src={Logo} alt="" height="18" />
+                                            <img src={Logo} alt="" height="32" />
                                         </span>
                                     </Link>
                                 </Card.Header>
 
                                 <Card.Body className="p-4">
                                     <div className="text-center">
-                                        <img src={notFoundImg} height="120" alt="" />
 
                                         <h1 className="text-error mt-4">500</h1>
-                                        <h4 className="text-uppercase text-danger mt-3">Internal Server Error</h4>
+                                        <h4 className="text-uppercase text-danger mt-3">Erro interno do servidor</h4>
                                         <p className="text-muted mt-3">
-                                            Why not try refreshing your page? or you can contact{' '}
-                                            <Link to="#" className="text-muted">
-                                                <b>Support</b>
-                                            </Link>
+                                            Que tal atualizar a página? Caso o erro persista, entre em contato com o suporte.
                                         </p>
 
-                                        <Link className="btn btn-info mt-3" to="/">
-                                            <i className="mdi mdi-reply"></i> Return Home
+                                        <Link className="btn btn-primary mt-3" to="/">
+                                            <i className="mdi mdi-reply"></i> Voltar ao início
                                         </Link>
                                     </div>
                                 </Card.Body>

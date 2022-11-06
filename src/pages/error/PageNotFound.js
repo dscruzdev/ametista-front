@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card } from 'react-bootstrap';
 
 // images
-import Logo from '../../assets/images/logo.png';
+import Logo from '../../assets/images/logo-2.png';
 
 const ErrorPageNotFound = (): React$Element<React$FragmentType> => {
     return (
@@ -18,7 +18,7 @@ const ErrorPageNotFound = (): React$Element<React$FragmentType> => {
                                 <Card.Header className="pt-4 pb-4 text-center bg-primary">
                                     <Link to="/">
                                         <span>
-                                            <img src={Logo} alt="" height="18" />
+                                            <img src={Logo} alt="" height="32" />
                                         </span>
                                     </Link>
                                 </Card.Header>
@@ -28,15 +28,13 @@ const ErrorPageNotFound = (): React$Element<React$FragmentType> => {
                                         <h1 className="text-error">
                                             4<i className="mdi mdi-emoticon-sad"></i>4
                                         </h1>
-                                        <h4 className="text-uppercase text-danger mt-3">Page Not Found</h4>
+                                        <h4 className="text-uppercase text-danger mt-3">Página não encontrada</h4>
                                         <p className="text-muted mt-3">
-                                            It's looking like you may have taken a wrong turn. Don't worry... it happens
-                                            to the best of us. Here's a little tip that might help you get back on
-                                            track.
+                                            Parece que você pegou o caminho errado. Não se preocupe... isso acontece com os melhores de nós. Acesse o botão abaixo para voltar aos trilhos.
                                         </p>
 
-                                        <Link className="btn btn-info mt-3" to="/">
-                                            <i className="mdi mdi-reply"></i> Return Home
+                                        <Link className="btn btn-primary mt-3" to="/">
+                                            <i className="mdi mdi-reply"></i> Voltar ao início
                                         </Link>
                                     </div>
                                 </Card.Body>
@@ -46,7 +44,7 @@ const ErrorPageNotFound = (): React$Element<React$FragmentType> => {
                 </div>
             </div>
 
-            <footer className="footer footer-alt">2018 - 2021 © Hyper - Coderthemes.com</footer>
+            
         </>
     );
 };

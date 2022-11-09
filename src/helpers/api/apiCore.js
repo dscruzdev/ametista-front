@@ -13,31 +13,32 @@ axios.interceptors.response.use(
         return response;
     },
     (error) => {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        let message;
+        console.log(error);
+        // // Any status codes that falls outside the range of 2xx cause this function to trigger
+        // let message;
 
-        if (error && error.response && error.response.status === 404) {
-            // window.location.href = '/not-found';
-        } else if (error && error.response && error.response.status === 403) {
-            window.location.href = '/access-denied';
-        } else {
-            switch (error.response.status) {
-                case 401:
-                    message = 'Invalid credentials';
-                    break;
-                case 403:
-                    message = 'Access Forbidden';
-                    break;
-                case 404:
-                    message = 'Sorry! the data you are looking for could not be found';
-                    break;
-                default: {
-                    message =
-                        error.response && error.response.data ? error.response.data['message'] : error.message || error;
-                }
-            }
-            return Promise.reject(message);
-        }
+        // if (error && error.response && error.response.status === 404) {
+        //     // window.location.href = '/not-found';
+        // } else if (error && error.response && error.response.status === 403) {
+        //     window.location.href = '/access-denied';
+        // } else {
+        //     switch (error.response.status) {
+        //         case 401:
+        //             message = 'Invalid credentials';
+        //             break;
+        //         case 403:
+        //             message = 'Access Forbidden';
+        //             break;
+        //         case 404:
+        //             message = 'Sorry! the data you are looking for could not be found';
+        //             break;
+        //         default: {
+        //             message =
+        //                 error.response && error.response.data ? error.response.data['message'] : error.message || error;
+        //         }
+        //     }
+        //     return Promise.reject(message);
+        // }
     }
 );
 

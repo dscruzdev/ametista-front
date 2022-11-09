@@ -26,9 +26,21 @@ type ChatProfileProps = {
 // ChatProfile
 const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$FragmentType> => {
     const user = selectedUser || {};
-    const status = user.status ? user.status.split(',') : [];
     const subject = user.subject ? user.subject.split(',') : [];
+    var languages="", subjects="", requestid="", description="", status; 
+    user.requests.map((request, index) => {
+        status += request.status
+        languages += request.language + ", ";
+        subjects = subjects + "," + request.subject;
+        requestid += request.idRequests + ", ";
+        description += request.description + ", "
+    });
+    const statusarray = status ? status.split(',') : [];
+    languages = languages.slice(0, languages.length-2);
+    requestid = requestid.slice(0, requestid.length-2);
+    description = description.slice(0, description.length-2);
 
+    const subjectsArray = subjects ? subjects.split(",") : [];
     return (
         <>
             {user && (
@@ -86,21 +98,21 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                     <i className="mdi mdi-badge-account-horizontal-outline"></i> CPF:
                                 </strong>
                             </p>
-                            <p>{user.phone}</p>
+                            <p>{user.cpfClients}</p>
 
                             <p className="mt-3 mb-1">
                                 <strong>
                                     <i className="uil uil-globe"></i> Idioma:
                                 </strong>
                             </p>
-                            <p>{user.languages}</p>
+                            <p>{languages}</p>
 
                             <p className="mt-3 mb-1">
                                 <strong>
                                     <i className="mdi mdi-identifier"></i> Número do chamado:
                                 </strong>
                             </p>
-                            <p>{user.phone}</p>
+                            <p>{requestid}</p>
 
                             <p className="mt-3 mb-2">
                                 <strong>
@@ -109,7 +121,7 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                             </p>
 
                             <p>
-                                {subject.map((subject, index) => {
+                                {subjectsArray.map((subject, index) => {
                                     return (
                                         <span key={index} className="badge badge-warning-lighten p-1 font-14 me-1">
                                             {subject}
@@ -124,7 +136,7 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                 </strong>
                             </p>
                            
-                            <p>{user.description}</p>
+                            <p>{description}</p>
                         
                             <p className="mt-3 mb-2">
                                 <strong>
@@ -133,7 +145,7 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                             </p>
 
                             <p>
-                                {status.map((status, index) => {
+                                {statusarray.map((status, index) => {
                                     if (status=="Em espera"){
                                         return (
                                             <span key={index} className="badge badge-warning-lighten p-1 font-14 me-1">
@@ -144,8 +156,13 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                         if (status=="Em andamento"){
                                             return (
                                                 <span key={index} className="badge badge-info-lighten p-1 font-14 me-1">
-                                                    {status}
+                                                    {user.requests[0].status}
                                                 </span>);
+                                    }else{
+                                        return (
+                                            <span key={index} className="badge badge-info-lighten p-1 font-14 me-1">
+                                                {user.requests[0].status}
+                                            </span>);
                                     }
                                 })}
                             

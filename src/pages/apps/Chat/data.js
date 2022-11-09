@@ -1,4 +1,8 @@
 // images
+import { getsubjects, getlanguages, getcomments, getrequests, getclients } from "../../../helpers/api";
+import { APICore } from "../../../helpers/api/apiCore";
+import axios from "axios";
+
 import avatar1 from '../../../assets/images/users/avatar-1.jpg';
 import avatar2 from '../../../assets/images/users/avatar-2.jpg';
 import avatar3 from '../../../assets/images/users/avatar-3.jpg';
@@ -9,7 +13,50 @@ import avatar7 from '../../../assets/images/users/avatar-7.jpg';
 import avatar8 from '../../../assets/images/users/avatar-8.jpg';
 import avatar9 from '../../../assets/images/users/avatar-9.jpg';
 
+// var dataclients;
+
+const clients = () =>
+    fetch("http://localhost:8080/front/chat")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
+
 const users = [
+    {
+        id: 0,
+        name: 'Wait',
+        avatar: avatar2,
+        lastMessage: 'Tait..',
+        totalUnread: 3,
+        lastMessageOn: 'wait...',
+        email: 'wait...',
+        phone: 'wait...',
+        subject: 'Financeiro',
+        location: 'California, USA',
+        languages: 'English, German, Spanish',
+        status: 'Em espera',
+        description: 'hsJADHlidhILDJdj',
+        requests:[
+            {
+                idRequests: 0,
+                category: "...",
+                endedAt: "...",
+                description: "...",
+                deadline: "...",
+                priority: 1,
+                status: "...",
+                idLanguage: "...",
+                idSubject: "...",
+                idChannels: "...",
+                CSAT: 5,
+                CES: 5,
+                NPS: 5,
+                createdAt: "2022-11-09T01:30:00.000Z",
+                updatedAt: "2022-11-09T01:30:00.000Z",
+                comments: []
+            }
+        ],
+    },
+    
     {
         id: 1,
         name: 'Brandon Smith',
@@ -23,7 +70,7 @@ const users = [
         location: 'California, USA',
         languages: 'English, German, Spanish',
         status: 'Em espera',
-        description:'hsJADHlidhILDJdj',
+        description: 'hsJADHlidhILDJdj',
     },
     {
         id: 2,
@@ -37,7 +84,7 @@ const users = [
         location: 'New York, USA',
         languages: 'English, German, Spanish',
         status: 'Em andamento',
-        description:'hsJADHlidhILDJdj',
+        description: 'hsJADHlidhILDJdj',
     },
     {
         id: 3,
@@ -238,4 +285,4 @@ for (const user of users) {
     );
 }
 
-export { users, messages };
+export { users, messages, clients };

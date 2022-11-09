@@ -14,7 +14,7 @@ import { users } from './data';
 
 // ChatApp
 const ChatApp = (): React$Element<React$FragmentType> => {
-    const [selectedUser, setSelectedUser] = useState(users[1]);
+    const [selectedUser, setSelectedUser] = useState(users[0]);
 
     /**
      * On user change

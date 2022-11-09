@@ -6,10 +6,11 @@ import classnames from 'classnames';
 import SimpleBar from 'simplebar-react';
 
 // dummy data
-import { users } from './data';
+import { users, clients } from './data';
+import { useAsync } from "react-async";
 
 type Users = {
-    id: number,
+    cpf: string,
     name: string,
     avatar: string,
     lastMessage: string,
@@ -26,18 +27,31 @@ type ChatUsersProps = {
     onUserSelect: (value: Users) => void,
 };
 
+const loadUsers = () =>
+    fetch("https://jsonplaceholder.typicode.com/users")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
+
 // ChatUsers
 const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$FragmentType> => {
-    const statusFilters = ['Todos','Em espera', 'Em andamento'];
+    const statusFilters = ['Todos', 'Em espera', 'Em andamento'];
+
+    const { data, error, isPending } = useAsync({ promiseFn: clients });
+    // const { dataSubject, errorSubject, isPendingSubject } = useAsync({ promiseFn: subjects });
+    // const { dataLanguage, errorLanguage, isPendingLanguage } = useAsync({ promiseFn: languages });
+    // const { dataRequest, errorRequest, isPendingRequest } = useAsync({ promiseFn: requests });
+    // const { dataComments, errorComments, isPendingComments } = useAsync({ promiseFn: comments });
+    
+    //const [selectedUser, setSelectedUser] = useAsync(users[1]);
 
     const [user, setUser] = useState([...users]);
-    const [selectedUser, setSelectedUser] = useState(users[1]);
+    const [selectedUser, setSelectedUser] = useState(users[0]);
     const [selectedstatus, setSelectedstatus] = useState('Todos');
 
     /**
      * Filter users
      */
-   const filterUsers = (status) => {
+    const filterUsers = (status) => {
         setSelectedstatus(status);
         setUser(
             status !== 'Todos'
@@ -64,91 +78,95 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
             onUserSelect(user);
         }
     };
-
-    return (
-        <>
-            <Card>
-                <Card.Body className="p-0">
-                    <ul className="nav nav-tabs nav-bordered">
-                        {statusFilters.map((status, index) => {
-                            return (
-                                <li key={index} className="nav-item" onClick={() => filterUsers(status)}>
-                                    <Link
-                                        to="#"
-                                        className={classnames('nav-link', 'py-2', {
-                                            active: selectedstatus === status,
-                                        })}>
-                                        {status}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-
-                    <div className="tab-content">
-                        <div className="tab-pane show active">
-                            <div className="app-search p-3">
-                                <div className="form-status position-relative">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder=""
-                                        onKeyUp={(e) => search(e.target.value)}
-                                    />
-                                    <span className="mdi mdi-magnify search-icon"></span>
-                                </div>
-                            </div>
-
-                            <SimpleBar className="px-3" style={{ maxHeight: '550px', width: '100%' }}>
-                                {user.map((user, index) => {
-                                    return (
+    if (isPending) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data ) {
+        
+        return (
+            <>
+                <Card>
+                    <Card.Body className="p-0">
+                        <ul className="nav nav-tabs nav-bordered">
+                            {statusFilters.map((status, index) => {
+                                return (
+                                    <li key={index} className="nav-item" onClick={() => filterUsers(status)}>
                                         <Link
                                             to="#"
-                                            key={index}
-                                            className="text-body"
-                                            onClick={(e) => {
-                                                activateUser(user);
-                                            }}>
-                                            <div
-                                                className={classnames('d-flex', 'align-items-start', 'mt-1', 'p-2', {
-                                                    'bg-light': user.id === selectedUser.id,
-                                                })}>
-                                                <img
-                                                    src={user.avatar}
-                                                    className="me-2 rounded-circle"
-                                                    height="48"
-                                                    alt=""
-                                                />
-
-                                                <div className="w-100 overflow-hidden">
-                                                    <h5 className="mt-0 mb-0 font-14">
-                                                        <span className="float-end text-muted font-12">
-                                                            {user.lastMessageOn}
-                                                        </span>
-                                                        {user.name}
-                                                    </h5>
-                                                    <p className="mt-1 mb-0 text-muted font-14">
-                                                        <span className="w-25 float-end text-end">
-                                                            {user.totalUnread && (
-                                                                <span className="badge badge-danger-lighten">
-                                                                    {user.totalUnread}
-                                                                </span>
-                                                            )}
-                                                        </span>
-                                                        <span className="w-75">{user.lastMessage}</span>
-                                                    </p>
-                                                </div>
-                                            </div>
+                                            className={classnames('nav-link', 'py-2', {
+                                                active: selectedstatus === status,
+                                            })}>
+                                            {status}
                                         </Link>
-                                    );
-                                })}
-                            </SimpleBar>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+
+                        <div className="tab-content">
+                            <div className="tab-pane show active">
+                                <div className="app-search p-3">
+                                    <div className="form-status position-relative">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder=""
+                                            onKeyUp={(e) => search(e.target.value)}
+                                        />
+                                        <span className="mdi mdi-magnify search-icon"></span>
+                                    </div>
+                                </div>
+
+                                <SimpleBar className="px-3" style={{ maxHeight: '550px', width: '100%' }}>
+                                    {data.map((user, index) => {
+                                        return (
+                                            <Link
+                                                to="#"
+                                                key={index}
+                                                className="text-body"
+                                                onClick={(e) => {
+                                                    activateUser(user);
+                                                }}>
+                                                <div
+                                                    className={classnames('d-flex', 'align-items-start', 'mt-1', 'p-2', {
+                                                        'bg-light': user.cpf === selectedUser.cpf,
+                                                    })}>
+                                                    <img
+                                                        src={user.avatar}
+                                                        className="me-2 rounded-circle"
+                                                        height="48"
+                                                        alt=""
+                                                    />
+
+                                                    <div className="w-100 overflow-hidden">
+                                                        <h5 className="mt-0 mb-0 font-14">
+                                                            <span className="float-end text-muted font-12">
+                                                                {/* {user.lastMessageOn} */}
+                                                            </span>
+                                                            {user.name}
+                                                        </h5>
+                                                        <p className="mt-1 mb-0 text-muted font-14">
+                                                            <span className="w-25 float-end text-end">
+                                                                {user.totalUnread && (
+                                                                    <span className="badge badge-danger-lighten">
+                                                                        {/* {user.totalUnread} */}
+                                                                    </span>
+                                                                )}
+                                                            </span>
+                                                            {/* <span className="w-75">{user.lastMessage}</span> */}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        );
+                                    })}
+                                </SimpleBar>
+                            </div>
                         </div>
-                    </div>
-                </Card.Body>
-            </Card>
-        </>
-    );
+                    </Card.Body>
+                </Card>
+            </>
+        );
+    }
 };
 
 export default ChatUsers;

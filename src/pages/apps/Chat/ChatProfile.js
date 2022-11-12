@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Card, Dropdown, Button, Row, Col } from 'react-bootstrap';
+import { endrequests } from '../../../helpers/api'
 import ModalsComments from '../../uikit/ModalsComments';
 import ModalsWriteComments from '../../uikit/ModalsWriteComments';
 import ModalsTicketEdit from '../../uikit/ModalsTicketEdit';
@@ -27,7 +28,7 @@ type ChatProfileProps = {
 const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$FragmentType> => {
     const user = selectedUser || {};
     const subject = user.subject ? user.subject.split(',') : [];
-    var languages="", subjects="", requestid="", description="", status; 
+    var languages = "", subjects = "", requestid = "", description = "", status;
     user.requests.map((request, index) => {
         status += request.status
         languages += request.language + ", ";
@@ -36,9 +37,24 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
         description += request.description + ", "
     });
     const statusarray = status ? status.split(',') : [];
-    languages = languages.slice(0, languages.length-2);
-    requestid = requestid.slice(0, requestid.length-2);
-    description = description.slice(0, description.length-2);
+    languages = languages.slice(0, languages.length - 2);
+    requestid = requestid.slice(0, requestid.length - 2);
+    description = description.slice(0, description.length - 2);
+    const endRequest = async (idRequests, cpfClients) => {
+        console.log(idRequests);
+        console.log(user.cpfClients);
+        var date;
+        date = new Date();
+        date = date.getUTCFullYear() + '-' +
+            ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
+            ('00' + date.getUTCDate()).slice(-2) + ' ' +
+            ('00' + date.getUTCHours()).slice(-2) + ':' +
+            ('00' + date.getUTCMinutes()).slice(-2) + ':' +
+            ('00' + date.getUTCSeconds()).slice(-2);
+        console.log(date);
+
+        //endrequests({ idRequests: idResquests, cpfClients: cpfClients, endedAt: date})
+    }
 
     const subjectsArray = subjects ? subjects.split(",") : [];
     return (
@@ -60,7 +76,7 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                         <div className="mt-3 text-center">
                             <img src={user.avatar} alt="" className="img-thumbnail avatar-lg rounded-circle" />
                             <h4>{user.name}</h4>
-                            <Button className="btn-sm mt-1 me-2" variant="primary-light">
+                            <Button className="btn-sm mt-1 me-2" variant="primary-light" onClick={()=>{endRequest(requestid, user.cpfClients)}}>
                                 <i className=" uil-check me-1"></i>Finalizar chamado
                             </Button>
                             <Button className="btn-sm mt-1 me-2" variant="primary">
@@ -72,19 +88,19 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                         </div>
 
                         <div className="mt-3">
-                        <hr className="" />
-                        <Row>
-                        <Col md={8}>
-                            <p className="mt-2 mb-1">
-                                <strong>
-                                    <i className="uil uil-at"></i> E-mail:
-                                </strong>
-                            </p>
-                            <p className="mb-0">{user.email}</p>
-                            </Col>
-                            <ModalsTicketEdit />
+                            <hr className="" />
+                            <Row>
+                                <Col md={8}>
+                                    <p className="mt-2 mb-1">
+                                        <strong>
+                                            <i className="uil uil-at"></i> E-mail:
+                                        </strong>
+                                    </p>
+                                    <p className="mb-0">{user.email}</p>
+                                </Col>
+                                <ModalsTicketEdit />
                             </Row>
-                            
+
 
                             <p className="mt-3 mb-1">
                                 <strong>
@@ -129,15 +145,15 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                     );
                                 })}
                             </p>
-                       
+
                             <p className="mb-2 mt-2">
                                 <strong>
                                     <i className="uil-align-left"></i> Descrição:
                                 </strong>
                             </p>
-                           
+
                             <p>{description}</p>
-                        
+
                             <p className="mt-3 mb-2">
                                 <strong>
                                     <i className="uil uil-tag-alt"></i> Status:
@@ -146,32 +162,32 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
 
                             <p>
                                 {statusarray.map((status, index) => {
-                                    if (status=="Em espera"){
+                                    if (status == "Em espera") {
                                         return (
                                             <span key={index} className="badge badge-warning-lighten p-1 font-14 me-1">
                                                 {status}
                                             </span>);
-                                        }
-                                        
-                                        if (status=="Em andamento"){
-                                            return (
-                                                <span key={index} className="badge badge-info-lighten p-1 font-14 me-1">
-                                                    {user.requests[0].status}
-                                                </span>);
-                                    }else{
+                                    }
+
+                                    if (status == "Em andamento") {
+                                        return (
+                                            <span key={index} className="badge badge-info-lighten p-1 font-14 me-1">
+                                                {user.requests[0].status}
+                                            </span>);
+                                    } else {
                                         return (
                                             <span key={index} className="badge badge-info-lighten p-1 font-14 me-1">
                                                 {user.requests[0].status}
                                             </span>);
                                     }
                                 })}
-                            
+
                             </p>
 
-                            
-                           <ModalsWriteComments />
-                           <ModalsComments />
-                            
+
+                            <ModalsWriteComments />
+                            <ModalsComments />
+
                         </div>
                     </Card.Body>
                 </Card>

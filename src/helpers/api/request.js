@@ -9,6 +9,11 @@ function getrequests(params: any): any {
     return api.get(`${baseUrl}`, params);
 }
 
+function endrequests(params: any): any {
+    const baseUrl = '/request';
+    return api.update(`${baseUrl}`, params);
+}
 
 
-export { getrequests };
+
+export { getrequests, endrequests };

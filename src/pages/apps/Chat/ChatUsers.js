@@ -78,10 +78,12 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
             onUserSelect(user);
         }
     };
+
+
+
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data ) {
-        
         return (
             <>
                 <Card>
@@ -128,10 +130,10 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
                                                 }}>
                                                 <div
                                                     className={classnames('d-flex', 'align-items-start', 'mt-1', 'p-2', {
-                                                        'bg-light': user.cpf === selectedUser.cpf,
+                                                        'bg-light': user.cpfClients === selectedUser.cpfClients,
                                                     })}>
                                                     <img
-                                                        src={user.avatar}
+                                                        src={'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'}
                                                         className="me-2 rounded-circle"
                                                         height="48"
                                                         alt=""

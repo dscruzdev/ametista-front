@@ -12,7 +12,7 @@ import Select from 'react-select';
 // images
 //import logodark from '../../assets/images/logo-dark.png';
 
-/*type ModalsProps = {
+type ModalsProps = {
     User: {
         id: number,
         name: string,
@@ -28,22 +28,19 @@ import Select from 'react-select';
         status: string,
         description: String,
     },
-};*/
+};
 
 
 
-const ModalWithColoredHeader = ({ User }) => {
-    const user = User || {};
+const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<React$FragmentType> => {
+    const user = selectedUser || {};
     const subject = user.subject ? user.subject.split(',') : [];
     var languages = "", subjects = "", requestid = "", description = "", status;
-    console.log(user);
-    /*user.requests.map((request, index) => {
+    user.requests.map((request, index) => {
         status += request.status
-        languages += request.language + ", ";
         subjects = subjects + "," + request.subject;
         requestid += request.idRequests + ", ";
-        description += request.description + ", "
-    });*/
+    });
     const statusarray = status ? status.split(',') : [];
     languages = languages.slice(0, languages.length - 2);
     requestid = requestid.slice(0, requestid.length - 2);
@@ -81,45 +78,47 @@ const ModalWithColoredHeader = ({ User }) => {
         setHeaderClassName(className);
         toggle();
     };
+
     return (
         <>
-            
-                            <Button className="btn-sm mt-1 me-2" variant="primary-light" onClick={() => openModalWithHeaderClass('primary-light')}>
-                                <i className=" uil-check me-1"></i>Finalizar chamado
-                            </Button>
-                {user && (
-                    <Modal show={modal} onHide={toggle}> 
-                        <Modal.Header
-                            onHide={toggle}
-                            closeButton
-                            className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
-                            <h4 className="modal-title text-light">Chamados em aberto</h4>
-                        </Modal.Header>
-                        <Modal.Body>
-                        
+
+            <Button className="btn-sm mt-1 me-2" variant="primary-light" onClick={() => openModalWithHeaderClass('primary-light')}>
+                <i className=" uil-check me-1"></i>Finalizar chamado
+            </Button>
+            {user && (
+                <Modal show={modal} onHide={toggle}>
+                    <Modal.Header
+                        onHide={toggle}
+                        closeButton
+                        className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+                        <h4 className="modal-title text-light">Chamados em aberto</h4>
+                    </Modal.Header>
+                    <Modal.Body>
+
                         <Form.Group>
-                <div className="mt-2 mb-2">
-                    <Form.Check className="" type="checkbox" id="" label="Chamado 1" />
-                    <Form.Check type="checkbox" id="" label="Chamado 2" />
-                </div>
-            </Form.Group>
-                        
-                
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant={headerClassName} onClick={()=>{endRequest(requestid, user.cpfClients)}}>
-                                Salvar
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                    )}
+                            <div className="mt-2 mb-2">
+                                {user.requests.map((request, index) => {
+                                   return( <Form.Check className="" type="checkbox" id="" label={request.subject} />)
+                                })}
+                            </div>
+                        </Form.Group>
+
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant={headerClassName} onClick={() => { endRequest(requestid, user.cpfClients) }}>
+                            Salvar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            )}
         </>
-        
+
     );
 };
 
 
-const ModalsFinalizarChamado = (): React$Element<React$FragmentType> => {
+const ModalsFinalizarChamado = ({ selectedUser }: ModalsProps): React$Element<React$FragmentType> => {
     return (
         <>
             {/*<PageTitle
@@ -149,9 +148,9 @@ const ModalsFinalizarChamado = (): React$Element<React$FragmentType> => {
                 </Col>
             </Row>*/}
 
-            
-                    <ModalWithColoredHeader />
-                
+
+            <ModalWithColoredHeader selectedUser={selectedUser} />
+
 
             {/*<Row>
                 <Col md={6}>

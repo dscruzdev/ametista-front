@@ -27,11 +27,6 @@ type ChatUsersProps = {
     onUserSelect: (value: Users) => void,
 };
 
-const loadUsers = () =>
-    fetch("https://jsonplaceholder.typicode.com/users")
-        .then(res => (res.ok ? res : Promise.reject(res)))
-        .then(res => res.json());
-
 // ChatUsers
 const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$FragmentType> => {
     const statusFilters = ['Todos', 'Em espera', 'Em andamento'];

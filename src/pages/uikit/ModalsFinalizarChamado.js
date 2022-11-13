@@ -46,21 +46,7 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
     languages = languages.slice(0, languages.length - 2);
     requestid = requestid.slice(0, requestid.length - 2);
     description = description.slice(0, description.length - 2);
-    const endRequest = async (idRequests, cpfClients) => {
-        console.log(idRequests);
-        console.log(user.cpfClients);
-        var date;
-        date = new Date();
-        date = date.getUTCFullYear() + '-' +
-            ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
-            ('00' + date.getUTCDate()).slice(-2) + ' ' +
-            ('00' + date.getUTCHours()).slice(-2) + ':' +
-            ('00' + date.getUTCMinutes()).slice(-2) + ':' +
-            ('00' + date.getUTCSeconds()).slice(-2);
-        console.log(date);
-
-        //endrequests({ idRequests: idResquests, cpfClients: cpfClients, endedAt: date})
-    }
+    
 
     const [modal, setModal] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
@@ -79,6 +65,33 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
         setHeaderClassName(className);
         toggle();
     };
+    const endedRequests = [];
+    function checkedboxes(check){
+        if(endedRequests.includes(check)){
+            const index = endedRequests.indexOf(check);
+            endedRequests.splice(index, 1);
+        }else{
+            endedRequests.push(check);
+        }
+    }
+
+    const endRequest = async () => {
+        var idRequests_tosend = "";
+        endedRequests.forEach((value)=>{
+            idRequests_tosend += value + ",";
+        });
+        idRequests_tosend = idRequests_tosend.slice(0, idRequests_tosend.length - 1);
+
+        //console.log(idRequests_tosend);
+        const response = await endrequests({ idRequests: idRequests_tosend }).then((response)=> {
+            if (response.status == 201){
+                console.log("Tudo deu certo e foi atualizado no banco");
+            }else{
+                console.log("Algo deu errado e o chamado não foi fechado");
+            }
+        });
+        
+    }
 
     return (
         <>
@@ -99,7 +112,7 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
                         <Form.Group>
                             <div className="mt-2 mb-2">
                                 {user.requests.map((request, index) => {
-                                   return( <Form.Check className="" type="checkbox" id="" label={request.subject} />)
+                                   return( <Form.Check className="" type="checkbox" id={request.idRequests} onChange={()=>{checkedboxes(request.idRequests)}} label={request.subject} />)
                                 })}
                             </div>
                         </Form.Group>
@@ -107,7 +120,7 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant={headerClassName} onClick={() => { endrequests(requestid, user.cpfClients) }}>
+                        <Button variant={headerClassName} onClick={() => { endRequest() }}>
                             Salvar
                         </Button>
                     </Modal.Footer>

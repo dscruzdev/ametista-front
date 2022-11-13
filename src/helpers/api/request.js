@@ -10,7 +10,7 @@ function getrequests(params: any): any {
 }
 
 function endrequests(params: any): any {
-    const baseUrl = '/request';
+    const baseUrl = '/front/request/endrequest';
     return api.update(`${baseUrl}`, params);
 }
 

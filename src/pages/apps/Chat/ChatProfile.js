@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, Dropdown, Button, Row, Col } from 'react-bootstrap';
 import { endrequests } from '../../../helpers/api'
 import ModalsComments from '../../uikit/ModalsComments';
+import ModalsFinalizarChamado from '../../uikit/ModalsFinalizarChamado';
 import ModalsWriteComments from '../../uikit/ModalsWriteComments';
 import ModalsTicketEdit from '../../uikit/ModalsTicketEdit';
 
@@ -76,6 +77,8 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                         <div className="mt-3 text-center">
                             <img src={user.avatar} alt="" className="img-thumbnail avatar-lg rounded-circle" />
                             <h4>{user.name}</h4>
+                            <ModalsFinalizarChamado User={user}/>
+
                             <Button className="btn-sm mt-1 me-2" variant="primary-light" onClick={()=>{endRequest(requestid, user.cpfClients)}}>
                                 <i className=" uil-check me-1"></i>Finalizar chamado
                             </Button>

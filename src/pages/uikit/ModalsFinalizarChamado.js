@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components';
 import Select from 'react-select';
+import {endrequests} from "../../helpers/api/request";
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -106,7 +107,7 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant={headerClassName} onClick={() => { endRequest(requestid, user.cpfClients) }}>
+                        <Button variant={headerClassName} onClick={() => { endrequests(requestid, user.cpfClients) }}>
                             Salvar
                         </Button>
                     </Modal.Footer>

@@ -18,7 +18,11 @@ const OrderColumn = ({ row }) => {
     return (
         <>
             <Link to="#" className="text-body fw-bold">
+<<<<<<< HEAD
                 {row.original.idRequests}
+=======
+                {row.original.id}
+>>>>>>> cd61a4a3576f2fd48b8486b23b43d5535eb25d10
             </Link>
         </>
     );
@@ -174,7 +178,10 @@ const Tickets = (): React$Element<React$FragmentType> => {
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd61a4a3576f2fd48b8486b23b43d5535eb25d10
         return (
             <>
 

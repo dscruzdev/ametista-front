@@ -83,13 +83,7 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
         idRequests_tosend = idRequests_tosend.slice(0, idRequests_tosend.length - 1);
 
         //console.log(idRequests_tosend);
-        const response = await endrequests({ idRequests: idRequests_tosend }).then((response)=> {
-            if (response.status == 201){
-                console.log("Tudo deu certo e foi atualizado no banco");
-            }else{
-                console.log("Algo deu errado e o chamado não foi fechado");
-            }
-        });
+        endrequests({ idRequests: idRequests_tosend });
         
     }
 

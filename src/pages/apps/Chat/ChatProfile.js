@@ -78,10 +78,7 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                             <img src={user.avatar} alt="" className="img-thumbnail avatar-lg rounded-circle" />
                             <h4>{user.name}</h4>
                             <ModalsFinalizarChamado selectedUser={selectedUser}/>
-
-                            <Button className="btn-sm mt-1 me-2" variant="primary-light" onClick={()=>{endRequest(requestid, user.cpfClients)}}>
-                                <i className=" uil-check me-1"></i>Finalizar chamado
-                            </Button>
+                            
                             <Button className="btn-sm mt-1 me-2" variant="primary">
                                 <i className=" uil-arrow-right me-1"></i>Histórico de chamados
                             </Button>

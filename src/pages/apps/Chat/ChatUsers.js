@@ -79,6 +79,7 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data ) {
+        console.log(data);
         return (
             <>
                 <Card>

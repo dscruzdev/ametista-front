@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components';
 import Select from 'react-select';
+import { createarea, createsubject } from '../../helpers';
+import { useAsync } from "react-async";
+
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -16,13 +19,24 @@ import Select from 'react-select';
 const ModalWithColoredHeader1 = () => {
     const [modal, setModal] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
+    const [area, setArea] = useState('');
+
 
     /**
      * Show/hide the modal
      */
-    const toggle = () => {
+    const toggle = (data) => {
+        //console.log(data['nome']);
+        //createarea({name:data});
         setModal(!modal);
     };
+
+    const submitArea = (event) => {
+        event.preventDefault();
+        createarea({ name: area });
+    };
+
+
 
     /**
      * Opens modal with custom header
@@ -31,46 +45,51 @@ const ModalWithColoredHeader1 = () => {
         setHeaderClassName(className);
         toggle();
     };
+
     return (
         <>
-             
-                <Button variant="primary" className="mb-2 me-2" onClick={() => openModalWithHeaderClass('primary')}>
-                    <i className="mdi mdi-plus-circle me-1"></i> Cadastrar área
-                </Button>
-              
 
-                    <Modal show={modal} onHide={toggle}> 
-                        <Modal.Header
-                            onHide={toggle}
-                            closeButton
-                            className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
-                           
-                        </Modal.Header>
-                        <Modal.Body>
-                        
-                        <form className="ps-3 pe-3 mt-2" action="#">
-                            <div className="mb-3">
-                                <label htmlFor="username" className="form-label">
-                                    Área
-                                </label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    id="area"
-                                    required=""
-                                    placeholder=""
-                                />
-                            </div>
-                        </form>
-                        
-                
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant={headerClassName} onClick={toggle}>
-                                Salvar
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+            <Button variant="primary" className="mb-2 me-2" onClick={() => openModalWithHeaderClass('primary')}>
+                <i className="mdi mdi-plus-circle me-1"></i> Cadastrar área
+            </Button>
+
+
+            <Modal show={modal} onHide={toggle}>
+                <Modal.Header
+                    onHide={toggle}
+                    closeButton
+                    className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+
+                </Modal.Header>
+                <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitArea}>
+                    <Modal.Body>
+
+
+                        <div className="mb-3">
+                            <label htmlFor="username" className="form-label">
+                                Área
+                            </label>
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="area"
+                                required=""
+                                placeholder=""
+                                name="area"
+                                onChange={event => setArea(event.target.value)}
+                            />
+                        </div>
+
+
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant={headerClassName} type="submit">
+                            Salvar
+                        </Button>
+                    </Modal.Footer>
+                </form>
+            </Modal>
         </>
     );
 };
@@ -78,6 +97,13 @@ const ModalWithColoredHeader1 = () => {
 const ModalWithColoredHeader2 = () => {
     const [modal, setModal] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
+    const [subject, setSubject] = useState('');
+
+    const submitSubject = (event) => {
+        event.preventDefault();
+        createsubject({ name: subject })
+    };
+    
 
     /**
      * Show/hide the modal
@@ -93,24 +119,30 @@ const ModalWithColoredHeader2 = () => {
         setHeaderClassName(className);
         toggle();
     };
-    return (
-        <>
-                    
+    const areas = [];
+    // area.forEach(data => {
+    //     areas.push({value:data.idAreas, label:data.name})
+    // });
+    
+        return (
+            <>
+
                 <Button variant="primary-light" className="mb-2 me-2" onClick={() => openModalWithHeaderClass('primary-light')}>
                     <i className="mdi mdi-plus-circle me-1"></i> Cadastrar assunto
                 </Button>
 
-                    <Modal show={modal} onHide={toggle}> 
-                        <Modal.Header
-                            onHide={toggle}
-                            closeButton
-                            className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
-                           
-                        </Modal.Header>
+                <Modal show={modal} onHide={toggle}>
+                    <Modal.Header
+                        onHide={toggle}
+                        closeButton
+                        className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+
+                    </Modal.Header>
+                    <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitSubject}>
                         <Modal.Body>
-                        
-                        <form className="ps-3 pe-3 mt-2" action="#">
-                        <div className="mb-3">
+
+
+                            <div className="mb-3">
                                 <label htmlFor="username" className="form-label">
                                     Assunto
                                 </label>
@@ -120,35 +152,37 @@ const ModalWithColoredHeader2 = () => {
                                     id="subject"
                                     required=""
                                     placeholder=""
+                                    name="subject"
+                                    onChange={event => setSubject(event.target.value)}
                                 />
                             </div>
 
                             <div className="mb-3">
-                            <p className="mb-1 mt-3 fw-bold">Áreas relacionadas</p>
-                            <Select
-                                isMulti={true}
-                                options={[
-                                    { value: 'pt', label: 'Marketing' },
-                                    { value: 'en', label: 'Financeiro' },
-                                    { value: 'es', label: 'Vendas' },
-                                ]}
-                                className="react-select"
-                                classNamePrefix="react-select">
+                                <p className="mb-1 mt-3 fw-bold">Áreas relacionadas</p>
+                                <Select
+                                    isMulti={true}
+                                    options={
+                                        areas
+                                    }
+                                    className="react-select"
+                                    classNamePrefix="react-select">
                                 </Select>
                             </div>
 
-                        </form>
-                        
-                
+
+
+
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant={headerClassName} onClick={toggle}>
+                            <Button variant={headerClassName} type="submit">
                                 Salvar
                             </Button>
                         </Modal.Footer>
-                    </Modal>
-        </>
-    );
+                    </form>
+                </Modal>
+            </>
+        );
+    
 };
 
 const ModalWithColoredHeader3 = () => {
@@ -171,44 +205,44 @@ const ModalWithColoredHeader3 = () => {
     };
     return (
         <>
-             
-                <Button variant="primary-light2" className="mb-2 " onClick={() => openModalWithHeaderClass('primary-light2')}>
-                    <i className="mdi mdi-plus-circle me-1"></i> Cadastrar idioma
-                </Button>
-              
 
-                    <Modal show={modal} onHide={toggle}> 
-                        <Modal.Header
-                            onHide={toggle}
-                            closeButton
-                            className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
-                           
-                        </Modal.Header>
-                        <Modal.Body>
-                        
-                        <form className="ps-3 pe-3 mt-2" action="#">
-                            <div className="mb-3">
-                                <label htmlFor="username" className="form-label">
-                                    Idioma
-                                </label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    id="language"
-                                    required=""
-                                    placeholder=""
-                                />
-                            </div>
-                        </form>
-                        
-                
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant={headerClassName} onClick={toggle}>
-                                Salvar
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+            <Button variant="primary-light2" className="mb-2 " onClick={() => openModalWithHeaderClass('primary-light2')}>
+                <i className="mdi mdi-plus-circle me-1"></i> Cadastrar idioma
+            </Button>
+
+
+            <Modal show={modal} onHide={toggle}>
+                <Modal.Header
+                    onHide={toggle}
+                    closeButton
+                    className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+
+                </Modal.Header>
+                <Modal.Body>
+
+                    <form className="ps-3 pe-3 mt-2" action="#">
+                        <div className="mb-3">
+                            <label htmlFor="username" className="form-label">
+                                Idioma
+                            </label>
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="language"
+                                required=""
+                                placeholder=""
+                            />
+                        </div>
+                    </form>
+
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant={headerClassName} onClick={toggle}>
+                        Salvar
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };
@@ -228,12 +262,12 @@ const ModalsOthers = (): React$Element<React$FragmentType> => {
                 {/*<Col md={6}>
                     <ModalSizes />
         </Col>*/}
-<Col>
-<ModalWithColoredHeader1 />
-<ModalWithColoredHeader2 />
-<ModalWithColoredHeader3 />
+                <Col>
+                    <ModalWithColoredHeader1 />
+                    <ModalWithColoredHeader2 />
+                    <ModalWithColoredHeader3 />
                 </Col>
-                    
+
             </Row>
 
             {/*<Row>

@@ -10,7 +10,9 @@ import Table from '../../../components/Table';
 import ModalsOthers from '../../uikit/ModalsOthers';
 import ModalsOthersAction from '../../uikit/ModalsOthersAction';
 
+
 // dummy data
+import { useAsync } from "react-async";
 import { sellers } from './Data';
 
 /* name column render */
@@ -82,6 +84,8 @@ const ActionColumn = ({ row }) => {
     );
 };
 
+
+
 // get all columns
 const columns = [
     {
@@ -96,11 +100,11 @@ const columns = [
         accessor: 'type',
         sort: true,
     },
-   /* {
-        Header: 'Wallet Balance',
-        accessor: 'balance',
-        sort: true,
-    },*/
+    /* {
+         Header: 'Wallet Balance',
+         accessor: 'balance',
+         sort: true,
+     },*/
     {
         Header: 'Data de cadastro',
         accessor: 'created_on',
@@ -140,9 +144,17 @@ const sizePerPageList = [
 
 // main component
 const Others = (): React$Element<React$FragmentType> => {
+    // const { data, error, isPending } = useAsync({
+    //     promiseFn: fetch("http://localhost:8080/area")
+    //         .then(res => (res.ok ? res : Promise.reject(res)))
+    //         .then(res => res.json())
+    // });
+    // if (isPending) return "Loading..."
+    // if (error) return `Something went wrong: ${error.message}`
+
     return (
         <>
-           {/*} <PageTitle
+            {/*} <PageTitle
                 breadCrumbItems={[
                     { label: 'eCommerce', path: '/apps/ecommerce/sellers' },
                     { label: 'Sellers', path: '/apps/ecommerce/sellers', active: true },
@@ -157,14 +169,14 @@ const Others = (): React$Element<React$FragmentType> => {
                     </div>
                 </Col>
             </Row>
-            
+
             <Row>
                 <Col xs={12}>
                     <Card>
                         <Card.Body>
                             <Row className="mb-2">
-                            <ModalsOthers />
-                                 {/*<Col sm={5}>
+                                <ModalsOthers />
+                                {/*<Col sm={5}>
                                     <Button variant="primary" className="mb-2">
                                         <i className="mdi mdi-plus-circle me-2"></i> Cadastrar funcionário
                                     </Button>
@@ -206,6 +218,7 @@ const Others = (): React$Element<React$FragmentType> => {
             </Row>
         </>
     );
+
 };
 
 export default Others;

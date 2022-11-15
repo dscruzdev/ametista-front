@@ -8,133 +8,136 @@ import Select from 'react-select';
 import StatisticsEmployees from '../apps/Registers/StatisticsEmployees';
 import StatusEmployees from '../apps/Registers/StatusEmployees';
 import { updatearea, updatelanguage, updatesubject, deletearea, deletelanguage, deletesubject } from '../../helpers/'
-
+import { area } from '../apps/Registers/Data';
+import { useAsync } from "react-async";
 // components
 //import PageTitle from '../../components/PageTitle';
 
 // images
 //import logodark from '../../assets/images/logo-dark.png';
-
-const ModalWithColoredHeader1 = () => {
-    const [modal, setModal] = useState(false);
+const ModalsWithPagesArea = (datas) => {
+    const [AttendantEditModal, setAttendantEditModal] = useState(false);
+    const [SubjectEditModal, setSubjectEditModal] = useState(false);
+    const [LanguageEditModal, setLanguageEditModal] = useState(false);
+    const [AreaEditModal, setAreaEditModal] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
-    const [area, setArea] = useState('');
+    const [areadata, setArea] = useState(datas.data.data.original.name);
+    const [subject, setSubject] = useState(datas.data.data.original.name);
+    const [language, setLanguage] = useState(datas.data.data.original.language);
 
+    //const [signInModal, setSignInModal] = useState(false);
 
     /**
      * Show/hide the modal
      */
-    const toggle = (data) => {
-        //console.log(data['nome']);
-        //createarea({name:data});
-        setModal(!modal);
+
+
+    const toggleModalEdit = (className) => {
+        if (datas.data.data.original.idAreas) {
+            setHeaderClassName(className);
+            setAreaEditModal(!AreaEditModal);
+            console.log({ idAreas: datas.data.data.original.idAreas });
+        }
+        if (datas.data.data.original.idSubjects) {
+            setHeaderClassName(className);
+            setLanguageEditModal(!LanguageEditModal);
+            console.log({ idSubjects: datas.data.data.original.idSubjects });
+
+        }
+        if (datas.data.data.original.idLanguages) {
+            setHeaderClassName(className);
+            setSubjectEditModal(!SubjectEditModal);
+            console.log({ idLanguages: datas.data.data.original.idLanguages });
+
+        }
+        //setAttendantEditModal(!AttendantEditModal);
     };
+    /*const toggleSignIn = () => {
+        setSignInModal(!signInModal);
+    };*/
 
     const submitArea = (event) => {
         event.preventDefault();
-        updatearea({ name: area });
-        setModal(!modal);
+        updatearea({ idAreas: datas.data.data.original.idAreas, name: areadata });
+        setAreaEditModal(!AreaEditModal);
     };
-
-
-
-    /**
-     * Opens modal with custom header
-     */
-    const openModalWithHeaderClass = (className) => {
-        setHeaderClassName(className);
-        toggle();
-    };
-
-    return (
-        <>
-
-            <Button variant="primary" className="mb-2 me-2" onClick={() => openModalWithHeaderClass('primary')}>
-                <i className="mdi mdi-plus-circle me-1"></i> Cadastrar área
-            </Button>
-
-
-            <Modal show={modal} onHide={toggle}>
-                <Modal.Header
-                    onHide={toggle}
-                    closeButton
-                    className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
-
-                </Modal.Header>
-                <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitArea}>
-                    <Modal.Body>
-
-
-                        <div className="mb-3">
-                            <label htmlFor="username" className="form-label">
-                                Área
-                            </label>
-                            <input
-                                className="form-control"
-                                type="text"
-                                id="area"
-                                required=""
-                                placeholder=""
-                                name="area"
-                                onChange={event => setArea(event.target.value)}
-                            />
-                        </div>
-
-
-
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant={headerClassName} type="submit">
-                            Salvar
-                        </Button>
-                    </Modal.Footer>
-                </form>
-            </Modal>
-        </>
-    );
-};
-
-const ModalWithColoredHeader2 = () => {
-    const [modal, setModal] = useState(false);
-    const [headerClassName, setHeaderClassName] = useState('');
-    const [subject, setSubject] = useState('');
-
     const submitSubject = (event) => {
         event.preventDefault();
-        updatesubject({ name: subject })
-        setModal(!modal);
+        updatesubject({ idSubjects: datas.data.data.original.idSubjects, name: subject })
+        setAreaEditModal(!SubjectEditModal);
     };
-    
-
-    /**
-     * Show/hide the modal
-     */
-    const toggle = () => {
-        setModal(!modal);
+    const submitLanguage = (event) => {
+        event.preventDefault();
+        updatelanguage({ idLanguages: datas.data.data.original.idLanguages, name: language })
+        setAreaEditModal(!LanguageEditModal);
     };
-
-    /**
-     * Opens modal with custom header
-     */
-    const openModalWithHeaderClass = (className) => {
-        setHeaderClassName(className);
-        toggle();
-    };
-    const areas = [];
-    // area.forEach(data => {
-    //     areas.push({value:data.idAreas, label:data.name})
-    // });
-    
+    const { data, error, isPending } = useAsync({ promiseFn: area });
+    if (isPending) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data) {
+        const areas = []
+        data.forEach(area => {
+            areas.push({ value: area.idAreas, label: area.name })
+        });
         return (
-            <>
+            <div>
 
-                <Button variant="primary-light" className="mb-2 me-2" onClick={() => openModalWithHeaderClass('primary-light')}>
-                    <i className="mdi mdi-plus-circle me-1"></i> Cadastrar assunto
+                <Button variant="primary" className="me-2 mb-1" onClick={() => { toggleModalEdit('primary') }}>
+                    <i className="mdi mdi-square-edit-outline"></i>
                 </Button>
 
-                <Modal show={modal} onHide={toggle}>
+
+                <ModalPositions data={datas} />
+
+
+
+                {/*<Button variant="info" onClick={toggleSignIn}>
+                    Log In Modal
+                </Button>*/}
+
+                {/* Sign up Modal */}
+
+                <Modal show={AreaEditModal} onHide={toggleModalEdit}>
                     <Modal.Header
-                        onHide={toggle}
+                        onHide={toggleModalEdit}
+                        closeButton
+                        className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+
+                    </Modal.Header>
+                    <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitArea}>
+                        <Modal.Body>
+
+
+                            <div className="mb-3">
+                                <label htmlFor="username" className="form-label">
+                                    Área
+                                </label>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    id="area"
+                                    required=""
+                                    placeholder=""
+                                    name="area"
+                                    value={areadata}
+                                    onChange={event => setArea(event.target.value)}
+                                />
+                            </div>
+
+
+
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant={headerClassName} type="submit">
+                                Salvar
+                            </Button>
+                        </Modal.Footer>
+                    </form>
+                </Modal>
+
+                <Modal show={SubjectEditModal} onHide={toggleModalEdit}>
+                    <Modal.Header
+                        onHide={toggleModalEdit}
                         closeButton
                         className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
 
@@ -169,7 +172,7 @@ const ModalWithColoredHeader2 = () => {
                                     classNamePrefix="react-select">
                                 </Select>
                             </div>
-                            
+
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant={headerClassName} type="submit">
@@ -178,70 +181,33 @@ const ModalWithColoredHeader2 = () => {
                         </Modal.Footer>
                     </form>
                 </Modal>
-            </>
-        );
-    
-};
 
-const ModalWithColoredHeader3 = () => {
-    const [modal, setModal] = useState(false);
-    const [headerClassName, setHeaderClassName] = useState('');
-    const [language, setLanguage] = useState('');
+                <Modal show={LanguageEditModal} onHide={toggleModalEdit}>
+                    <Modal.Header
+                        onHide={toggleModalEdit}
+                        closeButton
+                        className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
 
-    const submitLanguage = (event) => {
-        event.preventDefault();
-        updatelanguage({ language: language })
-        setModal(!modal);
-    };
-
-    /**
-     * Show/hide the modal
-     */
-    const toggle = () => {
-        setModal(!modal);
-    };
-
-    /**
-     * Opens modal with custom header
-     */
-    const openModalWithHeaderClass = (className) => {
-        setHeaderClassName(className);
-        toggle();
-    };
-    return (
-        <>
-
-            <Button variant="primary-light2" className="mb-2 " onClick={() => openModalWithHeaderClass('primary-light2')}>
-                <i className="mdi mdi-plus-circle me-1"></i> Cadastrar idioma
-            </Button>
+                    </Modal.Header>
+                    <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitLanguage}>
+                        <Modal.Body>
 
 
-            <Modal show={modal} onHide={toggle}>
-                <Modal.Header
-                    onHide={toggle}
-                    closeButton
-                    className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
+                            <div className="mb-3">
+                                <label htmlFor="username" className="form-label">
+                                    Idioma
+                                </label>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    id="language"
+                                    required=""
+                                    placeholder=""
+                                    name="language"
+                                    onChange={event => setLanguage(event.target.value)}
+                                />
+                            </div>
 
-                </Modal.Header>
-                <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitLanguage}>
-                <Modal.Body>
-
-                    
-                        <div className="mb-3">
-                            <label htmlFor="username" className="form-label">
-                                Idioma
-                            </label>
-                            <input
-                                className="form-control"
-                                type="text"
-                                id="language"
-                                required=""
-                                placeholder=""
-                                name="language"
-                                onChange={event => setLanguage(event.target.value)}
-                            />
-                        </div>
-                    
 
 
                 </Modal.Body>

@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { FormInput } from '../../components/';
+import { FormInput, VerticalForm } from '../../components/';
 //import { password } from '../../components/FormInput';
 import Select from 'react-select';
 import { createuser } from '../../helpers';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
 // components
@@ -21,12 +22,13 @@ const ModalsWithPages = () => {
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
     const [email, setEmail] = useState('');
-    
+    const [password, setPassword] = useState('');
+
     //const [signInModal, setSignInModal] = useState(false);
 
-    const submitUser = (event) => {
-        event.preventDefault();
-        createuser({ name: name, cpfUsers: cpf, email: email});
+    const submitUser = (formData) => {
+        console.log(formData['password']);
+        //createuser({ name: name, cpfUsers: cpf, email: email});
         
     };
 
@@ -42,55 +44,56 @@ const ModalsWithPages = () => {
     /*const toggleSignIn = () => {
         setSignInModal(!signInModal);
     };*/
+    const dispatch = useDispatch();
 
     return (
         <div>
-                <Row>
+            <Row>
                 <Col sm={5}>
-                <Button variant="primary" className="mb-2" onClick={toggleSignUp}>
-                    <i className="mdi mdi-plus-circle me-1"></i> Cadastrar funcionário
-                </Button>
+                    <Button variant="primary" className="mb-2" onClick={toggleSignUp}>
+                        <i className="mdi mdi-plus-circle me-1"></i> Cadastrar funcionário
+                    </Button>
                 </Col>
 
                 <Col sm={7}>
-                <div className="text-sm-end">            
-                <Button variant="light" className="mb-2">
-                    Exportar
-                </Button>
-                </div>
+                    <div className="text-sm-end">
+                        <Button variant="light" className="mb-2">
+                            Exportar
+                        </Button>
+                    </div>
                 </Col>
-                </Row>
-              
+            </Row>
 
-                {/*<Button variant="info" onClick={toggleSignIn}>
+
+            {/*<Button variant="info" onClick={toggleSignIn}>
                     Log In Modal
                 </Button>*/}
 
-                {/* Sign up Modal */}
-                <Modal show={signUpModal} onHide={toggleSignUp}>
-                    <Modal.Header onHide={toggleSignUp}
-                            closeButton className='modal-colored-header bg-primary'>
-                            <h4 className="modal-title">Cadastro de funcionário</h4>
-                        </Modal.Header >
-                        <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitUser}> 
+            {/* Sign up Modal */}
+            <Modal show={signUpModal} onHide={toggleSignUp}>
+                <Modal.Header onHide={toggleSignUp}
+                    closeButton className='modal-colored-header bg-primary'>
+                    <h4 className="modal-title">Cadastro de funcionário</h4>
+                </Modal.Header >=
+                <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitUser}>
                     <Modal.Body>
-                        
-                            <div className="mb-3">
+
+                        <div className="mb-3">
                             <FormInput
-                                    label="Nome"
-                                    type="text"
-                                    name="name"
-                                    containerClass={'mb-3'}
-                                    //register={name}
-                                    key="text"
-                                    //errors={errors}
-                                    //{control}
-                                    onChange={event => setName(event.target.value)}
+                                label="Nome"
+                                type="text"
+                                name="name"
+                                containerClass={'mb-3'}
+                                //register={name}
+                                key="text"
+                                //errors={errors}
+                                //{control}
+                                onChange={event => setName(event.target.value)}
                             />
-                            
+
 
                             <div className="mb-3">
-                            <FormInput
+                                <FormInput
                                     label="CPF"
                                     type="text"
                                     name="cpf"
@@ -104,7 +107,7 @@ const ModalsWithPages = () => {
                             </div>
 
                             <div className="mb-3">
-                            <FormInput
+                                <FormInput
                                     label="E-mail"
                                     type="text"
                                     name="email"
@@ -123,53 +126,53 @@ const ModalsWithPages = () => {
                                     name="password"
                                     type="password"
                                     containerClass={'mb-3'}
+                                    onChange={(event) => console.log(FormInput.event)}
                                     //onChange={event => setPassword(event.target.value)}
-                                    //register={password}
-                                    //key="password"
-                                    //value={password}
-
+                                //register={password}
+                                //key="password"
+                                //value={password}
                                 />
                             </div>
 
                             <div className="mb-3">
-                            <p className="mb-1 mt-3 fw-bold">Área</p>
-                            <Select
-                                className="react-select"
-                                classNamePrefix="react-select"
-                                options={[
-                                    { value: 'administrativo', label: 'Administrativa' },
-                                    { value: 'marketing', label: 'Marketing' },
-                                    { value: 'comercial', label: 'Comercial' },
-                                ]}>
-                            </Select>
+                                <p className="mb-1 mt-3 fw-bold">Área</p>
+                                <Select
+                                    className="react-select"
+                                    classNamePrefix="react-select"
+                                    options={[
+                                        { value: 'administrativo', label: 'Administrativa' },
+                                        { value: 'marketing', label: 'Marketing' },
+                                        { value: 'comercial', label: 'Comercial' },
+                                    ]}>
+                                </Select>
                             </div>
 
                             <div className="mb-3">
-                            <p className="mb-1 mt-3 fw-bold">Idiomas</p>
-                            <Select
-                                isMulti={true}
-                                options={[
-                                    { value: 'pt', label: 'Português' },
-                                    { value: 'en', label: 'Inglês' },
-                                    { value: 'es', label: 'Espanhol' },
-                                ]}
-                                className="react-select"
-                                classNamePrefix="react-select">
+                                <p className="mb-1 mt-3 fw-bold">Idiomas</p>
+                                <Select
+                                    isMulti={true}
+                                    options={[
+                                        { value: 'pt', label: 'Português' },
+                                        { value: 'en', label: 'Inglês' },
+                                        { value: 'es', label: 'Espanhol' },
+                                    ]}
+                                    className="react-select"
+                                    classNamePrefix="react-select">
                                 </Select>
 
-                           
+
                                 <div className="mb-3 mt-3">
 
-                            <Form.Group>
-                                <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
-                                <Form.Control type="file" />
-                            </Form.Group>
-                            </div>
-                       
-                            </div>
-                            </div>
+                                    <Form.Group>
+                                        <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
+                                        <Form.Control type="file" />
+                                    </Form.Group>
+                                </div>
 
-                            {/*<div className="mb-3">
+                            </div>
+                        </div>
+
+                        {/*<div className="mb-3">
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="customCheck1" />
                                     <label className="form-check-label" htmlFor="customCheck1">
@@ -178,19 +181,19 @@ const ModalsWithPages = () => {
                                 </div>
                             </div>*/}
 
-                            
-                        
+
+
                     </Modal.Body>
                     <Modal.Footer>
-                    
-                            <Button variant="primary" type="submit">
-                                Salvar
-                            </Button>
-                        </Modal.Footer>
-                        </form>
-                </Modal>
 
-                {/* Sign in Modal 
+                        <Button variant="primary" type="submit">
+                            Salvar
+                        </Button>
+                    </Modal.Footer>
+                </form>
+            </Modal>
+
+            {/* Sign in Modal 
                 <Modal show={signInModal} onHide={toggleSignIn}>
                     <Modal.Body>
                         <form className="ps-3 pe-3" action="#">
@@ -237,7 +240,7 @@ const ModalsWithPages = () => {
                         </form>
                     </Modal.Body>
                 </Modal>*/}
-            </div>
+        </div >
     );
 };
 
@@ -265,7 +268,7 @@ const ModalWithAlerts = () => {
             <Card.Body>
                 <h4 className="header-title">Modal based Alerts</h4>
 
-               
+
                 <Button variant="primary" onClick={() => openModalWithClass('success')}>
                     <i className="mdi mdi-delete"></i>
                 </Button>
@@ -601,8 +604,8 @@ const MultipleModal = () => {
 };
 
 const ToggleBetweenModals = () => {
-    const [modal, setModal] = useState<boolean>(false);
-    const [nextModal, setNextModal] = useState<boolean>(false);
+    const [modal, setModal] = useState < boolean > (false);
+    const [nextModal, setNextModal] = useState < boolean > (false);
 
     // Show/hide the modal
     const toggle = () => {
@@ -716,8 +719,8 @@ const Modals = (): React$Element<React$FragmentType> => {
                     <ModalSizes />
         </Col>*/}
 
-                
-                    <ModalsWithPages />
+
+                <ModalsWithPages />
             </Row>
 
             {/*<Row>

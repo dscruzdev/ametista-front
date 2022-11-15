@@ -318,42 +318,7 @@ const ModalsWithPagesArea = (data) => {
 
             {/* Sign up Modal */}
 
-            <Modal show={AreaEditModal} onHide={toggleModalEdit}>
-                <Modal.Header
-                    onHide={toggleModalEdit}
-                    closeButton
-                    className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
-
-                </Modal.Header>
-                <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitArea}>
-                    <Modal.Body>
-
-
-                        <div className="mb-3">
-                            <label htmlFor="username" className="form-label">
-                                Área
-                            </label>
-                            <input
-                                className="form-control"
-                                type="text"
-                                id="area"
-                                required=""
-                                placeholder=""
-                                name="area"
-                                onChange={event => setArea(event.target.value)}
-                            />
-                        </div>
-
-
-
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant={headerClassName} type="submit">
-                            Salvar
-                        </Button>
-                    </Modal.Footer>
-                </form>
-            </Modal>
+            
         </div>
     );
 };

@@ -80,7 +80,7 @@ const RevenueColumn = ({ row }) => {
 const ActionColumn = ({ row }) => {
     return (
         <>
-            <ModalsEmployeesAction />
+            <ModalsEmployeesAction data={row}/>
         </>
     );
 };

@@ -3,7 +3,7 @@ import { login, logout, signup, forgotPassword, forgotPasswordConfirm } from './
 import { getrequests, endrequests } from './request';
 import { getclients } from './client';
 import { getareas, createarea, deletearea, updatearea } from './area';
-import { createuser } from './user';
+import { createuser, deleteuser } from './user';
 import { getlanguages, createlanguage, deletelanguage, updatelanguage } from './language';
 import { getsubjects, createsubject, deletesubject, updatesubject } from './subject';
 import { getcomments } from './comment';
@@ -25,6 +25,7 @@ export {
     createsubject,
     createlanguage,
     createuser,
+    deleteuser,
     deletearea,
     deletelanguage,
     deletesubject,

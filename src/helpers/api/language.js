@@ -9,6 +9,11 @@ function getlanguages(params: any): any {
     return api.get(`${baseUrl}`, params);
 }
 
+function createlanguage(params: any): any {
+    const baseUrl = '/language';
+    return api.create(`${baseUrl}`, params);
+}
 
 
-export { getlanguages };
+
+export { getlanguages, createlanguage };

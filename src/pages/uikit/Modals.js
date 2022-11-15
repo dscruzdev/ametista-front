@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components/';
 import Select from 'react-select';
+import { createuser } from '../../helpers';
+import { setPassword } from '../../components/';
 import { useForm } from 'react-hook-form';
 
 // components
@@ -13,116 +15,19 @@ import { useForm } from 'react-hook-form';
 // images
 //import logodark from '../../assets/images/logo-dark.png';
 
-const ModalSizes = () => {
-    const [modal, setModal] = useState(false);
-    const [size, setSize] = useState(null);
-    const [className, setClassName] = useState(null);
-    const [scroll, setScroll] = useState(null);
-
-    /**
-     * Show/hide the modal
-     */
-    const toggle = () => {
-        setModal(!modal);
-    };
-
-    /**
-     * Opens large modal
-     */
-    const openModalWithSize = (size) => {
-        setSize(size);
-        setClassName(null);
-        setScroll(null);
-        toggle();
-    };
-
-    /**
-     * Opens modal with custom class
-     */
-    const openModalWithClass = (className) => {
-        setClassName(className);
-        setSize(null);
-        setScroll(null);
-        toggle();
-    };
-
-    /**
-     * Opens large modal
-     */
-    const openModalWithScroll = () => {
-        setScroll(true);
-        setSize(null);
-        setClassName(null);
-        toggle();
-    };
-
-    return (
-        <>
-            <Card>
-                <Card.Body>
-                    <h4 className="header-title">Bootstrap Modals</h4>
-
-                    <p className="text-muted">A rendered modal with header, body, and set of actions in the footer.</p>
-
-                    <div className="button-list">
-                        <Button variant="primary" onClick={toggle}>
-                            Standard Modal
-                        </Button>
-                        <Button variant="info" onClick={() => openModalWithSize('lg')}>
-                            Large Modal
-                        </Button>
-                        <Button variant="success" onClick={() => openModalWithSize('sm')}>
-                            Small Modal
-                        </Button>
-                        <Button variant="primary" onClick={() => openModalWithClass('modal-full-width')}>
-                            Full width Modal
-                        </Button>
-                        <Button variant="secondary" onClick={openModalWithScroll}>
-                            Scrollable Modal
-                        </Button>
-                    </div>
-
-                    <Modal show={modal} onHide={toggle} dialogClassName={className} size={size} scrollable={scroll}>
-                        <Modal.Header onHide={toggle} closeButton>
-                            <h4 className="modal-title">Modal Heading</h4>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <h6>Text in a modal</h6>
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                            <hr />
-                            <h6>Overflowing text to show scroll behavior</h6>
-                            <p>
-                                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-                                in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                            </p>
-                            <p>
-                                Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-                                lacus vel augue laoreet rutrum faucibus dolor auctor.
-                            </p>
-                            <p>
-                                Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-                                scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-                                auctor fringilla.
-                            </p>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="light" onClick={toggle}>
-                                Close
-                            </Button>{' '}
-                            <Button variant="primary" onClick={toggle}>
-                                Save changes
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                </Card.Body>
-            </Card>
-        </>
-    );
-};
 
 const ModalsWithPages = () => {
     const [signUpModal, setSignUpModal] = useState(false);
+    const [name, setName] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [email, setEmail] = useState('');
+    
     //const [signInModal, setSignInModal] = useState(false);
+
+    const submitUser = (event) => {
+        event.preventDefault();
+        createuser({ name: name, cpfUsers: cpf, email: email});
+    };
 
     /**
      * Show/hide the modal
@@ -162,23 +67,23 @@ const ModalsWithPages = () => {
                 <Modal show={signUpModal} onHide={toggleSignUp}>
                     <Modal.Header onHide={toggleSignUp}
                             closeButton className='modal-colored-header bg-primary'>
-                        
                             <h4 className="modal-title">Cadastro de funcionário</h4>
                         </Modal.Header >
-                        
+                        <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitUser}> 
                     <Modal.Body>
-                        <form className="ps-3 pe-3 mt-2" action="#">
+                        
                             <div className="mb-3">
                             <FormInput
                                     label="Nome"
                                     type="text"
                                     name="name"
                                     containerClass={'mb-3'}
-                                    //register={register}
+                                    //register={name}
                                     key="text"
                                     //errors={errors}
                                     //{control}
-                                />
+                                    onChange={event => setName(event.target.value)}
+                            />
                             
 
                             <div className="mb-3">
@@ -191,6 +96,7 @@ const ModalsWithPages = () => {
                                     key="text"
                                     //errors={errors}
                                     //{control}
+                                    onChange={event => setCpf(event.target.value)}
                                 />
                             </div>
 
@@ -204,17 +110,20 @@ const ModalsWithPages = () => {
                                     key="text"
                                     //errors={errors}
                                     //{control}
+                                    onChange={event => setEmail(event.target.value)}
                                 />
                             </div>
 
                             <div className="mb-3">
-                                <FormInput
+                                <FormInput onChange={console.log(this)}
                                     label="Senha"
-                                    type="password"
                                     name="password"
+                                    type="password"
                                     containerClass={'mb-3'}
-                                    //register={register}
-                                    key="password"
+                                    //register={password}
+                                    //key="password"
+                                    //value={password}
+
                                 />
                             </div>
 
@@ -266,14 +175,15 @@ const ModalsWithPages = () => {
             </div>*/}
 
                             
-                        </form>
+                        
                     </Modal.Body>
                     <Modal.Footer>
                     
-                            <Button variant="primary" type="submit" onClick={toggleSignUp}>
+                            <Button variant="primary" type="submit">
                                 Salvar
                             </Button>
                         </Modal.Footer>
+                        </form>
                 </Modal>
 
                 {/* Sign in Modal 

@@ -84,6 +84,8 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
 
         //console.log(idRequests_tosend);
         endrequests({ idRequests: idRequests_tosend });
+
+        setModal(!modal);
         
     }
 

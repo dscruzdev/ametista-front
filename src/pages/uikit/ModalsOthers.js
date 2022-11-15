@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components';
 import Select from 'react-select';
-import { createarea, createsubject } from '../../helpers';
+import { createarea, createsubject, createlanguage } from '../../helpers';
 import { useAsync } from "react-async";
 
 
@@ -34,6 +34,7 @@ const ModalWithColoredHeader1 = () => {
     const submitArea = (event) => {
         event.preventDefault();
         createarea({ name: area });
+        setModal(!modal);
     };
 
 
@@ -102,6 +103,7 @@ const ModalWithColoredHeader2 = () => {
     const submitSubject = (event) => {
         event.preventDefault();
         createsubject({ name: subject })
+        setModal(!modal);
     };
     
 
@@ -168,10 +170,7 @@ const ModalWithColoredHeader2 = () => {
                                     classNamePrefix="react-select">
                                 </Select>
                             </div>
-
-
-
-
+                            
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant={headerClassName} type="submit">
@@ -188,6 +187,13 @@ const ModalWithColoredHeader2 = () => {
 const ModalWithColoredHeader3 = () => {
     const [modal, setModal] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
+    const [language, setLanguage] = useState('');
+
+    const submitLanguage = (event) => {
+        event.preventDefault();
+        createlanguage({ language: language })
+        setModal(!modal);
+    };
 
     /**
      * Show/hide the modal
@@ -218,9 +224,10 @@ const ModalWithColoredHeader3 = () => {
                     className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
 
                 </Modal.Header>
+                <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitLanguage}>
                 <Modal.Body>
 
-                    <form className="ps-3 pe-3 mt-2" action="#">
+                    
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">
                                 Idioma
@@ -231,17 +238,20 @@ const ModalWithColoredHeader3 = () => {
                                 id="language"
                                 required=""
                                 placeholder=""
+                                name="language"
+                                onChange={event => setLanguage(event.target.value)}
                             />
                         </div>
-                    </form>
+                    
 
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant={headerClassName} onClick={toggle}>
+                    <Button variant={headerClassName} type="submit">
                         Salvar
                     </Button>
                 </Modal.Footer>
+                </form>
             </Modal>
         </>
     );

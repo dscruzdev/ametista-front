@@ -6,6 +6,11 @@ import classNames from 'classnames';
 /* Password Input */
 const PasswordInput = ({ name, placeholder, refCallback, errors, register, className }) => {
     const [showPassword, setShowPassword] = useState(false);
+    const [password, setPassword] = useState('');
+
+    const fun=(event) => {
+        setPassword(event.target.value)
+    }
 
     return (
         <>
@@ -15,6 +20,7 @@ const PasswordInput = ({ name, placeholder, refCallback, errors, register, class
                     placeholder={placeholder}
                     name={name}
                     id={name}
+                    onChange={event => fun(event)}
                     as="input"
                     ref={(r) => {
                         if (refCallback) refCallback(r);

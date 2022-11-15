@@ -15,8 +15,6 @@ import ModalsOthersAction from '../../uikit/ModalsOthersAction';
 import { useAsync } from "react-async";
 import { others } from './Data';
 
-
-
 /* name column render */
 const NameColumn = ({ row }) => {
     return (

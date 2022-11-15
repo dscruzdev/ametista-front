@@ -11,7 +11,8 @@ import Table from '../../../components/Table';
 import Modals from '../../uikit/Modals';
 
 // dummy data
-import { orders } from './Data';
+import { employees } from './Data';
+import { useAsync } from "react-async";
 import ModalsEmployeesAction from '../../uikit/ModalsEmployeesAction';
 
 /* name column render */
@@ -83,6 +84,14 @@ const ActionColumn = ({ row }) => {
     );
 };
 
+const EmployeeDateColumn = ({ row }) => {
+    return (
+        <>
+            {row.original.order_date} <small className="text-muted">{row.original.order_time}</small>
+        </>
+    );
+};
+
 // get all columns
 const columns = [
     {
@@ -94,7 +103,7 @@ const columns = [
     },
     {
         Header: 'CPF',
-        accessor: 'cpf',
+        accessor: 'cpfUsers',
         sort: true,
     },
     {
@@ -106,7 +115,7 @@ const columns = [
     {
         Header: 'Área',
         accessor: 'area',
-        sort: true,
+        sort: false,
     },
    /* {
         Header: 'Wallet Balance',
@@ -115,7 +124,8 @@ const columns = [
     },*/
     {
         Header: 'Data de cadastro',
-        accessor: 'created_on',
+        //accessor: 'createddate_on',
+        Cell: EmployeeDateColumn,
         sort: true,
     },
    
@@ -153,6 +163,10 @@ const sizePerPageList = [
 
 // main component
 const Employees = (): React$Element<React$FragmentType> => {
+    const { data, error, isPending } = useAsync({ promiseFn: employees });
+    if (isPending) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data) {
     return (
         <>
         <Row>
@@ -201,7 +215,7 @@ const Employees = (): React$Element<React$FragmentType> => {
 
                             <Table
                                 columns={columns}
-                                data={orders}
+                                data={data}
                                 pageSize={10}
                                 sizePerPageList={sizePerPageList}
                                 isSortable={true}
@@ -219,5 +233,5 @@ const Employees = (): React$Element<React$FragmentType> => {
         </>
     );
 };
-
+}
 export default Employees;

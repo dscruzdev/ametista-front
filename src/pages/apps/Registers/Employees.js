@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import Chart from 'react-apexcharts';
 
+
 // components
 //import PageTitle from '../../../components/PageTitle';
 import Table from '../../../components/Table';
 import Modals from '../../uikit/Modals';
 
 // dummy data
-//import { area } from './Data';
+import { orders } from './Data';
 import ModalsEmployeesAction from '../../uikit/ModalsEmployeesAction';
 import { orders } from './Data';
 

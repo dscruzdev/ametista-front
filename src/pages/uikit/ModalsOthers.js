@@ -7,6 +7,7 @@ import { FormInput } from '../../components';
 import Select from 'react-select';
 import { createarea, createsubject, createlanguage } from '../../helpers';
 import { useAsync } from "react-async";
+import { area } from '../apps/Registers/Data';
 
 
 // components
@@ -99,10 +100,12 @@ const ModalWithColoredHeader2 = () => {
     const [modal, setModal] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
     const [subject, setSubject] = useState('');
+    const [areaarray, setArea] = useState('');
 
     const submitSubject = (event) => {
         event.preventDefault();
-        createsubject({ name: subject })
+        createsubject({ name: subject, areas: areaarray })
+        console.log({subject, areaarray })
         setModal(!modal);
     };
     
@@ -121,11 +124,16 @@ const ModalWithColoredHeader2 = () => {
         setHeaderClassName(className);
         toggle();
     };
-    const areas = [];
-    // area.forEach(data => {
-    //     areas.push({value:data.idAreas, label:data.name})
-    // });
-    
+
+    const { data, error, isPending } = useAsync({ promiseFn: area });
+
+    if (isPending) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data) {
+        const areas = []
+        data.forEach(area => {    
+            areas.push ({value:area.idAreas,label:area.name})
+        })
         return (
             <>
 
@@ -161,7 +169,8 @@ const ModalWithColoredHeader2 = () => {
 
                             <div className="mb-3">
                                 <p className="mb-1 mt-3 fw-bold">Áreas relacionadas</p>
-                                <Select
+                                <Select 
+                                    onChange={(area)=> setArea (area)}
                                     isMulti={true}
                                     options={
                                         areas
@@ -181,7 +190,7 @@ const ModalWithColoredHeader2 = () => {
                 </Modal>
             </>
         );
-    
+                                }
 };
 
 const ModalWithColoredHeader3 = () => {

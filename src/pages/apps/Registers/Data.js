@@ -2557,8 +2557,13 @@ const customers = [
     },
 ];
 
-const area = () =>
+const others = () =>
     fetch("http://localhost:8080/front/others")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
+
+const area = () =>
+    fetch("http://localhost:8080/area")
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json());
 
@@ -3465,4 +3470,4 @@ const area = () =>
     },
 ];*/
 
-export { products, orders, customers, area };
+export { products, orders, customers, others, area };

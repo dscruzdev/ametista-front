@@ -74,7 +74,7 @@ const ModalsWithPages = () => {
                 <Modal.Header onHide={toggleSignUp}
                     closeButton className='modal-colored-header bg-primary'>
                     <h4 className="modal-title">Cadastro de funcionário</h4>
-                </Modal.Header >=
+                </Modal.Header >
                 <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitUser}>
                     <Modal.Body>
 
@@ -162,7 +162,6 @@ const ModalsWithPages = () => {
 
 
                                 <div className="mb-3 mt-3">
-
                                     <Form.Group>
                                         <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
                                         <Form.Control type="file" />

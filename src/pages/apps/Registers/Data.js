@@ -2557,7 +2557,12 @@ const customers = [
     },
 ];
 
-const sellers = [
+const area = () =>
+    fetch("http://localhost:8080/front/others")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
+
+/*const sellers = [
     {
         id: 1,
         name: 'Hayward Billo',
@@ -3458,6 +3463,6 @@ const sellers = [
         created_on: '07/18/2019',
         image: 'https://robohash.org/evenietquaeconsequuntur.png?size=100x100&set=set1',
     },
-];
+];*/
 
-export { products, orders, customers, sellers };
+export { products, orders, customers, area };

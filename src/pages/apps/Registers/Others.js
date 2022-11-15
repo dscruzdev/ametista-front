@@ -13,7 +13,9 @@ import ModalsOthersAction from '../../uikit/ModalsOthersAction';
 
 // dummy data
 import { useAsync } from "react-async";
-import { sellers } from './Data';
+import { area } from './Data';
+
+
 
 /* name column render */
 const NameColumn = ({ row }) => {
@@ -84,6 +86,14 @@ const ActionColumn = ({ row }) => {
     );
 };
 
+const OtherDateColumn = ({ row }) => {
+    return (
+        <>
+            {row.original.createddate_on} <small className="text-muted">{row.original.createdtime_on}</small>
+        </>
+    );
+};
+
 
 
 // get all columns
@@ -107,7 +117,8 @@ const columns = [
      },*/
     {
         Header: 'Data de cadastro',
-        accessor: 'created_on',
+        accessor: 'createddate_on',
+        Cell: OtherDateColumn,
         sort: true,
     },
     /*{
@@ -144,6 +155,7 @@ const sizePerPageList = [
 
 // main component
 const Others = (): React$Element<React$FragmentType> => {
+    const { data, error, isPending } = useAsync({ promiseFn: area });
     // const { data, error, isPending } = useAsync({
     //     promiseFn: fetch("http://localhost:8080/area")
     //         .then(res => (res.ok ? res : Promise.reject(res)))
@@ -151,7 +163,9 @@ const Others = (): React$Element<React$FragmentType> => {
     // });
     // if (isPending) return "Loading..."
     // if (error) return `Something went wrong: ${error.message}`
-
+    if (isPending) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data) {
     return (
         <>
             {/*} <PageTitle
@@ -201,7 +215,7 @@ const Others = (): React$Element<React$FragmentType> => {
 
                             <Table
                                 columns={columns}
-                                data={sellers}
+                                data={data}
                                 pageSize={10}
                                 sizePerPageList={sizePerPageList}
                                 isSortable={true}
@@ -218,7 +232,7 @@ const Others = (): React$Element<React$FragmentType> => {
             </Row>
         </>
     );
-
+                            }
 };
 
 export default Others;

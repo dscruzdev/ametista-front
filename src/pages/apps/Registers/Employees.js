@@ -10,7 +10,7 @@ import Table from '../../../components/Table';
 import Modals from '../../uikit/Modals';
 
 // dummy data
-import { sellers } from './Data';
+//import { area } from './Data';
 import ModalsEmployeesAction from '../../uikit/ModalsEmployeesAction';
 
 /* name column render */
@@ -200,7 +200,7 @@ const Employees = (): React$Element<React$FragmentType> => {
 
                             <Table
                                 columns={columns}
-                                data={sellers}
+                                //data={data}
                                 pageSize={10}
                                 sizePerPageList={sizePerPageList}
                                 isSortable={true}

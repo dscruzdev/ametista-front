@@ -210,83 +210,17 @@ const ModalsWithPagesArea = (datas) => {
 
 
 
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant={headerClassName} type="submit">
-                        Salvar
-                    </Button>
-                </Modal.Footer>
-                </form>
-            </Modal>
-        </>
-    );
-};
-
-const ModalsWithPagesArea = (data) => {
-    const [AttendantEditModal, setAttendantEditModal] = useState(false);
-    const [SubjectEditModal, setSubjectEditModal] = useState(false);
-    const [LanguageEditModal, setLanguageEditModal] = useState(false);
-    const [AreaEditModal, setAreaEditModal] = useState(false);
-    const [area, setArea] = useState(data.data.data.original.name);
-
-    //const [signInModal, setSignInModal] = useState(false);
-
-    /**
-     * Show/hide the modal
-     */
-
-
-
-    const toggleModalEdit = () => {
-        if (data.data.data.original.idAreas) {
-            setAreaEditModal(!AreaEditModal);
-            console.log({ idAreas: data.data.data.original.idAreas });
-        }
-        if (data.data.data.original.idSubjects) {
-            setLanguageEditModal(!LanguageEditModal);
-            console.log({ idSubjects: data.data.data.original.idSubjects });
-
-        }
-        if (data.data.data.original.idLanguages) {
-            setSubjectEditModal(!SubjectEditModal);
-            console.log({ idLanguages: data.data.data.original.idLanguages });
-
-        }
-        //setAttendantEditModal(!AttendantEditModal);
-    };
-    /*const toggleSignIn = () => {
-        setSignInModal(!signInModal);
-    };*/
-
-    const submitArea = (event) => {
-        event.preventDefault();
-        updatearea({ idAreas:data.data.data.original.idAreas,name: area });
-        setAreaEditModal(!AreaEditModal);
-    };
-
-
-
-    return (
-        <div>
-
-            <Button variant="primary" className="me-2 mb-1" onClick={toggleModalEdit}>
-                <i className="mdi mdi-square-edit-outline"></i>
-            </Button>
-
-
-            <ModalPositions data={data} />
-
-
-
-            {/*<Button variant="info" onClick={toggleSignIn}>
-                    Log In Modal
-                </Button>*/}
-
-            {/* Sign up Modal */}
-
-            
-        </div>
-    );
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant={headerClassName} type="submit">
+                                Salvar
+                            </Button>
+                        </Modal.Footer>
+                    </form>
+                </Modal>
+            </div>
+        );
+    }
 };
 
 const ModalPositions = (data) => {

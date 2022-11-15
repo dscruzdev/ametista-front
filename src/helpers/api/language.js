@@ -14,6 +14,16 @@ function createlanguage(params: any): any {
     return api.create(`${baseUrl}`, params);
 }
 
+function deletelanguage(params: any): any {
+    const baseUrl = '/language';
+    return api.delete(`${baseUrl}`, params);
+}
+
+function updatelanguage(params: any): any {
+    const baseUrl = '/language';
+    return api.update(`${baseUrl}`, params);
+}
 
 
-export { getlanguages, createlanguage };
+
+export { getlanguages, createlanguage, deletelanguage, updatelanguage };

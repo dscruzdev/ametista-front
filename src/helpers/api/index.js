@@ -2,10 +2,33 @@
 import { login, logout, signup, forgotPassword, forgotPasswordConfirm } from './auth';
 import { getrequests, endrequests } from './request';
 import { getclients } from './client';
-import { getareas, createarea } from './area';
+import { getareas, createarea, deletearea, updatearea } from './area';
 import { createuser } from './user';
-import { getlanguages, createlanguage} from './language';
-import { getsubjects, createsubject } from './subject';
+import { getlanguages, createlanguage, deletelanguage, updatelanguage } from './language';
+import { getsubjects, createsubject, deletesubject, updatesubject } from './subject';
 import { getcomments } from './comment';
 
-export { login, logout, signup, forgotPassword, forgotPasswordConfirm, getclients, getcomments, getlanguages, getrequests, getsubjects, endrequests, getareas, createarea, createsubject, createlanguage, createuser };
+export {
+    login,
+    logout,
+    signup,
+    forgotPassword,
+    forgotPasswordConfirm,
+    getclients,
+    getcomments,
+    getlanguages,
+    getrequests,
+    getsubjects,
+    endrequests,
+    getareas,
+    createarea,
+    createsubject,
+    createlanguage,
+    createuser,
+    deletearea,
+    deletelanguage,
+    deletesubject,
+    updatearea,
+    updatelanguage,
+    updatesubject
+};

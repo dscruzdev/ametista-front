@@ -14,6 +14,16 @@ function createarea(params: any): any {
     return api.create(`${baseUrl}`, params);
 }
 
+function deletearea(params: any): any {
+    const baseUrl = '/area/'+params.idAreas;
+    return api.delete(`${baseUrl}`, params);
+}
+
+function updatearea(params: any): any {
+    const baseUrl = '/area/'+params.idAreas;
+    return api.update(`${baseUrl}`, params);
+}
 
 
-export { getareas, createarea };
+
+export { getareas, createarea, deletearea, updatearea };

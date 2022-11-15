@@ -21,7 +21,8 @@ const NameColumn = ({ row }) => {
         <>
             <div className="table-user">
                 <Link to="#" className="text-body fw-semibold">
-                    {row.original.name} {row.original.language}
+                    {row.original.name}
+                    {row.original.language}
                 </Link>
             </div>
         </>
@@ -79,7 +80,7 @@ const RevenueColumn = ({ row }) => {
 const ActionColumn = ({ row }) => {
     return (
         <>
-            <ModalsOthersAction />
+            <ModalsOthersAction data={row} />
         </>
     );
 };
@@ -157,9 +158,9 @@ const Others = (): React$Element<React$FragmentType> => {
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
-    return (
-        <>
-            {/*} <PageTitle
+        return (
+            <>
+                {/*} <PageTitle
                 breadCrumbItems={[
                     { label: 'eCommerce', path: '/apps/ecommerce/sellers' },
                     { label: 'Sellers', path: '/apps/ecommerce/sellers', active: true },
@@ -167,21 +168,21 @@ const Others = (): React$Element<React$FragmentType> => {
                 title={'Sellers'}
             />*/}
 
-            <Row>
-                <Col>
-                    <div className="page-title-box">
-                        <h4 className="page-title">Outros cadastros</h4>
-                    </div>
-                </Col>
-            </Row>
+                <Row>
+                    <Col>
+                        <div className="page-title-box">
+                            <h4 className="page-title">Outros cadastros</h4>
+                        </div>
+                    </Col>
+                </Row>
 
-            <Row>
-                <Col xs={12}>
-                    <Card>
-                        <Card.Body>
-                            <Row className="mb-2">
-                                <ModalsOthers />
-                                {/*<Col sm={5}>
+                <Row>
+                    <Col xs={12}>
+                        <Card>
+                            <Card.Body>
+                                <Row className="mb-2">
+                                    <ModalsOthers />
+                                    {/*<Col sm={5}>
                                     <Button variant="primary" className="mb-2">
                                         <i className="mdi mdi-plus-circle me-2"></i> Cadastrar funcionário
                                     </Button>
@@ -202,28 +203,28 @@ const Others = (): React$Element<React$FragmentType> => {
                                         </Button>
                                     </div>
                                 </Col>*/}
-                            </Row>
+                                </Row>
 
-                            <Table
-                                columns={columns}
-                                data={data}
-                                pageSize={10}
-                                sizePerPageList={sizePerPageList}
-                                isSortable={true}
-                                pagination={true}
-                                isSelectable={true}
-                                isSearchable={true}
-                                tableClass="table-striped"
-                                theadClass="table-light"
-                                searchBoxClass="mt-2 mb-3"
-                            />
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </>
-    );
-                            }
+                                <Table
+                                    columns={columns}
+                                    data={data}
+                                    pageSize={10}
+                                    sizePerPageList={sizePerPageList}
+                                    isSortable={true}
+                                    pagination={true}
+                                    isSelectable={true}
+                                    isSearchable={true}
+                                    tableClass="table-striped"
+                                    theadClass="table-light"
+                                    searchBoxClass="mt-2 mb-3"
+                                />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </>
+        );
+    }
 };
 
 export default Others;

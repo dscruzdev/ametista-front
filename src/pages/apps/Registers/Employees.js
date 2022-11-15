@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import Chart from 'react-apexcharts';
 
+
 // components
 //import PageTitle from '../../../components/PageTitle';
 import Table from '../../../components/Table';
 import Modals from '../../uikit/Modals';
 
 // dummy data
-//import { area } from './Data';
+import { orders } from './Data';
 import ModalsEmployeesAction from '../../uikit/ModalsEmployeesAction';
 
 /* name column render */
@@ -200,7 +201,7 @@ const Employees = (): React$Element<React$FragmentType> => {
 
                             <Table
                                 columns={columns}
-                                //data={data}
+                                data={orders}
                                 pageSize={10}
                                 sizePerPageList={sizePerPageList}
                                 isSortable={true}

@@ -4,9 +4,9 @@ import { Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput, VerticalForm } from '../../components/';
+//import { password } from '../../components/FormInput';
 import Select from 'react-select';
 import { createuser } from '../../helpers';
-import { setPassword } from '../../components/';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
@@ -29,7 +29,10 @@ const ModalsWithPages = () => {
     const submitUser = (formData) => {
         console.log(formData['password']);
         //createuser({ name: name, cpfUsers: cpf, email: email});
+        
     };
+
+    //console.log(password)
 
     /**
      * Show/hide the modal
@@ -124,6 +127,7 @@ const ModalsWithPages = () => {
                                     type="password"
                                     containerClass={'mb-3'}
                                     onChange={(event) => console.log(FormInput.event)}
+                                    //onChange={event => setPassword(event.target.value)}
                                 //register={password}
                                 //key="password"
                                 //value={password}
@@ -175,7 +179,7 @@ const ModalsWithPages = () => {
                                         I accept <Link to="#">Terms and Conditions</Link>
                                     </label>
                                 </div>
-            </div>*/}
+                            </div>*/}
 
 
 

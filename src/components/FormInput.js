@@ -11,6 +11,7 @@ const PasswordInput = ({ name, placeholder, refCallback, errors, register, class
     const fun=(event) => {
         setPassword(event.target.value)
     }
+    
 
     return (
         <>
@@ -76,7 +77,6 @@ const FormInput = ({
 }: FormInputProps): React$Element<React$FragmentType> => {
     // handle input type
     const comp = type === 'textarea' ? 'textarea' : type === 'select' ? 'select' : 'input';
-
     return (
         <>
             {type === 'hidden' ? (

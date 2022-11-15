@@ -15,12 +15,12 @@ function createlanguage(params: any): any {
 }
 
 function deletelanguage(params: any): any {
-    const baseUrl = '/language';
+    const baseUrl = '/language/'+params.idLanguages;
     return api.delete(`${baseUrl}`, params);
 }
 
 function updatelanguage(params: any): any {
-    const baseUrl = '/language';
+    const baseUrl = '/language/'+params.idLanguages;
     return api.update(`${baseUrl}`, params);
 }
 

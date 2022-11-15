@@ -15,12 +15,12 @@ function createsubject(params: any): any {
 }
 
 function deletesubject(params: any): any {
-    const baseUrl = '/subject';
+    const baseUrl = '/subject/'+params.idSubjects;
     return api.delete(`${baseUrl}`, params);
 }
 
 function updatesubject(params: any): any {
-    const baseUrl = '/subject';
+    const baseUrl = '/subject/'+params.idSubjects;
     return api.update(`${baseUrl}`, params);
 }
 

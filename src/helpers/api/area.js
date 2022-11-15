@@ -20,7 +20,7 @@ function deletearea(params: any): any {
 }
 
 function updatearea(params: any): any {
-    const baseUrl = '/area';
+    const baseUrl = '/area/'+params.idAreas;
     return api.update(`${baseUrl}`, params);
 }
 

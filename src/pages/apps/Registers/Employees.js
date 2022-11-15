@@ -13,7 +13,6 @@ import Modals from '../../uikit/Modals';
 // dummy data
 import { orders } from './Data';
 import ModalsEmployeesAction from '../../uikit/ModalsEmployeesAction';
-import { orders } from './Data';
 
 /* name column render */
 const NameColumn = ({ row }) => {

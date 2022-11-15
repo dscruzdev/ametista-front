@@ -13,7 +13,7 @@ import ModalsOthersAction from '../../uikit/ModalsOthersAction';
 
 // dummy data
 import { useAsync } from "react-async";
-import { area } from './Data';
+import { others } from './Data';
 
 
 
@@ -23,7 +23,7 @@ const NameColumn = ({ row }) => {
         <>
             <div className="table-user">
                 <Link to="#" className="text-body fw-semibold">
-                    {row.original.name}
+                    {row.original.name} {row.original.language}
                 </Link>
             </div>
         </>
@@ -155,14 +155,7 @@ const sizePerPageList = [
 
 // main component
 const Others = (): React$Element<React$FragmentType> => {
-    const { data, error, isPending } = useAsync({ promiseFn: area });
-    // const { data, error, isPending } = useAsync({
-    //     promiseFn: fetch("http://localhost:8080/area")
-    //         .then(res => (res.ok ? res : Promise.reject(res)))
-    //         .then(res => res.json())
-    // });
-    // if (isPending) return "Loading..."
-    // if (error) return `Something went wrong: ${error.message}`
+    const { data, error, isPending } = useAsync({ promiseFn: others });
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {

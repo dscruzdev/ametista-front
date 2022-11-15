@@ -2567,6 +2567,11 @@ const area = () =>
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json());
 
+const employees = () =>
+    fetch("http://localhost:8080/front/employees")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
+
 /*const sellers = [
     {
         id: 1,
@@ -3470,4 +3475,4 @@ const area = () =>
     },
 ];*/
 
-export { products, orders, customers, others, area };
+export { products, orders, customers, others, area, employees };

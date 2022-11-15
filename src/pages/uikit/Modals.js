@@ -160,15 +160,28 @@ const ModalsWithPages = () => {
                                     classNamePrefix="react-select">
                                 </Select>
 
+                            </div>
 
-                                <div className="mb-3 mt-3">
+                            <div className="mb-3">
+                                <p className="mb-1 mt-3 fw-bold">Tipo de usuário</p>
+                                <Select
+                                    isMulti={true}
+                                    options={[
+                                        { value: '1', label: 'Atendente' },
+                                        { value: '2', label: 'Administrador' },
+                                    ]}
+                                    className="react-select"
+                                    classNamePrefix="react-select">
+                                </Select>
+
+                            </div>
+
+                            <div className="mb-3 mt-3">
                                     <Form.Group>
                                         <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
                                         <Form.Control type="file" />
                                     </Form.Group>
                                 </div>
-
-                            </div>
                         </div>
 
                         {/*<div className="mb-3">

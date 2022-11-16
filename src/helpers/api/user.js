@@ -9,4 +9,9 @@ function createuser(params: any): any {
     return api.create(`${baseUrl}`, params);
 }
 
-export { createuser };
+function deleteuser(params: any): any {
+    const baseUrl = '/user/'+params.cpfUsers;
+    return api.delete(`${baseUrl}`, params);
+}
+
+export { createuser, deleteuser };

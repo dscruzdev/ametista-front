@@ -7,6 +7,7 @@ import { FormInput } from '../../components';
 import Select from 'react-select';
 import StatisticsEmployees from '../apps/Registers/StatisticsEmployees';
 import StatusEmployees from '../apps/Registers/StatusEmployees';
+import { deleteuser } from '../../helpers/'
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -15,7 +16,8 @@ import StatusEmployees from '../apps/Registers/StatusEmployees';
 //import logodark from '../../assets/images/logo-dark.png';
 
 
-const ModalsWithPagesArea = () => {
+const ModalsWithPagesArea = (data) => {
+
     const [AttendantEditModal, setAttendantEditModal] = useState(false);
 
     //const [signInModal, setSignInModal] = useState(false);
@@ -42,7 +44,7 @@ const ModalsWithPagesArea = () => {
                 </Button>
 
 
-                <ModalPositions />
+                <ModalPositions data={data} />
                 
               
 
@@ -170,7 +172,7 @@ const ModalsWithPagesArea = () => {
     );
 };
 
-const ModalPositions = () => {
+const ModalPositions = (data) => {
     const [modal, setModal] = useState(false);
     const [className, setClassName] = useState(null);
 
@@ -180,6 +182,13 @@ const ModalPositions = () => {
     const toggle = () => {
         setModal(!modal);
     };
+
+    const confirmed = () => {
+        
+            deleteuser({ cpfUsers: data.data.data.data.original.cpfUsers });
+
+        setModal(!modal);
+    }
 
     /**
      * Opens modal with custom class
@@ -208,7 +217,7 @@ const ModalPositions = () => {
                             <Button variant="light" onClick={toggle}>
                                 Não
                             </Button>{' '}
-                            <Button variant="primary" onClick={toggle}>
+                            <Button variant="primary" onClick={confirmed}>
                                 Sim
                             </Button>
                         </Modal.Footer>
@@ -261,7 +270,7 @@ const ModalDetails = () => {
 };
 
 
-const ModalsEmployeesAction = (): React$Element<React$FragmentType> => {
+const ModalsEmployeesAction = (data): React$Element<React$FragmentType> => {
     return (
         <>
             {/*<PageTitle
@@ -278,7 +287,7 @@ const ModalsEmployeesAction = (): React$Element<React$FragmentType> => {
         </Col>*/}
                     
                 <Col md="1">
-                    <ModalsWithPagesArea />
+                    <ModalsWithPagesArea data={data}/>
                     </Col>
                     
             </Row>

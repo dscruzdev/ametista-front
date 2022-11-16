@@ -104,8 +104,7 @@ const ModalWithColoredHeader2 = () => {
 
     const submitSubject = (event) => {
         event.preventDefault();
-        createsubject({ name: subject, areas: areaarray })
-        console.log({subject, areaarray })
+        createsubject({ name: subject, areas: areaarray });
         setModal(!modal);
     };
     

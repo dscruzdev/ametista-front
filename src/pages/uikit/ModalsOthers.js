@@ -251,9 +251,6 @@ const ModalWithColoredHeader3 = () => {
                                 onChange={event => setLanguage(event.target.value)}
                             />
                         </div>
-                    
-
-
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant={headerClassName} type="submit">

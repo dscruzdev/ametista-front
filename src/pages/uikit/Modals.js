@@ -28,12 +28,12 @@ const ModalsWithPages = () => {
     const [areaarray, setArea] = useState('');
     const [languagearray, setLanguage] = useState('');
     const [level, setLevel] = useState('');
+    const [image, setImage] = useState('');
 
     //const [signInModal, setSignInModal] = useState(false);
 
     const submitUser = () => {
-        createuser({ name: name, cpfUsers: cpf, email: email, password:password, areas: areaarray, languages: languagearray, user_level: level.value});
-
+        createuser({ name: name, cpfUsers: cpf, email: email, password:password, areas: areaarray, languages: languagearray, user_level: level.value, image:image});
         window.location.reload(false);
     };
 
@@ -191,7 +191,7 @@ const ModalsWithPages = () => {
                             <div className="mb-3 mt-3">
                                     <Form.Group>
                                         <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
-                                        <Form.Control type="file" />
+                                        <Form.Control type="file" onChange={(event)=> setImage (event.target.value)}/>
                                     </Form.Group>
                                 </div>
                         </div>

@@ -35,7 +35,7 @@ const ModalWithColoredHeader1 = () => {
     const submitArea = (event) => {
         event.preventDefault();
         createarea({ name: area });
-        setModal(!modal);
+        window.location.reload(false);
     };
 
 
@@ -105,8 +105,7 @@ const ModalWithColoredHeader2 = () => {
     const submitSubject = (event) => {
         event.preventDefault();
         createsubject({ name: subject, areas: areaarray })
-        console.log({subject, areaarray })
-        setModal(!modal);
+        window.location.reload(false);
     };
     
 
@@ -201,7 +200,7 @@ const ModalWithColoredHeader3 = () => {
     const submitLanguage = (event) => {
         event.preventDefault();
         createlanguage({ language: language })
-        setModal(!modal);
+        window.location.reload(false);
     };
 
     /**
@@ -218,6 +217,7 @@ const ModalWithColoredHeader3 = () => {
         setHeaderClassName(className);
         toggle();
     };
+    
     return (
         <>
 

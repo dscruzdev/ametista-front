@@ -245,7 +245,7 @@ const ModalPositions = (data) => {
             deletelanguage({ idLanguages: data.data.data.data.original.idLanguages });
 
         }
-        setModal(!modal);
+        window.location.reload(false);
     }
     /**
      * Opens modal with custom class

@@ -1,6 +1,5 @@
 // @flow
 import VerticalForm from './VerticalForm';
-import FormInput from './FormInput';
-import setPassword from './FormInput';
+import FormInput  from './FormInput';
 
-export { VerticalForm, FormInput, setPassword };
+export { VerticalForm, FormInput };

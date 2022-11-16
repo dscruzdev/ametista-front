@@ -176,6 +176,8 @@ const ModalPositions = (data) => {
     const [modal, setModal] = useState(false);
     const [className, setClassName] = useState(null);
 
+    
+
     /**
      * Show/hide the modal
      */
@@ -186,8 +188,9 @@ const ModalPositions = (data) => {
     const confirmed = () => {
         
             deleteuser({ cpfUsers: data.data.data.data.original.cpfUsers });
+            window.location.reload(false);
 
-        setModal(!modal);
+        //setModal(!modal);
     }
 
     /**

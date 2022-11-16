@@ -2567,6 +2567,11 @@ const area = () =>
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json());
 
+const modaldata = () =>
+    fetch("http://localhost:8080/front/modals")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
+
 const employees = () =>
     fetch("http://localhost:8080/front/employees")
         .then(res => (res.ok ? res : Promise.reject(res)))
@@ -3475,4 +3480,4 @@ const employees = () =>
     },
 ];*/
 
-export { products, orders, customers, others, area, employees };
+export { products, orders, customers, others, area, employees, modaldata };

@@ -220,7 +220,7 @@ const Employees = (): React$Element<React$FragmentType> => {
                                 sizePerPageList={sizePerPageList}
                                 isSortable={true}
                                 pagination={true}
-                                isSelectable={true}
+                                isSelectable={false}
                                 isSearchable={true}
                                 tableClass="table-striped"
                                 theadClass="table-light"

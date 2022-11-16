@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import { Row, Col, Card, Button, Modal, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { FormInput, VerticalForm } from '../../components/';
+import { FormInput, SetPassword, VerticalForm } from '../../components/';
 //import { password } from '../../components/FormInput';
 import Select from 'react-select';
 import { createuser } from '../../helpers';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useAsync } from "react-async";
+import { modaldata } from '../apps/Registers/Data';
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -23,16 +25,17 @@ const ModalsWithPages = () => {
     const [cpf, setCpf] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [areaarray, setArea] = useState('');
+    const [languagearray, setLanguage] = useState('');
+    const [level, setLevel] = useState('');
 
     //const [signInModal, setSignInModal] = useState(false);
 
-    const submitUser = (formData) => {
-        console.log(formData['password']);
-        //createuser({ name: name, cpfUsers: cpf, email: email});
-        
-    };
+    const submitUser = () => {
+        createuser({ name: name, cpfUsers: cpf, email: email, password:password, areas: areaarray, languages: languagearray, user_level: level.value});
 
-    //console.log(password)
+        window.location.reload(false);
+    };
 
     /**
      * Show/hide the modal
@@ -45,7 +48,20 @@ const ModalsWithPages = () => {
         setSignInModal(!signInModal);
     };*/
     const dispatch = useDispatch();
+    const { data, error, isPending } = useAsync({ promiseFn: modaldata });
 
+    if (isPending) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data) {
+        const areas = []
+        data.areas.forEach(area => {
+            areas.push ({value:area.idAreas,label:area.name})
+        })
+        const languages = []
+        data.languages.forEach(language => {    
+            languages.push ({value:language.idLanguages,label:language.language})
+        })
+     
     return (
         <div>
             <Row>
@@ -75,7 +91,7 @@ const ModalsWithPages = () => {
                     closeButton className='modal-colored-header bg-primary'>
                     <h4 className="modal-title">Cadastro de funcionário</h4>
                 </Modal.Header >
-                <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitUser}>
+                <form className="ps-3 pe-3 mt-2">
                     <Modal.Body>
 
                         <div className="mb-3">
@@ -126,11 +142,7 @@ const ModalsWithPages = () => {
                                     name="password"
                                     type="password"
                                     containerClass={'mb-3'}
-                                    onChange={(event) => console.log(FormInput.event)}
-                                    //onChange={event => setPassword(event.target.value)}
-                                //register={password}
-                                //key="password"
-                                //value={password}
+                                    onChange={event => { setPassword(event.target.value)}}
                                 />
                             </div>
 
@@ -139,23 +151,22 @@ const ModalsWithPages = () => {
                                 <Select
                                     className="react-select"
                                     classNamePrefix="react-select"
-                                    options={[
-                                        { value: 'administrativo', label: 'Administrativa' },
-                                        { value: 'marketing', label: 'Marketing' },
-                                        { value: 'comercial', label: 'Comercial' },
-                                    ]}>
+                                    onChange={(area)=> setArea (area)}
+                                    isMulti={true}
+                                    options={
+                                        areas
+                                    }>
                                 </Select>
                             </div>
 
                             <div className="mb-3">
                                 <p className="mb-1 mt-3 fw-bold">Idiomas</p>
                                 <Select
+                                    onChange={(language)=> setLanguage (language)}
                                     isMulti={true}
-                                    options={[
-                                        { value: 'pt', label: 'Português' },
-                                        { value: 'en', label: 'Inglês' },
-                                        { value: 'es', label: 'Espanhol' },
-                                    ]}
+                                    options={
+                                        languages
+                                    }
                                     className="react-select"
                                     classNamePrefix="react-select">
                                 </Select>
@@ -165,7 +176,8 @@ const ModalsWithPages = () => {
                             <div className="mb-3">
                                 <p className="mb-1 mt-3 fw-bold">Tipo de usuário</p>
                                 <Select
-                                    isMulti={true}
+                                    onChange={(value)=> setLevel (value)}
+                                    isMulti={false}
                                     options={[
                                         { value: '1', label: 'Atendente' },
                                         { value: '2', label: 'Administrador' },
@@ -198,7 +210,7 @@ const ModalsWithPages = () => {
                     </Modal.Body>
                     <Modal.Footer>
 
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" onClick={submitUser} >
                             Salvar
                         </Button>
                     </Modal.Footer>
@@ -254,6 +266,7 @@ const ModalsWithPages = () => {
                 </Modal>*/}
         </div >
     );
+            }
 };
 
 const ModalWithAlerts = () => {
@@ -715,7 +728,7 @@ const StaticBackdropModal = () => {
     );
 };
 
-const Modals = (): React$Element<React$FragmentType> => {
+const Modals = (passwords): React$Element<React$FragmentType> => {
     return (
         <>
             {/*<PageTitle
@@ -732,7 +745,7 @@ const Modals = (): React$Element<React$FragmentType> => {
         </Col>*/}
 
 
-                <ModalsWithPages />
+                <ModalsWithPages passwords={passwords}/>
             </Row>
 
             {/*<Row>

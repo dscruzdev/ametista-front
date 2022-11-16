@@ -4,13 +4,16 @@ import { Form, InputGroup } from 'react-bootstrap';
 import classNames from 'classnames';
 
 /* Password Input */
-const PasswordInput = ({ name, placeholder, refCallback, errors, register, className }) => {
+const PasswordInput = ({ name, placeholder, refCallback, errors, register, className, onChange}) => {
     const [showPassword, setShowPassword] = useState(false);
-    const [password, setPassword] = useState('');
+    //const [password, setPassword] = useState('');
+    //console.log(password)
 
-    const fun=(event) => {
+    
+
+    /*const fun=(event) => {
         setPassword(event.target.value)
-    }
+    }*/
     
 
     return (
@@ -21,7 +24,7 @@ const PasswordInput = ({ name, placeholder, refCallback, errors, register, class
                     placeholder={placeholder}
                     name={name}
                     id={name}
-                    onChange={event => fun(event)}
+                    onChange={onChange}
                     as="input"
                     ref={(r) => {
                         if (refCallback) refCallback(r);
@@ -31,6 +34,7 @@ const PasswordInput = ({ name, placeholder, refCallback, errors, register, class
                     {...(register ? register(name) : {})}
                     autoComplete={name}
                 />
+                
                 <div
                     className={classNames('input-group-text', 'input-group-password', {
                         'show-password': showPassword,
@@ -59,7 +63,10 @@ type FormInputProps = {
     containerClass?: string,
     refCallback?: any,
     children?: any,
+    passwords?: any,
+    onChange?: any,
 };
+
 
 const FormInput = ({
     label,
@@ -73,9 +80,11 @@ const FormInput = ({
     containerClass,
     refCallback,
     children,
+    onChange,
     ...otherProps
 }: FormInputProps): React$Element<React$FragmentType> => {
     // handle input type
+    console.log(onChange)
     const comp = type === 'textarea' ? 'textarea' : type === 'select' ? 'select' : 'input';
     return (
         <>
@@ -99,6 +108,7 @@ const FormInput = ({
                                     errors={errors}
                                     register={register}
                                     className={className}
+                                    onChange={onChange}
                                 />
 
                                 {errors && errors[name] ? (
@@ -173,6 +183,7 @@ const FormInput = ({
                                                 placeholder={placeholder}
                                                 name={name}
                                                 id={name}
+                                                onChange={onChange}
                                                 as={comp}
                                                 ref={(r) => {
                                                     if (refCallback) refCallback(r);

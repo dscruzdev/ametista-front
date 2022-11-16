@@ -24,6 +24,7 @@ const ModalsWithPagesArea = (datas) => {
     const [areadata, setArea] = useState(datas.data.data.original.name);
     const [subject, setSubject] = useState(datas.data.data.original.name);
     const [language, setLanguage] = useState(datas.data.data.original.language);
+    const [areaarray, setAreaarray] = useState(datas.data.data.original.areas);
 
     //const [signInModal, setSignInModal] = useState(false);
 
@@ -36,19 +37,14 @@ const ModalsWithPagesArea = (datas) => {
         if (datas.data.data.original.idAreas) {
             setHeaderClassName(className);
             setAreaEditModal(!AreaEditModal);
-            console.log({ idAreas: datas.data.data.original.idAreas });
         }
         if (datas.data.data.original.idSubjects) {
             setHeaderClassName(className);
-            setLanguageEditModal(!LanguageEditModal);
-            console.log({ idSubjects: datas.data.data.original.idSubjects });
-
+            setSubjectEditModal(!SubjectEditModal);
         }
         if (datas.data.data.original.idLanguages) {
             setHeaderClassName(className);
-            setSubjectEditModal(!SubjectEditModal);
-            console.log({ idLanguages: datas.data.data.original.idLanguages });
-
+            setLanguageEditModal(!LanguageEditModal);
         }
         //setAttendantEditModal(!AttendantEditModal);
     };
@@ -63,13 +59,13 @@ const ModalsWithPagesArea = (datas) => {
     };
     const submitSubject = (event) => {
         event.preventDefault();
-        updatesubject({ idSubjects: datas.data.data.original.idSubjects, name: subject })
-        setAreaEditModal(!SubjectEditModal);
+        updatesubject({ idSubjects: datas.data.data.original.idSubjects, name: subject, areas:areaarray })
+        setSubjectEditModal(!SubjectEditModal);
     };
     const submitLanguage = (event) => {
         event.preventDefault();
-        updatelanguage({ idLanguages: datas.data.data.original.idLanguages, name: language })
-        setAreaEditModal(!LanguageEditModal);
+        updatelanguage({ idLanguages: datas.data.data.original.idLanguages, language: language })
+        setLanguageEditModal(!LanguageEditModal);
     };
     const { data, error, isPending } = useAsync({ promiseFn: area });
     if (isPending) return "Loading..."
@@ -157,6 +153,7 @@ const ModalsWithPagesArea = (datas) => {
                                     required=""
                                     placeholder=""
                                     name="subject"
+                                    value={subject}
                                     onChange={event => setSubject(event.target.value)}
                                 />
                             </div>
@@ -164,10 +161,12 @@ const ModalsWithPagesArea = (datas) => {
                             <div className="mb-3">
                                 <p className="mb-1 mt-3 fw-bold">Áreas relacionadas</p>
                                 <Select
+                                    onChange={(area) => setAreaarray(area)}
                                     isMulti={true}
                                     options={
                                         areas
                                     }
+                                    value={areaarray}
                                     className="react-select"
                                     classNamePrefix="react-select">
                                 </Select>
@@ -204,6 +203,7 @@ const ModalsWithPagesArea = (datas) => {
                                     required=""
                                     placeholder=""
                                     name="language"
+                                    value={language}
                                     onChange={event => setLanguage(event.target.value)}
                                 />
                             </div>

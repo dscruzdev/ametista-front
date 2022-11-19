@@ -28,12 +28,19 @@ const ModalsWithPages = () => {
     const [areaarray, setArea] = useState('');
     const [languagearray, setLanguage] = useState('');
     const [level, setLevel] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState({ preview: '', data: '' });
 
     //const [signInModal, setSignInModal] = useState(false);
-
+    const handleFileChange = (e) => {
+        const img = {
+          preview: URL.createObjectURL(e.target.files[0]),
+          data: e.target.files[0],
+        }
+        setImage(img)
+      }
     const submitUser = () => {
-        createuser({ name: name, cpfUsers: cpf, email: email, password:password, areas: areaarray, languages: languagearray, user_level: level.value, image:image});
+        
+        createuser({ name: name, cpfUsers: cpf, email: email, password: password, areas: areaarray, languages: languagearray, user_level: level.value, user_image: image });
         window.location.reload(false);
     };
 
@@ -49,154 +56,153 @@ const ModalsWithPages = () => {
     };*/
     const dispatch = useDispatch();
     const { data, error, isPending } = useAsync({ promiseFn: modaldata });
-
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
         const areas = []
         data.areas.forEach(area => {
-            areas.push ({value:area.idAreas,label:area.name})
+            areas.push({ value: area.idAreas, label: area.name })
         })
         const languages = []
-        data.languages.forEach(language => {    
-            languages.push ({value:language.idLanguages,label:language.language})
+        data.languages.forEach(language => {
+            languages.push({ value: language.idLanguages, label: language.language })
         })
-     
-    return (
-        <div>
-            <Row>
-                <Col sm={5}>
-                    <Button variant="primary" className="mb-2" onClick={toggleSignUp}>
-                        <i className="mdi mdi-plus-circle me-1"></i> Cadastrar funcionário
-                    </Button>
-                </Col>
 
-                <Col sm={7}>
-                    <div className="text-sm-end">
-                        <Button variant="light" className="mb-2">
-                            Exportar
+        return (
+            <div>
+                <Row>
+                    <Col sm={5}>
+                        <Button variant="primary" className="mb-2" onClick={toggleSignUp}>
+                            <i className="mdi mdi-plus-circle me-1"></i> Cadastrar funcionário
                         </Button>
-                    </div>
-                </Col>
-            </Row>
+                    </Col>
+
+                    <Col sm={7}>
+                        <div className="text-sm-end">
+                            <Button variant="light" className="mb-2">
+                                Exportar
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
 
 
-            {/*<Button variant="info" onClick={toggleSignIn}>
+                {/*<Button variant="info" onClick={toggleSignIn}>
                     Log In Modal
                 </Button>*/}
 
-            {/* Sign up Modal */}
-            <Modal show={signUpModal} onHide={toggleSignUp}>
-                <Modal.Header onHide={toggleSignUp}
-                    closeButton className='modal-colored-header bg-primary'>
-                    <h4 className="modal-title">Cadastro de funcionário</h4>
-                </Modal.Header >
-                <form className="ps-3 pe-3 mt-2">
-                    <Modal.Body>
-
-                        <div className="mb-3">
-                            <FormInput
-                                label="Nome"
-                                type="text"
-                                name="name"
-                                containerClass={'mb-3'}
-                                //register={name}
-                                key="text"
-                                //errors={errors}
-                                //{control}
-                                onChange={event => setName(event.target.value)}
-                            />
-
+                {/* Sign up Modal */}
+                <Modal show={signUpModal} onHide={toggleSignUp}>
+                    <Modal.Header onHide={toggleSignUp}
+                        closeButton className='modal-colored-header bg-primary'>
+                        <h4 className="modal-title">Cadastro de funcionário</h4>
+                    </Modal.Header >
+                    <form className="ps-3 pe-3 mt-2">
+                        <Modal.Body>
 
                             <div className="mb-3">
                                 <FormInput
-                                    label="CPF"
+                                    label="Nome"
                                     type="text"
-                                    name="cpf"
+                                    name="name"
                                     containerClass={'mb-3'}
-                                    //register={register}
+                                    //register={name}
                                     key="text"
                                     //errors={errors}
                                     //{control}
-                                    onChange={event => setCpf(event.target.value)}
+                                    onChange={event => setName(event.target.value)}
                                 />
-                            </div>
 
-                            <div className="mb-3">
-                                <FormInput
-                                    label="E-mail"
-                                    type="text"
-                                    name="email"
-                                    containerClass={'mb-3'}
-                                    //register={register}
-                                    key="text"
-                                    //errors={errors}
-                                    //{control}
-                                    onChange={event => setEmail(event.target.value)}
-                                />
-                            </div>
 
-                            <div className="mb-3">
-                                <FormInput
-                                    label="Senha"
-                                    name="password"
-                                    type="password"
-                                    containerClass={'mb-3'}
-                                    onChange={event => { setPassword(event.target.value)}}
-                                />
-                            </div>
+                                <div className="mb-3">
+                                    <FormInput
+                                        label="CPF"
+                                        type="text"
+                                        name="cpf"
+                                        containerClass={'mb-3'}
+                                        //register={register}
+                                        key="text"
+                                        //errors={errors}
+                                        //{control}
+                                        onChange={event => setCpf(event.target.value)}
+                                    />
+                                </div>
 
-                            <div className="mb-3">
-                                <p className="mb-1 mt-3 fw-bold">Área</p>
-                                <Select
-                                    className="react-select"
-                                    classNamePrefix="react-select"
-                                    onChange={(area)=> setArea (area)}
-                                    isMulti={true}
-                                    options={
-                                        areas
-                                    }>
-                                </Select>
-                            </div>
+                                <div className="mb-3">
+                                    <FormInput
+                                        label="E-mail"
+                                        type="text"
+                                        name="email"
+                                        containerClass={'mb-3'}
+                                        //register={register}
+                                        key="text"
+                                        //errors={errors}
+                                        //{control}
+                                        onChange={event => setEmail(event.target.value)}
+                                    />
+                                </div>
 
-                            <div className="mb-3">
-                                <p className="mb-1 mt-3 fw-bold">Idiomas</p>
-                                <Select
-                                    onChange={(language)=> setLanguage (language)}
-                                    isMulti={true}
-                                    options={
-                                        languages
-                                    }
-                                    className="react-select"
-                                    classNamePrefix="react-select">
-                                </Select>
+                                <div className="mb-3">
+                                    <FormInput
+                                        label="Senha"
+                                        name="password"
+                                        type="password"
+                                        containerClass={'mb-3'}
+                                        onChange={event => { setPassword(event.target.value) }}
+                                    />
+                                </div>
 
-                            </div>
+                                <div className="mb-3">
+                                    <p className="mb-1 mt-3 fw-bold">Área</p>
+                                    <Select
+                                        className="react-select"
+                                        classNamePrefix="react-select"
+                                        onChange={(area) => setArea(area)}
+                                        isMulti={true}
+                                        options={
+                                            areas
+                                        }>
+                                    </Select>
+                                </div>
 
-                            <div className="mb-3">
-                                <p className="mb-1 mt-3 fw-bold">Tipo de usuário</p>
-                                <Select
-                                    onChange={(value)=> setLevel (value)}
-                                    isMulti={false}
-                                    options={[
-                                        { value: '1', label: 'Atendente' },
-                                        { value: '2', label: 'Administrador' },
-                                    ]}
-                                    className="react-select"
-                                    classNamePrefix="react-select">
-                                </Select>
+                                <div className="mb-3">
+                                    <p className="mb-1 mt-3 fw-bold">Idiomas</p>
+                                    <Select
+                                        onChange={(language) => setLanguage(language)}
+                                        isMulti={true}
+                                        options={
+                                            languages
+                                        }
+                                        className="react-select"
+                                        classNamePrefix="react-select">
+                                    </Select>
 
-                            </div>
+                                </div>
 
-                            <div className="mb-3 mt-3">
+                                <div className="mb-3">
+                                    <p className="mb-1 mt-3 fw-bold">Tipo de usuário</p>
+                                    <Select
+                                        onChange={(value) => setLevel(value)}
+                                        isMulti={false}
+                                        options={[
+                                            { value: '1', label: 'Atendente' },
+                                            { value: '2', label: 'Administrador' },
+                                        ]}
+                                        className="react-select"
+                                        classNamePrefix="react-select">
+                                    </Select>
+
+                                </div>
+
+                                <div className="mb-3 mt-3">
                                     <Form.Group>
                                         <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
-                                        <Form.Control type="file" onChange={(event)=> setImage (event.target.value)}/>
+                                        <Form.Control type="file" name='user_image' onChange={handleFileChange} />
                                     </Form.Group>
                                 </div>
-                        </div>
+                            </div>
 
-                        {/*<div className="mb-3">
+                            {/*<div className="mb-3">
                                 <div className="form-check">
                                     <input type="checkbox" className="form-check-input" id="customCheck1" />
                                     <label className="form-check-label" htmlFor="customCheck1">
@@ -207,17 +213,17 @@ const ModalsWithPages = () => {
 
 
 
-                    </Modal.Body>
-                    <Modal.Footer>
+                        </Modal.Body>
+                        <Modal.Footer>
 
-                        <Button variant="primary" onClick={submitUser} >
-                            Salvar
-                        </Button>
-                    </Modal.Footer>
-                </form>
-            </Modal>
+                            <Button variant="primary" onClick={submitUser} >
+                                Salvar
+                            </Button>
+                        </Modal.Footer>
+                    </form>
+                </Modal>
 
-            {/* Sign in Modal 
+                {/* Sign in Modal 
                 <Modal show={signInModal} onHide={toggleSignIn}>
                     <Modal.Body>
                         <form className="ps-3 pe-3" action="#">
@@ -264,9 +270,9 @@ const ModalsWithPages = () => {
                         </form>
                     </Modal.Body>
                 </Modal>*/}
-        </div >
-    );
-            }
+            </div >
+        );
+    }
 };
 
 const ModalWithAlerts = () => {
@@ -745,7 +751,7 @@ const Modals = (passwords): React$Element<React$FragmentType> => {
         </Col>*/}
 
 
-                <ModalsWithPages passwords={passwords}/>
+                <ModalsWithPages passwords={passwords} />
             </Row>
 
             {/*<Row>

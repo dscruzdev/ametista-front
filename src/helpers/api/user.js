@@ -6,7 +6,7 @@ const api = new APICore();
 // account
 function createuser(params: any): any {
     const baseUrl = '/user';
-    return api.create(`${baseUrl}`, params);
+    return api.createWithFile(`${baseUrl}`, params);
 }
 
 function deleteuser(params: any): any {

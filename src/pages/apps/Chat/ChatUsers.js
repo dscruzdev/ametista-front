@@ -28,7 +28,7 @@ type ChatUsersProps = {
 };
 
 // ChatUsers
-const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$FragmentType> => {
+const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<React$FragmentType> => {
     const statusFilters = ['Todos', 'Em espera', 'Em andamento'];
 
     const { data, error, isPending } = useAsync({ promiseFn: clients });
@@ -74,7 +74,9 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
         }
     };
 
-
+    const joinconversation = (idRequest) =>{
+        socket.emit("join_conversation", idRequest);
+    }
 
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
@@ -122,6 +124,8 @@ const ChatUsers = ({ onUserSelect }: ChatUsersProps): React$Element<React$Fragme
                                                 className="text-body"
                                                 onClick={(e) => {
                                                     activateUser(user);
+                                                    console.log(user);
+                                                    joinconversation({cpfUsers:"222.222.222-22",idRequests:user.requests[user.requests.length-1].idRequests});
                                                 }}>
                                                 <div
                                                     className={classnames('d-flex', 'align-items-start', 'mt-1', 'p-2', {

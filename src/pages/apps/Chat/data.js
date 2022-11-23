@@ -162,6 +162,10 @@ const users = [
         status: 'Em andamento',
     },
 ];
+const messagesConversation = (id) =>
+    fetch("/conversation/messages/"+id)
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
 
 const messages = [];
 
@@ -285,4 +289,4 @@ for (const user of users) {
     );
 }
 
-export { users, messages, clients };
+export { users, messages, clients, messagesConversation };

@@ -7,6 +7,8 @@ import classnames from 'classnames';
 import SimpleBar from 'simplebar-react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { sendmessage } from '../../../helpers/api/';
+import { useAsync } from "react-async";
 
 // components
 import { FormInput } from '../../../components';
@@ -88,9 +90,10 @@ type ChatAreaProps = {
 };
 
 // ChatArea
-const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$FragmentType> => {
+const ChatArea = ({ selectedUser, socket }: ChatAreaProps): React$Element<React$FragmentType> => {
     const [loading, setLoading] = useState(false);
     const [userMessages, setUserMessages] = useState([]);
+    const [messageId, setMessageId] = useState(0);
     const [toUser] = useState({
         id: 9,
         name: 'Shreyu N',
@@ -101,7 +104,7 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
         languages: 'English, German, Spanish',
         subject: 'Financeiro',
     });
-
+    
     /*
      *  Fetches the messages for selected user
      */
@@ -125,6 +128,20 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
         getMessagesForUser();
     }, [getMessagesForUser]);
 
+    useEffect(() => {
+        socket.on("receive_message", (data) => {
+            let newUserMessages = [...userMessages];
+            newUserMessages.push({
+                id: messageId,
+                from: selectedUser,
+                to: toUser,
+                message: { type: 'text', value: data },
+                sendOn: new Date().getHours() + ':' + new Date().getMinutes(),
+            });
+            setUserMessages(newUserMessages);
+            setMessageId(messageId + 1);
+        })
+    }, [messageId, selectedUser, socket, toUser, userMessages]);
     /*
      * form validation schema
      */
@@ -149,20 +166,24 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
     /**
      * sends the chat message
      */
-    const sendChatMessage = (e, values) => {
+    const sendChatMessage = async (e, values) => {
         let newUserMessages = [...userMessages];
         newUserMessages.push({
-            id: userMessages.length + 1,
+            id: messageId,
             from: toUser,
             to: selectedUser,
             message: { type: 'text', value: values.target[0].value },
             sendOn: new Date().getHours() + ':' + new Date().getMinutes(),
         });
         setUserMessages(newUserMessages);
+        setMessageId(messageId + 1);
+        sendmessage({ idRequests: selectedUser.requests[selectedUser.requests.length - 1].idRequests, body: values.target[0].value });
+        console.log(messageId);
         reset();
     };
-
+    console.log(selectedUser)
     return (
+        
         <>
             <Card>
                 <Card.Body className="position-relative px-0 pb-0">
@@ -199,7 +220,7 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
                                         </div>
                                         <div className="col-sm-auto">
                                             <div className="btn-group">
-                                            <ModalsUploadFile/>
+                                                <ModalsUploadFile />
                                                 <Link to="#" className="btn btn-light">
                                                     {' '}
                                                     <i className="uil uil-smile"></i>{' '}

@@ -7,6 +7,7 @@ import { createuser, deleteuser, updateuser } from './user';
 import { getlanguages, createlanguage, deletelanguage, updatelanguage } from './language';
 import { getsubjects, createsubject, deletesubject, updatesubject } from './subject';
 import { getcomments } from './comment';
+import { sendmessage } from './conversation';
 
 export {
     login,
@@ -32,5 +33,6 @@ export {
     deletesubject,
     updatearea,
     updatelanguage,
-    updatesubject
+    updatesubject,
+    sendmessage,
 };

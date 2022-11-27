@@ -6,7 +6,8 @@ import ModalsComments from '../../uikit/ModalsComments';
 import ModalsFinalizarChamado from '../../uikit/ModalsFinalizarChamado';
 import ModalsWriteComments from '../../uikit/ModalsWriteComments';
 import ModalsTicketEdit from '../../uikit/ModalsTicketEdit';
-
+import io from 'socket.io-client';
+const socket = io.connect("http://localhost:8080");
 type ChatProfileProps = {
     selectedUser: {
         id: number,
@@ -26,7 +27,7 @@ type ChatProfileProps = {
 };
 
 // ChatProfile
-const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$FragmentType> => {
+const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<React$FragmentType> => {
     const user = selectedUser || {};
     const subject = user.subject ? user.subject.split(',') : [];
     var languages = "", subjects = "", requestid = "", description = "", status;

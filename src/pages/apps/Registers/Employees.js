@@ -14,6 +14,9 @@ import Modals from '../../uikit/Modals';
 import { employees } from './Data';
 import { useAsync } from "react-async";
 import ModalsEmployeesAction from '../../uikit/ModalsEmployeesAction';
+import { useEffect } from 'react';
+import { CSVLink } from 'react-csv';
+import { useReducer } from 'react';
 
 /* name column render */
 const NameColumn = ({ row }) => {
@@ -27,53 +30,6 @@ const NameColumn = ({ row }) => {
         </>
     );
 };
-
-/* revenue column render 
-const RevenueColumn = ({ row }) => {
-    const options = {
-        chart: {
-            type: 'line',
-            sparkline: {
-                enabled: true,
-            },
-        },
-        series: [],
-        stroke: {
-            width: 2,
-            curve: 'smooth',
-        },
-        markers: {
-            size: 0,
-        },
-        colors: ['#727cf5'],
-        tooltip: {
-            fixed: {
-                enabled: false,
-            },
-            x: {
-                show: false,
-            },
-            y: {
-                title: {
-                    formatter: function (seriesName) {
-                        return '';
-                    },
-                },
-            },
-            marker: {
-                show: false,
-            },
-        },
-    };
-
-    const series = [{ name: 'data', data: [66, 95, 53, 66, 70, 41, 27, 62, 87, 69, 17] }];
-
-    return (
-        <>
-            <Chart options={options} series={series} height={35} width={80} />
-        </>
-    );
-};*/
 
 /* action column render */
 const ActionColumn = ({ row }) => {
@@ -92,6 +48,16 @@ const EmployeeDateColumn = ({ row }) => {
     );
 };
 
+/*function ExportExcel() {
+    const [userdata, setUserdata]= useState([]);
+
+    useEffect( () => {
+        const getuserdata = async () => {
+            const userreq = await fetch();
+        }
+    getuserdata();
+    },[]);
+}*/
 // get all columns
 const columns = [
     {
@@ -167,6 +133,14 @@ const Employees = (): React$Element<React$FragmentType> => {
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
+        const toexport = [];
+        data.forEach(user => {
+            toexport.push(
+                {
+                    name: user.name, cpf: user.cpfUsers, email: user.email, date: user.createdAt, area: user.area
+                }
+            )
+        })
     return (
         <>
         <Row>
@@ -185,11 +159,24 @@ const Employees = (): React$Element<React$FragmentType> => {
             />*/}
             
             <Row>
-                <Col xs={12}>
+                <Col>
                     <Card>
                         <Card.Body>
-                            <Row className="mb-2">
-                                 <Modals />
+                           
+                            <Row>
+                            <Col>
+                            <Modals />
+                            </Col>
+
+                    <Col>
+                        <div className="text-sm-end">
+                            <Button variant="light" className="mb-2" >
+                            <CSVLink data={toexport} filename="Funcionarios">
+                                Exportar</CSVLink>
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
                                  {/*<Col sm={5}>
                                     <Button variant="primary" className="mb-2">
                                         <i className="mdi mdi-plus-circle me-2"></i> Cadastrar funcionário
@@ -211,8 +198,7 @@ const Employees = (): React$Element<React$FragmentType> => {
                                         </Button>
                                     </div>
                                 </Col>*/}
-                            </Row>
-
+                            
                             <Table
                                 columns={columns}
                                 data={data}

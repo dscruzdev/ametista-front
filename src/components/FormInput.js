@@ -6,14 +6,6 @@ import classNames from 'classnames';
 /* Password Input */
 const PasswordInput = ({ name, placeholder, refCallback, errors, register, className, onChange}) => {
     const [showPassword, setShowPassword] = useState(false);
-    //const [password, setPassword] = useState('');
-    //console.log(password)
-
-    
-
-    /*const fun=(event) => {
-        setPassword(event.target.value)
-    }*/
     
 
     return (
@@ -84,7 +76,6 @@ const FormInput = ({
     ...otherProps
 }: FormInputProps): React$Element<React$FragmentType> => {
     // handle input type
-    console.log(onChange)
     const comp = type === 'textarea' ? 'textarea' : type === 'select' ? 'select' : 'input';
     return (
         <>

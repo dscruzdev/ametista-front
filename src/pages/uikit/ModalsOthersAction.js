@@ -34,6 +34,7 @@ const ModalsWithPagesArea = (datas) => {
 
 
     const toggleModalEdit = (className) => {
+        console.log(datas)
         if (datas.data.data.original.idAreas) {
             setHeaderClassName(className);
             setAreaEditModal(!AreaEditModal);
@@ -44,7 +45,7 @@ const ModalsWithPagesArea = (datas) => {
         }
         if (datas.data.data.original.idLanguages) {
             setHeaderClassName(className);
-            setLanguageEditModal(!LanguageEditModal);
+            setLanguageEditModal(!LanguageEditModal);    
         }
         //setAttendantEditModal(!AttendantEditModal);
     };
@@ -56,16 +57,19 @@ const ModalsWithPagesArea = (datas) => {
         event.preventDefault();
         updatearea({ idAreas: datas.data.data.original.idAreas, name: areadata });
         setAreaEditModal(!AreaEditModal);
+        window.location.reload(true);
     };
     const submitSubject = (event) => {
         event.preventDefault();
         updatesubject({ idSubjects: datas.data.data.original.idSubjects, name: subject, areas:areaarray })
         setSubjectEditModal(!SubjectEditModal);
+        window.location.reload(true);
     };
     const submitLanguage = (event) => {
         event.preventDefault();
         updatelanguage({ idLanguages: datas.data.data.original.idLanguages, language: language })
         setLanguageEditModal(!LanguageEditModal);
+        window.location.reload(true);
     };
     const { data, error, isPending } = useAsync({ promiseFn: area });
     if (isPending) return "Loading..."

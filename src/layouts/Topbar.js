@@ -88,26 +88,6 @@ const Notifications = [
 // get the profilemenu
 const ProfileMenus = [
     {
-        label: 'My Account',
-        icon: 'mdi mdi-account-circle',
-        redirectTo: '#',
-    },
-    {
-        label: 'Settings',
-        icon: 'mdi mdi-account-edit',
-        redirectTo: '#',
-    },
-    {
-        label: 'Support',
-        icon: 'mdi mdi-lifebuoy',
-        redirectTo: '#',
-    },
-    {
-        label: 'Lock Screen',
-        icon: 'mdi mdi-lock-outline',
-        redirectTo: '/account/lock-screen',
-    },
-    {
         label: 'Logout',
         icon: 'mdi mdi-logout',
         redirectTo: '/account/logout',
@@ -185,9 +165,9 @@ const Topbar = ({ hideLogo, navCssClasses, openLeftMenuCallBack, topbarDark }: T
                     )}
 
                     <ul className="list-unstyled topbar-menu float-end mb-0">
-                        <li className="dropdown notification-list">
+                        {/*<li className="dropdown notification-list">
                             <NotificationDropdown notifications={Notifications} />
-                        </li>
+                    </li>*/}
 
                         <li className="dropdown notification-list">
                             <ProfileDropdown

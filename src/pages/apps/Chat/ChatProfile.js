@@ -83,9 +83,6 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
                             <Button className="btn-sm mt-1 me-2" variant="primary">
                                 <i className=" uil-arrow-right me-1"></i>Histórico de chamados
                             </Button>
-                            <p className="text-muted mt-2 font-14">
-                                Última interação: <strong>{user.lastMessageOn}</strong>
-                            </p>
                         </div>
 
                         <div className="mt-3">
@@ -163,7 +160,7 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
 
                             <p>
                                 {statusarray.map((status, index) => {
-                                    if (status == "Em espera") {
+                                    if (status == "Em aberto") {
                                         return (
                                             <span key={index} className="badge badge-warning-lighten p-1 font-14 me-1">
                                                 {status}
@@ -177,7 +174,7 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
                                             </span>);
                                     } else {
                                         return (
-                                            <span key={index} className="badge badge-info-lighten p-1 font-14 me-1">
+                                            <span key={index} className="badge badge-success-lighten p-1 font-14 me-1">
                                                 {user.requests[0].status}
                                             </span>);
                                     }

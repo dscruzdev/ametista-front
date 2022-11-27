@@ -69,7 +69,7 @@ const ModalsWithPagesArea = (datas) => {
 
     return (
         <div>
-                <ModalDetails />
+                {/*<ModalDetails />*/}
                 
                 <Button variant="primary" className="me-2 mb-1" onClick={toggleEmployeeEdit}>
                     <i className="mdi mdi-square-edit-outline"></i>

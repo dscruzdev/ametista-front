@@ -29,7 +29,7 @@ type ChatUsersProps = {
 
 // ChatUsers
 const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<React$FragmentType> => {
-    const statusFilters = ['Todos', 'Em espera', 'Em andamento'];
+    const statusFilters = ['Todos', 'Em andamento', 'Em aberto'];
 
     const { data, error, isPending } = useAsync({ promiseFn: clients });
     // const { dataSubject, errorSubject, isPendingSubject } = useAsync({ promiseFn: subjects });
@@ -59,9 +59,9 @@ const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<Reac
      * Search the user
      * @param {*} text
      */
-    const search = (text) => {
+    {/*const search = (text) => {
         setUser(text ? [...users].filter((u) => u.name.toLowerCase().indexOf(text.toLowerCase()) >= 0) : [...users]);
-    };
+    };*/}
 
     /**
      * Activates the user
@@ -81,6 +81,7 @@ const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<Reac
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data ) {
+        console.log(data)
         return (
             <>
                 <Card>
@@ -101,10 +102,10 @@ const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<Reac
                             })}
                         </ul>
 
-                        <div className="tab-content">
+                      <div className="tab-content">
                             <div className="tab-pane show active">
                                 <div className="app-search p-3">
-                                    <div className="form-status position-relative">
+                            {/*<div className="form-status position-relative">
                                         <input
                                             type="text"
                                             className="form-control"
@@ -112,8 +113,8 @@ const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<Reac
                                             onKeyUp={(e) => search(e.target.value)}
                                         />
                                         <span className="mdi mdi-magnify search-icon"></span>
-                                    </div>
-                                </div>
+                        </div>*/}
+                        </div>
 
                                 <SimpleBar className="px-3" style={{ maxHeight: '550px', width: '100%' }}>
                                     {data.map((user, index) => {

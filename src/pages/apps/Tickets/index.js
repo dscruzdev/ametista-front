@@ -11,7 +11,8 @@ import { useAsync } from "react-async";
 
 
 // dummy data
-import { orders, requests } from './Data'
+import { requests } from './Data'
+import { CSVLink } from 'react-csv';
 
 /* order column render */
 const OrderColumn = ({ row }) => {
@@ -64,12 +65,11 @@ const StatusColumn = ({ row }) => {
             <h5>
                 <span
                     className={classNames('badge', {
-                        'badge-success-lighten': row.original.ticket_status === 'Concluído',
-                        'badge-danger-lighten': row.original.ticket_status === 'Cancelado',
-                        'badge-info-lighten': row.original.ticket_status === 'Em andamento',
-                        'badge-warning-lighten': row.original.ticket_status === 'Em espera',
+                        'badge-success-lighten': row.original.status === 'Finalizado',
+                        'badge-info-lighten': row.original.status === 'Em andamento',
+                        'badge-warning-lighten': row.original.status === 'Em aberto',
                     })}>
-                    {row.original.ticket_status}
+                    {row.original.status}
                 </span>
             </h5>
         </>
@@ -127,7 +127,7 @@ const columns = [
     },
     {
         Header: 'Status',
-        accessor: 'ticket_status',
+        accessor: 'status',
         sort: false,
         Cell: StatusColumn,
     },
@@ -158,22 +158,30 @@ const sizePerPageList = [
 
 // main component
 const Tickets = (): React$Element<React$FragmentType> => {
-    const [orderList, setOrderList] = useState(orders);
+    const [requestList, setResquestList] = useState(requests);
     const { data, error, isPending } = useAsync({ promiseFn: requests });
 
-    // change order status group
-    const changeOrderStatusGroup = (OrderStatusGroup) => {
-        let updatedData = orders;
+    /* change order status group
+    const changeRequestStatusGroup = (RequestStatusGroup) => {
+        let updatedData = requests;
         //  filter
         updatedData =
-            OrderStatusGroup === 'Todos'
-                ? orders
-                : [...orders].filter((o) => o.ticket_status?.includes(OrderStatusGroup));
-        setOrderList(updatedData);
-    };
+        RequestStatusGroup === 'Todos'
+                ? requests
+                : [...requests].filter((o) => o.status?.includes(RequestStatusGroup));
+        setResquestList(updatedData);
+    };*/
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
+        const toexport = [];
+        data.forEach(request => {
+            toexport.push(
+                {
+                    id: request.idRequests, date: request.createdAt, client: request.client, subject: request.subject, status: request.status
+                }
+            )
+        })
         return (
             <>
 
@@ -181,8 +189,22 @@ const Tickets = (): React$Element<React$FragmentType> => {
                     <Col xs={12}>
                         <Card>
                             <Card.Body>
-                                <SearchByDate />
-                                <Row className="mb-2">
+                            <Row>
+                            <Col>
+                            <SearchByDate />
+                            </Col>
+
+                    <Col>
+                        <div className="text-sm-end">
+                            <Button variant="light" className="mb-2" >
+                            <CSVLink data={toexport} filename="Chamados">
+                                Exportar</CSVLink>
+                            </Button>
+                        </div>
+                    </Col>
+                    </Row>
+                                
+                               {/*} <Row className="mb-2">
                                     <Col xl={8}>
                                         <form className="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
                                             <div className="col-auto">
@@ -193,18 +215,17 @@ const Tickets = (): React$Element<React$FragmentType> => {
                                                     <select
                                                         className="form-select"
                                                         id="status-select"
-                                                        onChange={(e) => changeOrderStatusGroup(e.target.value)}>
+                                                        onChange={(e) => changeRequestStatusGroup(e.target.value)}>
                                                         <option value="Todos">Todos</option>
-                                                        <option value="Cancelado">Cancelado</option>
-                                                        <option value="Em espera">Em espera</option>
                                                         <option value="Em andamento">Em andamento</option>
-                                                        <option value="Concluído">Concluído</option>
+                                                        <option value="Em aberto">Em aberto</option>
+                                                        <option value="Finalizado">Finalizado</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </form>
                                     </Col>
-                                </Row>
+        </Row>*/}
 
                                 <Table
                                     columns={columns}

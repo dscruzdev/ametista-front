@@ -35,7 +35,7 @@ const users = [
         languages: 'English, German, Spanish',
         status: 'Em espera',
         description: 'hsJADHlidhILDJdj',
-        requests:[
+        requests: [
             {
                 idRequests: 0,
                 category: "...",
@@ -56,7 +56,7 @@ const users = [
             }
         ],
     },
-    
+
     {
         id: 1,
         name: 'Brandon Smith',
@@ -163,7 +163,7 @@ const users = [
     },
 ];
 const messagesConversation = (id) =>
-    fetch("/conversation/messages/"+id)
+    fetch("/chat/messages/" + id)
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json());
 

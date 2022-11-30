@@ -15,7 +15,7 @@ const Status = (): React$Element<any> => {
         labels: ['Concluído', 'Em andamento', 'Em espera'],
         datasets: [
             {
-                data: [64, 26, 10],
+                data: [30, 60, 10],
                 backgroundColor: colors,
                 borderColor: 'transparent',
                 borderWidth: '3',

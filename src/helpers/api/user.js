@@ -6,7 +6,7 @@ const api = new APICore();
 // account
 function createuser(params: any): any {
     const baseUrl = '/user';
-    return api.createWithFile(`${baseUrl}`, params);
+    return api.create(`${baseUrl}`, params);
 }
 
 function deleteuser(params: any): any {
@@ -14,4 +14,10 @@ function deleteuser(params: any): any {
     return api.delete(`${baseUrl}`, params);
 }
 
-export { createuser, deleteuser };
+function updateuser(params: any): any {
+    const baseUrl = '/user/'+params.cpfUsers;
+    return api.update(`${baseUrl}`, params);
+}
+
+
+export { createuser, deleteuser, updateuser };

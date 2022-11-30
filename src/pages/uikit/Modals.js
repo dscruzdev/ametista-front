@@ -20,6 +20,7 @@ import { modaldata } from '../apps/Registers/Data';
 
 
 const ModalsWithPages = () => {
+    
     const [signUpModal, setSignUpModal] = useState(false);
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
@@ -28,19 +29,22 @@ const ModalsWithPages = () => {
     const [areaarray, setArea] = useState('');
     const [languagearray, setLanguage] = useState('');
     const [level, setLevel] = useState('');
-    const [image, setImage] = useState({ preview: '', data: '' });
+    //const [image, setImage] = useState({ preview: '', data: '' });
 
     //const [signInModal, setSignInModal] = useState(false);
-    const handleFileChange = (e) => {
+    /*const handleFileChange = (e) => {
         const img = {
           preview: URL.createObjectURL(e.target.files[0]),
           data: e.target.files[0],
         }
         setImage(img)
-      }
+      }*/
+
+    const handleOnExport = () => {
+
+    }
     const submitUser = () => {
-        
-        createuser({ name: name, cpfUsers: cpf, email: email, password: password, areas: areaarray, languages: languagearray, user_level: level.value, user_image: image });
+        createuser({ name: name, cpfUsers: cpf, email: email, password: password, areas: areaarray, languages: languagearray, user_level: level.value });
         window.location.reload(false);
     };
 
@@ -54,7 +58,6 @@ const ModalsWithPages = () => {
     /*const toggleSignIn = () => {
         setSignInModal(!signInModal);
     };*/
-    const dispatch = useDispatch();
     const { data, error, isPending } = useAsync({ promiseFn: modaldata });
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
@@ -70,21 +73,14 @@ const ModalsWithPages = () => {
 
         return (
             <div>
-                <Row>
-                    <Col sm={5}>
+               
+                    
                         <Button variant="primary" className="mb-2" onClick={toggleSignUp}>
                             <i className="mdi mdi-plus-circle me-1"></i> Cadastrar funcionário
                         </Button>
-                    </Col>
+                    
 
-                    <Col sm={7}>
-                        <div className="text-sm-end">
-                            <Button variant="light" className="mb-2">
-                                Exportar
-                            </Button>
-                        </div>
-                    </Col>
-                </Row>
+                
 
 
                 {/*<Button variant="info" onClick={toggleSignIn}>
@@ -194,12 +190,12 @@ const ModalsWithPages = () => {
 
                                 </div>
 
-                                <div className="mb-3 mt-3">
+                                {/*<div className="mb-3 mt-3">
                                     <Form.Group>
                                         <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
-                                        <Form.Control type="file" name='user_image' onChange={handleFileChange} />
+                                        <Form.Control type="file" name='user_image' />
                                     </Form.Group>
-                                </div>
+                                </div>*/}
                             </div>
 
                             {/*<div className="mb-3">

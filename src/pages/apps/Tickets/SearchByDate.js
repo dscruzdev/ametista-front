@@ -38,16 +38,6 @@ const SearchByDate = (): React$Element<React$FragmentType> => {
                         </div>
                     </div>
                 </Col>
-
-                <Col xl={4}>
-                    <div className="page-title-box">
-                                    <div className="text-lg-end mt-xl-0">
-                                        <Button variant="light" className="mb-2">
-                                            Export
-                                        </Button>
-                                    </div>
-                                    </div>
-                                </Col>
             </Row>
         </>
     );

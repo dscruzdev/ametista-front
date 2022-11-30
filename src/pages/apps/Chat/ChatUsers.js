@@ -61,9 +61,9 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
      * Search the user
      * @param {*} text
      */
-    const search = (text) => {
+    {/*const search = (text) => {
         setUser(text ? [...users].filter((u) => u.name.toLowerCase().indexOf(text.toLowerCase()) >= 0) : [...users]);
-    };
+    };*/}
 
     /**
      * Activates the user
@@ -86,6 +86,7 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data ) {
+        console.log(data)
         return (
             <>
                 <Card>
@@ -106,10 +107,10 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
                             })}
                         </ul>
 
-                        <div className="tab-content">
+                      <div className="tab-content">
                             <div className="tab-pane show active">
                                 <div className="app-search p-3">
-                                    <div className="form-status position-relative">
+                            {/*<div className="form-status position-relative">
                                         <input
                                             type="text"
                                             className="form-control"
@@ -117,8 +118,8 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
                                             onKeyUp={(e) => search(e.target.value)}
                                         />
                                         <span className="mdi mdi-magnify search-icon"></span>
-                                    </div>
-                                </div>
+                        </div>*/}
+                        </div>
 
                                 <SimpleBar className="px-3" style={{ maxHeight: '550px', width: '100%' }}>
                                     {data.map((user, index) => {

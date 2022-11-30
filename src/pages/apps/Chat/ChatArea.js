@@ -239,16 +239,16 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
                                         </div>
                                         <div className="col-sm-auto">
                                             <div className="btn-group">
-                                                <ModalsUploadFile />
+                                                {/*<ModalsUploadFile />
                                                 <Link to="#" className="btn btn-light">
                                                     {' '}
                                                     <i className="uil uil-smile"></i>{' '}
-                                                </Link>
+                        </Link>*/}
                                                 <button type="submit" className="btn btn-success chat-send btn-block">
                                                     <i className="uil uil-message"></i>
                                                 </button>
                                             </div>
-                                        </div>
+                        </div>
                                     </div>
                                 </form>
                             </div>

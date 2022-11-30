@@ -7,8 +7,9 @@ import { FormInput } from '../../components';
 import Select from 'react-select';
 import StatisticsEmployees from '../apps/Registers/StatisticsEmployees';
 import StatusEmployees from '../apps/Registers/StatusEmployees';
-import { deleteuser } from '../../helpers/'
-
+import { deleteuser, updateuser } from '../../helpers/'
+import { useAsync } from "react-async";
+import { modaldata } from '../apps/Registers/Data';
 // components
 //import PageTitle from '../../components/PageTitle';
 
@@ -16,35 +17,66 @@ import { deleteuser } from '../../helpers/'
 //import logodark from '../../assets/images/logo-dark.png';
 
 
-const ModalsWithPagesArea = (data) => {
-
-    const [AttendantEditModal, setAttendantEditModal] = useState(false);
-
+const ModalsWithPagesArea = (datas) => {
+    const [headerClassName, setHeaderClassName] = useState('');
+    const [EmployeeEditModal, setEmployeeEditModal] = useState(false);
+    const [name, setName] = useState(datas.data.data.original.name);
+    const [cpf, setCpf] = useState(datas.data.data.original.cpfUsers);
+    const [email, setEmail] = useState(datas.data.data.original.email);
+    const [password, setPassword] = useState(datas.data.data.original.password);
+    const [areaarray, setAreaArray] = useState(datas.data.data.original.areas);
+    const [languagearray, setLanguageArray] = useState(datas.data.data.original.languages);
     //const [signInModal, setSignInModal] = useState(false);
 
     /**
      * Show/hide the modal
      */
 
+    
 
 
-    const toggleAttendantEdit = () => {
-        setAttendantEditModal(!AttendantEditModal);
+
+    const toggleEmployeeEdit = (className) => {
+        console.log(datas)
+        setHeaderClassName(className);
+        setEmployeeEditModal(!EmployeeEditModal);
     };
+
+    const submitEmployee = (event) => {
+        event.preventDefault();
+        updateuser({ cpfUsers: datas.data.data.original.cpfUsers, name: name, cpfUsers: cpf, email: email, password: password,  areas: areaarray, languages: languagearray });
+        setEmployeeEditModal(!EmployeeEditModal);
+        
+        window.location.reload(true);
+    };
+    
     /*const toggleSignIn = () => {
         setSignInModal(!signInModal);
     };*/
 
+    const { data, error, isPending } = useAsync({ promiseFn: modaldata });
+    if (isPending) return "Loading..."
+    if (error) return `Something went wrong: ${error.message}`
+    if (data) {
+        const areas = []
+        data.areas.forEach(area => {
+            areas.push({ value: area.idAreas, label: area.name })
+        })
+        const languages = []
+        data.languages.forEach(language => {
+            languages.push({ value: language.idLanguages, label: language.language })
+        })
+
     return (
         <div>
-                <ModalDetails />
+                {/*<ModalDetails />*/}
                 
-                <Button variant="primary" className="me-2 mb-1" onClick={toggleAttendantEdit}>
+                <Button variant="primary" className="me-2 mb-1" onClick={toggleEmployeeEdit}>
                     <i className="mdi mdi-square-edit-outline"></i>
                 </Button>
 
 
-                <ModalPositions data={data} />
+                <ModalPositions data={datas} />
                 
               
 
@@ -53,13 +85,14 @@ const ModalsWithPagesArea = (data) => {
                 </Button>*/}
 
                 {/* Sign up Modal */}
-                <Modal show={AttendantEditModal} onHide={toggleAttendantEdit}>
-                    <Modal.Header onHide={toggleAttendantEdit}
+                <Modal show={EmployeeEditModal} onHide={toggleEmployeeEdit}>
+                    <Modal.Header onHide={toggleEmployeeEdit}
                             closeButton className='modal-colored-header bg-primary'>
                             <h4 className="modal-title">Cadastro de funcionário</h4>
                         </Modal.Header>
+                        <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitEmployee}>
                     <Modal.Body>
-                        <form className="ps-3 pe-3 mt-2" action="#">
+                        
                             <div className="mb-3">
                             <FormInput
                                     label="Nome"
@@ -68,6 +101,8 @@ const ModalsWithPagesArea = (data) => {
                                     containerClass={'mb-3'}
                                     //register={register}
                                     key="text"
+                                    value={name}
+                                    onChange={event => setName(event.target.value)}
                                     //errors={errors}
                                     //{control}
                                 />
@@ -81,6 +116,9 @@ const ModalsWithPagesArea = (data) => {
                                     containerClass={'mb-3'}
                                     //register={register}
                                     key="text"
+                                    value={cpf}
+                                    disabled={true}
+                                    onChange={event => setCpf(event.target.value)}
                                     //errors={errors}
                                     //{control}
                                 />
@@ -92,7 +130,8 @@ const ModalsWithPagesArea = (data) => {
                                     type="text"
                                     name="email"
                                     containerClass={'mb-3'}
-                                    //register={register}
+                                    value={email}
+                                    onChange={event => setEmail(event.target.value)}
                                     key="text"
                                     //errors={errors}
                                     //{control}
@@ -105,7 +144,8 @@ const ModalsWithPagesArea = (data) => {
                                     type="password"
                                     name="password"
                                     containerClass={'mb-3'}
-                                    //register={register}
+                                    value={password}
+                                    onChange={event => setPassword(event.target.value)}
                                     key="password"
                                 />
                             </div>
@@ -113,37 +153,31 @@ const ModalsWithPagesArea = (data) => {
                             <div className="mb-3">
                             <p className="mb-1 mt-3 fw-bold">Área</p>
                             <Select
+                                onChange={(area) => setAreaArray(area)}
+                                isMulti={true}
+                                options={
+                                        areas
+                                    }
+                                value={areaarray}
                                 className="react-select"
-                                classNamePrefix="react-select"
-                                options={[
-                                    { value: 'administrativo', label: 'Administrativa' },
-                                    { value: 'marketing', label: 'Marketing' },
-                                    { value: 'comercial', label: 'Comercial' },
-                                ]}>
+                                classNamePrefix="react-select">
                             </Select>
                             </div>
 
                             <div className="mb-3">
                             <p className="mb-1 mt-3 fw-bold">Idiomas</p>
                             <Select
+                                onChange={(language) => setLanguageArray(language)}
                                 isMulti={true}
-                                options={[
-                                    { value: 'pt', label: 'Português' },
-                                    { value: 'en', label: 'Inglês' },
-                                    { value: 'es', label: 'Espanhol' },
-                                ]}
+                                options={
+                                        languages
+                                    }
+                                value={languagearray}
                                 className="react-select"
                                 classNamePrefix="react-select">
                                 </Select>
                             </div>
 
-                            <div className="mb-3 mt-3">
-
-                            <Form.Group>
-                                <Form.Label htmlFor="file">Imagem de perfil</Form.Label>
-                                <Form.Control type="file" />
-                            </Form.Group>
-                            </div>
                             </div>
 
                             {/*<div className="mb-3">
@@ -156,20 +190,23 @@ const ModalsWithPagesArea = (data) => {
             </div>*/}
 
                             
-                        </form>
+                        
                         
                     </Modal.Body>
                     <Modal.Footer>
                     
-                            <Button variant="primary" type="submit" onClick={toggleAttendantEdit}>
+                            <Button variant="primary" type="submit">
                                 Salvar
                             </Button>
                         </Modal.Footer>
+                        </form>
                 </Modal>
                 
                 
             </div>
+   
     );
+}
 };
 
 const ModalPositions = (data) => {

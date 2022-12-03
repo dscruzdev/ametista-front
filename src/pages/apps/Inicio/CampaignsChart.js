@@ -28,7 +28,7 @@ const CampaignsChart = (): React$Element<any> => {
         },
     };
 
-    const apexBarChartData = [86, 36, 50, 10];
+    const apexBarChartData = [20, 40, 10, 20];
 
     return (
         <Card>

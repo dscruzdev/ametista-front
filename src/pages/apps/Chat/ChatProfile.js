@@ -76,7 +76,7 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
             </Dropdown>*/}
 
                         <div className="mt-3 text-center">
-                            <img src={user.avatar} alt="" className="img-thumbnail avatar-lg rounded-circle" />
+                            <img src={'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'} alt="" className="img-thumbnail avatar-lg rounded-circle" />
                             <h4>{user.name}</h4>
                             <ModalsFinalizarChamado selectedUser={selectedUser}/>
                             

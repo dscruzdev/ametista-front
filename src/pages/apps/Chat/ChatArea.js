@@ -8,7 +8,6 @@ import SimpleBar from 'simplebar-react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { sendmessage } from '../../../helpers/api/';
-import { useAsync } from "react-async";
 
 // components
 import { FormInput } from '../../../components';
@@ -16,7 +15,7 @@ import Loader from '../../../components/Loader';
 import ModalsUploadFile from '../../uikit/ModalsUploadFile';
 
 // default data
-import { messages } from './data';
+import { messages, messagesConversation } from './data';
 
 const UserMessage = ({ message, toUser }) => {
     return (
@@ -90,10 +89,12 @@ type ChatAreaProps = {
 };
 
 // ChatArea
-const ChatArea = ({ selectedUser, socket }: ChatAreaProps): React$Element<React$FragmentType> => {
+const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: ChatAreaProps): React$Element<React$FragmentType> => {
     const [loading, setLoading] = useState(false);
     const [userMessages, setUserMessages] = useState([]);
-    const [messageId, setMessageId] = useState(0);
+    const [messageId, setMessageId] = useState(1);
+    const [unreaded, setUnreaded] = useState(0);
+    const [loadedData, setLoadedData] = useState(false);
     const [toUser] = useState({
         id: 9,
         name: 'Shreyu N',
@@ -104,10 +105,14 @@ const ChatArea = ({ selectedUser, socket }: ChatAreaProps): React$Element<React$
         languages: 'English, German, Spanish',
         subject: 'Financeiro',
     });
-    
+
+    const oldmessages = olderMessages.data;
+
     /*
      *  Fetches the messages for selected user
      */
+
+
     const getMessagesForUser = useCallback(() => {
         if (selectedUser) {
             setLoading(true);
@@ -130,6 +135,9 @@ const ChatArea = ({ selectedUser, socket }: ChatAreaProps): React$Element<React$
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
+            
+            toUser.lastMessage = data;
+            toUser.totalUnread = unreaded + 1;
             let newUserMessages = [...userMessages];
             newUserMessages.push({
                 id: messageId,
@@ -140,8 +148,19 @@ const ChatArea = ({ selectedUser, socket }: ChatAreaProps): React$Element<React$
             });
             setUserMessages(newUserMessages);
             setMessageId(messageId + 1);
+            setUnreaded(unreaded + 1);
         })
-    }, [messageId, selectedUser, socket, toUser, userMessages]);
+    }, [messageId, selectedUser, socket, toUser, userMessages, unreaded, oldmessages]);
+
+    if (olderMessages.length !== 0 && !loadedData) {
+        oldmessages.forEach((message, key) => {
+            message.id = key + 1;
+        });
+        setLoadedData(true);
+        trueCheck();
+        setUserMessages(oldmessages);
+    }
+
     /*
      * form validation schema
      */
@@ -166,10 +185,11 @@ const ChatArea = ({ selectedUser, socket }: ChatAreaProps): React$Element<React$
     /**
      * sends the chat message
      */
+
     const sendChatMessage = async (e, values) => {
         let newUserMessages = [...userMessages];
         newUserMessages.push({
-            id: messageId,
+            id: oldmessages.length+messageId,
             from: toUser,
             to: selectedUser,
             message: { type: 'text', value: values.target[0].value },
@@ -178,12 +198,11 @@ const ChatArea = ({ selectedUser, socket }: ChatAreaProps): React$Element<React$
         setUserMessages(newUserMessages);
         setMessageId(messageId + 1);
         sendmessage({ idRequests: selectedUser.requests[selectedUser.requests.length - 1].idRequests, body: values.target[0].value });
-        console.log(messageId);
+        console.log(newUserMessages);
         reset();
     };
-    console.log(selectedUser)
+
     return (
-        
         <>
             <Card>
                 <Card.Body className="position-relative px-0 pb-0">

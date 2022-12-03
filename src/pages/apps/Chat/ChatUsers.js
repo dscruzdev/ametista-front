@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import classnames from 'classnames';
 import SimpleBar from 'simplebar-react';
+import { getmessages } from '../../../helpers/api/';
+
 
 // dummy data
 import { users, clients } from './data';
@@ -28,8 +30,8 @@ type ChatUsersProps = {
 };
 
 // ChatUsers
-const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<React$FragmentType> => {
-    const statusFilters = ['Todos', 'Em andamento', 'Em aberto'];
+const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): React$Element<React$FragmentType> => {
+    const statusFilters = ['Todos', 'Em espera', 'Em andamento'];
 
     const { data, error, isPending } = useAsync({ promiseFn: clients });
     // const { dataSubject, errorSubject, isPendingSubject } = useAsync({ promiseFn: subjects });
@@ -73,8 +75,11 @@ const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<Reac
             onUserSelect(user);
         }
     };
-
-    const joinconversation = (idRequest) =>{
+    var olderMessages;
+    const joinconversation = async (idRequest) =>{
+        olderMessages = await getmessages({"idRequests":idRequest.idRequests, "uid": "f79b3375-257b-420a-af19-913162987b77"});
+        onMessagesLoad(olderMessages);
+        console.log(olderMessages);
         socket.emit("join_conversation", idRequest);
     }
 
@@ -125,7 +130,6 @@ const ChatUsers = ({ onUserSelect, socket }: ChatUsersProps): React$Element<Reac
                                                 className="text-body"
                                                 onClick={(e) => {
                                                     activateUser(user);
-                                                    console.log(user);
                                                     joinconversation({cpfUsers:"222.222.222-22",idRequests:user.requests[user.requests.length-1].idRequests});
                                                 }}>
                                                 <div

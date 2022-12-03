@@ -61,20 +61,20 @@ const Inicio = (): React$Element<React$FragmentType> => {
             </Row>
 
             <Row>
-                <Col xl={4} lg={6}>
+                <Col xl={6} lg={9}>
                     <Status />
                 </Col>
                 {/*<Col xl={4} lg={6}>
                     <Statistics />
                 </Col>*/}
 
-                <Col xl={4} lg={6}>
+                <Col xl={6} lg={9}>
                     <Channels />
                 </Col>
 
-                <Col xl={4} lg={6}>
+                {/*<Col xl={4} lg={6}>
                     <CampaignsChart />
-                </Col>
+            </Col>*/}
 
                 {/*<Col xl={4} sm={12}>
                     <StatisticsWidget

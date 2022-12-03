@@ -9,13 +9,13 @@ import CardTitle from '../../../components/CardTitle';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Status = (): React$Element<any> => {
-    const colors = ['#0acf97', '#573668', '#fa5c7c'];
+    const colors = ['#0acf97', '#ffbc00', '#fa5c7c'];
 
     const donutChartData = {
-        labels: ['Concluído', 'Em andamento', 'Em espera'],
+        labels: ['Concluído', 'Em andamento', 'Em aberto'],
         datasets: [
             {
-                data: [64, 26, 10],
+                data: [30, 60, 10],
                 backgroundColor: colors,
                 borderColor: 'transparent',
                 borderWidth: '3',
@@ -38,7 +38,7 @@ const Status = (): React$Element<any> => {
             <Card.Body>
                   <h4 className="header-title mt-2 mb-3">Status dos chamados</h4>
 
-                <div className="my-2 chartjs-chart" style={{ height: '165px' }}>
+                <div className="my-2 chartjs-chart" style={{ height: '120px' }}>
                     <Doughnut data={donutChartData} options={donutChartOpts} />
                 </div>
 
@@ -47,17 +47,17 @@ const Status = (): React$Element<any> => {
                         <div className="my-2 my-sm-0">
                             <i className="mdi mdi-check-circle-outline text-success mt-2 h3"></i>
                             <h4 className="fw-bold">
-                                <span>64%</span>
+                                <span>30%</span>
                             </h4>
-                            <p className="text-muted mb-0">Concluído</p>
+                            <p className="text-muted mb-0">Finalizado</p>
                         </div>
                     </Col>
 
                     <Col sm={4}>
                         <div className="my-2 my-sm-0">
-                            <i className="mdi mdi-progress-check text-primary mt-2 h3"></i>
+                            <i className="mdi mdi-progress-check text-warning mt-2 h3"></i>
                             <h4 className="fw-bold">
-                                <span>26%</span>
+                                <span>60%</span>
                             </h4>
                             <p className="text-muted mb-0"> Em andamento</p>
                         </div>
@@ -69,7 +69,7 @@ const Status = (): React$Element<any> => {
                             <h4 className="fw-bold">
                                 <span>10%</span>
                             </h4>
-                            <p className="text-muted mb-0"> Em espera</p>
+                            <p className="text-muted mb-0"> Em aberto</p>
                         </div>
                     </Col>
                 </Row>

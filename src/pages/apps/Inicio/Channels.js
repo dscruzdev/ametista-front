@@ -23,37 +23,37 @@ const Channels = (): React$Element<any> => {
                     <tbody>
                         <tr>
                             <td>WhatsApp</td>
-                            <td>15</td>
+                            <td>5</td>
                             <td>
-                                <ProgressBar now={65} style={{ height: '3px' }} variant="success"/>
+                                <ProgressBar now={50} style={{ height: '3px' }} variant="success"/>
                             </td>
                         </tr>
-                        <tr>
+                       {/*} <tr>
                             <td>Instagram Direct</td>
                             <td>10</td>
                             <td>
                                 <ProgressBar now={45} style={{ height: '3px' }}  />
                             </td>
-                        </tr>
-                        <tr>
+                        </tr>*/}
+<tr>
                             <td>Facebook Messenger</td>
-                            <td>3</td>
+                            <td>2</td>
                             <td>
-                                <ProgressBar now={30} style={{ height: '3px' }} variant="info" />
+                                <ProgressBar now={20} style={{ height: '3px' }} variant="info" />
                             </td>
                         </tr>
                         <tr>
                             <td>E-mail</td>
                             <td>2</td>
                             <td>
-                                <ProgressBar now={25} style={{ height: '3px' }} variant="warning" />
+                                <ProgressBar now={20} style={{ height: '3px' }} variant="warning" />
                             </td>
                         </tr>
                         <tr>
                             <td>SMS</td>
                             <td>1</td>
                             <td>
-                                <ProgressBar now={25} style={{ height: '3px' }} variant="danger" />
+                                <ProgressBar now={10} style={{ height: '3px' }} variant="primary" />
                             </td>
                         </tr>
                     </tbody>

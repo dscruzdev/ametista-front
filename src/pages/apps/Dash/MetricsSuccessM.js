@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const MetricsSuccessM = (): React$Element<any> => {
     return (
         <Row>
-        <Col xl={4}>
+        <Col xl={6}>
         <Card>
             <Card.Body  className="bg-primary-light card">
                 {/*<Link to="#" className="p-0 float-end">
@@ -27,12 +27,12 @@ const MetricsSuccessM = (): React$Element<any> => {
         </Card>
         </Col>
 
-        <Col xl={4}>
+        {/*<Col xl={4}>
         <Card>
             <Card.Body  className="bg-primary-light card">
                 {/*<Link to="#" className="p-0 float-end">
                     Export <i className="mdi mdi-download ms-1"></i>
-    </Link>*/}
+    </Link>
                 <Card className="shadow-none m-0 bg-primary-light">
                                     <Card.Body className="text-center">
                                     <i className="uil-smile text-white font-24"></i><i className="uil-meh-alt text-white font-24"></i><i className="uil-sad text-white font-24"></i>
@@ -45,9 +45,9 @@ const MetricsSuccessM = (): React$Element<any> => {
                
             </Card.Body>
         </Card>
-        </Col>
+        </Col>*/}
 
-        <Col xl={4}>
+        <Col xl={6}>
         <Card>
             <Card.Body  className="bg-primary-light card">
                 {/*<Link to="#" className="p-0 float-end">

@@ -14,7 +14,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="uil-comment-alt text-muted font-24"></i>
                                         <h3>
-                                            <span>40</span>
+                                            <span>10</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Total de chamados</p>
                                     </Card.Body>
@@ -26,7 +26,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="uil-comment-alt-check text-muted font-24"></i>
                                         <h3>
-                                            <span>31</span>
+                                            <span>7</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Total de chamados atendidos</p>
                                     </Card.Body>

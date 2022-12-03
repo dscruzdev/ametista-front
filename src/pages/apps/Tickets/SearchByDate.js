@@ -7,7 +7,7 @@ import HyperDatepicker from '../../../components/Datepicker';
 
 
 
-const SearchByDate = (): React$Element<React$FragmentType> => {
+const SearchByDate = ({eDate}): React$Element<React$FragmentType> => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     
     /*
@@ -16,14 +16,14 @@ const SearchByDate = (): React$Element<React$FragmentType> => {
     const onDateChange = (date) => {
         if (date) {
             setSelectedDate(date);
+            eDate(date);
         }
     }; 
     return (
         <>
-            <Row>
-                <Col xl={8}>
-                    <div className="page-title-box">
-                        <div>
+           
+                   
+                     
                             <form className="d-flex">
                                 <div className="input-group">
                                  <HyperDatepicker
@@ -35,10 +35,9 @@ const SearchByDate = (): React$Element<React$FragmentType> => {
                                     />
                                     </div>
                             </form>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
+                        
+                   
+                
         </>
     );
 };

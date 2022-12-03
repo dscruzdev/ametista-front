@@ -202,8 +202,10 @@ const Tickets = (): React$Element<React$FragmentType> => {
                         <Card>
                             <Card.Body>
                                 <Row>
-                                    <Col>
+                                    <Col xs={2}>
                                         <SearchByDate eDate={getInitialDate} />
+                                    </Col>
+                                    <Col xs={2}>
                                         <SearchByDate eDate={getFinalDate} />
                                     </Col>
 

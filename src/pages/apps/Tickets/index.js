@@ -171,6 +171,18 @@ const Tickets = (): React$Element<React$FragmentType> => {
                 : [...requests].filter((o) => o.status?.includes(RequestStatusGroup));
         setResquestList(updatedData);
     };*/
+    const [iDate, setIDate] = useState(new Date());
+    const [fDate, setFDate] = useState(new Date());
+    const getInitialDate = (date) => {
+        setIDate(date);
+        console.log("Data Inicial");
+        console.log(iDate);
+    }
+    const getFinalDate = (date) => {
+        setFDate(date);
+        console.log("Data Final");
+        console.log(fDate);
+    }
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
@@ -189,22 +201,23 @@ const Tickets = (): React$Element<React$FragmentType> => {
                     <Col xs={12}>
                         <Card>
                             <Card.Body>
-                            <Row>
-                            <Col>
-                            <SearchByDate />
-                            </Col>
+                                <Row>
+                                    <Col>
+                                        <SearchByDate eDate={getInitialDate} />
+                                        <SearchByDate eDate={getFinalDate} />
+                                    </Col>
 
-                    <Col>
-                        <div className="text-sm-end">
-                            <Button variant="light" className="mb-2" >
-                            <CSVLink data={toexport} filename="Chamados">
-                                Exportar</CSVLink>
-                            </Button>
-                        </div>
-                    </Col>
-                    </Row>
-                                
-                               {/*} <Row className="mb-2">
+                                    <Col>
+                                        <div className="text-sm-end">
+                                            <Button variant="light" className="mb-2" >
+                                                <CSVLink data={toexport} filename="Chamados">
+                                                    Exportar</CSVLink>
+                                            </Button>
+                                        </div>
+                                    </Col>
+                                </Row>
+
+                                {/*} <Row className="mb-2">
                                     <Col xl={8}>
                                         <form className="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
                                             <div className="col-auto">

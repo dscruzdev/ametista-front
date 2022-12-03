@@ -7,7 +7,7 @@ import HyperDatepicker from '../../../components/Datepicker';
 
 
 
-const SearchByDate = (): React$Element<React$FragmentType> => {
+const SearchByDate = ({eDate}): React$Element<React$FragmentType> => {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     /*
@@ -16,6 +16,7 @@ const SearchByDate = (): React$Element<React$FragmentType> => {
     const onDateChange = (date) => {
         if (date) {
             setSelectedDate(date);
+            eDate(date);
         }
     }; 
     return (

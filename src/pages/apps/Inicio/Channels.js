@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, Table, ProgressBar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Channels = (): React$Element<any> => {
+const Channels = ({totalchamadosmessenger, totalchamadoswhatsapp, totalchamadossms, totalchamadosemail, totalchamados}): React$Element<any> => {
     return (
         <Card>
             <Card.Body>
@@ -23,37 +23,39 @@ const Channels = (): React$Element<any> => {
                     <tbody>
                         <tr>
                             <td>WhatsApp</td>
-                            <td>15</td>
+                            <td>{(totalchamadoswhatsapp)}</td>
                             <td>
-                                <ProgressBar now={65} style={{ height: '3px' }} variant="success"/>
+                                <ProgressBar now={(totalchamadoswhatsapp/totalchamados)*100} style={{ height: '3px' }} variant="success"/>
                             </td>
                         </tr>
-                        <tr>
+                        {/*<tr>
                             <td>Instagram Direct</td>
                             <td>10</td>
                             <td>
                                 <ProgressBar now={45} style={{ height: '3px' }}  />
                             </td>
-                        </tr>
+                        </tr>*/}
                         <tr>
                             <td>Facebook Messenger</td>
-                            <td>3</td>
+                            <td>{(totalchamadosmessenger)}</td>
                             <td>
-                                <ProgressBar now={30} style={{ height: '3px' }} variant="info" />
+                                <ProgressBar now={(totalchamadosmessenger/totalchamados)*100} style={{ height: '3px' }} variant="info" />
                             </td>
                         </tr>
-                        <tr>
-                            <td>E-mail</td>
-                            <td>2</td>
-                            <td>
-                                <ProgressBar now={25} style={{ height: '3px' }} variant="warning" />
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td>SMS</td>
-                            <td>1</td>
+                            <td>{(totalchamadossms)}</td>
                             <td>
-                                <ProgressBar now={25} style={{ height: '3px' }} variant="danger" />
+                                <ProgressBar now={(totalchamadossms/totalchamados)*100} style={{ height: '3px' }} variant="danger" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>E-mail</td>
+                            <td>{(totalchamadosemail)}</td>
+                            <td>
+                                <ProgressBar now={(totalchamadosemail/totalchamados)*100} style={{ height: '3px' }} variant="warning" />
                             </td>
                         </tr>
                     </tbody>

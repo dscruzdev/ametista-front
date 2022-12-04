@@ -8,14 +8,14 @@ import CardTitle from '../../../components/CardTitle';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Status = (): React$Element<any> => {
+const Status = ({totalchamadosfinalizados, totalchamadosemandamento, totalchamadosaberto, totalchamados}): React$Element<any> => {
     const colors = ['#0acf97', '#ffbc00', '#fa5c7c'];
 
     const donutChartData = {
-        labels: ['Concluído', 'Em andamento', 'Em aberto'],
+        labels: ['Finalizado', 'Em andamento', 'Em aberto'],
         datasets: [
             {
-                data: [30, 60, 10],
+                data: [totalchamadosfinalizados, totalchamadosemandamento, totalchamadosaberto],
                 backgroundColor: colors,
                 borderColor: 'transparent',
                 borderWidth: '3',
@@ -47,7 +47,7 @@ const Status = (): React$Element<any> => {
                         <div className="my-2 my-sm-0">
                             <i className="mdi mdi-check-circle-outline text-success mt-2 h3"></i>
                             <h4 className="fw-bold">
-                                <span>30%</span>
+                                <span>{(totalchamadosfinalizados/totalchamados)*100}%</span>
                             </h4>
                             <p className="text-muted mb-0">Finalizado</p>
                         </div>
@@ -57,7 +57,7 @@ const Status = (): React$Element<any> => {
                         <div className="my-2 my-sm-0">
                             <i className="mdi mdi-progress-check text-warning mt-2 h3"></i>
                             <h4 className="fw-bold">
-                                <span>60%</span>
+                                <span>{(totalchamadosemandamento/totalchamados)*100}%</span>
                             </h4>
                             <p className="text-muted mb-0"> Em andamento</p>
                         </div>
@@ -67,7 +67,7 @@ const Status = (): React$Element<any> => {
                         <div className="my-2 my-sm-0">
                             <i className="mdi mdi-progress-clock text-danger mt-2 h3"></i>
                             <h4 className="fw-bold">
-                                <span>10%</span>
+                                <span>{(totalchamadosaberto/totalchamados)*100}%</span>
                             </h4>
                             <p className="text-muted mb-0"> Em aberto</p>
                         </div>

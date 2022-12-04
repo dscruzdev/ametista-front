@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 
-const Statistics = (): React$Element<React$FragmentType> => {
+const Statistics = ({totalchamados, totalchamadosatendidos, totalcsat, nps}): React$Element<React$FragmentType> => {
     return (
         <Row>
             <Col xs={12}>
@@ -14,7 +14,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="uil-comment-alt text-muted font-24"></i>
                                         <h3>
-                                            <span>10</span>
+                                            <span>{(totalchamados)}</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Total de chamados</p>
                                     </Card.Body>
@@ -26,7 +26,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="uil-comment-alt-check text-muted font-24"></i>
                                         <h3>
-                                            <span>7</span>
+                                            <span>{(totalchamadosatendidos)}</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Total de chamados atendidos</p>
                                     </Card.Body>
@@ -38,7 +38,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="uil-smile text-muted font-24"></i><i className="uil-meh-alt text-muted font-24"></i><i className="uil-sad text-muted font-24"></i>
                                         <h3>
-                                            <span>70</span>
+                                            <span>{(totalcsat)}%</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Customer Satisfation Score (CSAT)</p>
                                     </Card.Body>
@@ -50,7 +50,7 @@ const Statistics = (): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                     <i className="uil-smile text-muted font-24"></i><i className="uil-meh-alt text-muted font-24"></i><i className="uil-sad text-muted font-24"></i>
                                         <h3>
-                                            <span>89</span>
+                                            <span>{(nps)}</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Net Promoter Score (NPS)</p>
                                     </Card.Body>

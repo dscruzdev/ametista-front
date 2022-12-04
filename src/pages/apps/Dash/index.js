@@ -9,6 +9,7 @@ import Email from './Email';
 import { inicio } from './Data'
 import { useAsync } from "react-async";
 import moment from 'moment/moment';
+import SearchByDate from './SearchByDate';
 
 const Dash = (): React$Element<React$FragmentType> => {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -16,15 +17,23 @@ const Dash = (): React$Element<React$FragmentType> => {
     /*
      * handle date change*/
     
-    const onDateChange = (date) => {
-        if (date) {
-            setSelectedDate(date);
-        }
-    }; 
+    const [iDate, setIDate] = useState(new Date(0));
+    const [fDate, setFDate] = useState(new Date());
+    const getInitialDate = (date) => {
+        setIDate(date);
+    }
+    const getFinalDate = (date) => {
+        setFDate(date);
+    }
+
     const { data, error, isPending } = useAsync({ promiseFn: inicio });
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
+        var filtrado = data.filter((request) => {
+            var data_atual = new Date(request.createdAt)
+            return data_atual >= iDate && data_atual <= fDate;
+        })
         var totalchamados = 0;
         var totalchamadosM = 0;
         var totalchamadosE = 0;
@@ -61,7 +70,7 @@ const Dash = (): React$Element<React$FragmentType> => {
         var hoursM =0;
         var hoursE =0;
         
-       data.forEach((request, index) => {
+       filtrado.forEach((request, index) => {
         totalchamados = index + 1;
         if (request.idChannels != "4") {
             totalchamadosM ++;
@@ -162,24 +171,24 @@ const Dash = (): React$Element<React$FragmentType> => {
     )
     return (
         <>
+        <div className="mt-2 mb-2">
             <Row>
-                <Col>
-                    <div className="page-title-box">
-                        <div className="page-title-right">
-                            <form className="d-flex">
-                                <div className="input-group">
-                                 <HyperDatepicker
-                                        value={selectedDate}
-                                        inputClass="form-control-light"
-                                        onChange={(date) => {
-                                            onDateChange(date);
-                                        }}
-                                    />
-                                    </div>
-                            </form>
-                        </div>
+                <Col xs={2}>
+                    
                         <h4 className="page-title">Dashboard</h4>
-                    </div>
+                    
+                </Col>
+                </Row>
+            <Row>
+                <Col xs={2}>
+                    <SearchByDate eDate={getInitialDate} />
+                </Col>
+                <Col xs={2}>
+                    <SearchByDate eDate={getFinalDate} />                  
+                </Col>
+            </Row>
+            </div>
+
                     <Tab.Container defaultActiveKey="1">
                 <Row>
                     <Col>
@@ -217,8 +226,6 @@ const Dash = (): React$Element<React$FragmentType> => {
                     </Col>
                 </Row>
             </Tab.Container>
-                </Col>
-            </Row>
         </>
     );
 };

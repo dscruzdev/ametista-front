@@ -115,6 +115,18 @@ const Inicio = (): React$Element<React$FragmentType> => {
             totalchamadosemail ++;
         }
 
+        if (request.status == "Finalizado") { 
+            totalchamadosfinalizados ++;
+        }
+
+        if (request.status == "Em andamento") { 
+            totalchamadosemandamento ++;
+        }
+
+        if (request.status == "Em aberto") { 
+            totalchamadosaberto ++;
+        }
+
         
     }    
         )

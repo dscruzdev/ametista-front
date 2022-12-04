@@ -171,22 +171,19 @@ const Tickets = (): React$Element<React$FragmentType> => {
                 : [...requests].filter((o) => o.status?.includes(RequestStatusGroup));
         setResquestList(updatedData);
     };*/
-    const [iDate, setIDate] = useState(new Date());
+    const [iDate, setIDate] = useState(new Date(0));
     const [fDate, setFDate] = useState(new Date());
     const getInitialDate = (date) => {
         setIDate(date);
-        console.log("Data Inicial");
-        console.log(iDate);
     }
     const getFinalDate = (date) => {
         setFDate(date);
-        console.log("Data Final");
-        console.log(fDate);
     }
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
         const toexport = [];
+        
         data.forEach(request => {
             toexport.push(
                 {
@@ -194,6 +191,12 @@ const Tickets = (): React$Element<React$FragmentType> => {
                 }
             )
         })
+        
+        var filtrado = data.filter((request) => {
+            var data_atual = new Date(request.createdAt)
+            return data_atual >= iDate && data_atual <= fDate;
+        })
+
         return (
             <>
 
@@ -208,13 +211,13 @@ const Tickets = (): React$Element<React$FragmentType> => {
                                     <Col xs={2}>
                                         <SearchByDate eDate={getFinalDate} />
                                     </Col>
-
                                     <Col>
                                         <div className="text-sm-end">
                                             <Button variant="light" className="mb-2" >
                                                 <CSVLink data={toexport} filename="Chamados">
                                                     Exportar</CSVLink>
                                             </Button>
+
                                         </div>
                                     </Col>
                                 </Row>
@@ -244,7 +247,7 @@ const Tickets = (): React$Element<React$FragmentType> => {
 
                                 <Table
                                     columns={columns}
-                                    data={data}
+                                    data={filtrado}
                                     pageSize={10}
                                     sizePerPageList={sizePerPageList}
                                     isSortable={true}

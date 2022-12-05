@@ -158,7 +158,7 @@ const sizePerPageList = [
 
 // main component
 const Tickets = (): React$Element<React$FragmentType> => {
-    const [requestList, setResquestList] = useState(requests);
+    //const [requestList, setResquestList] = useState(requests);
     const { data, error, isPending } = useAsync({ promiseFn: requests });
 
     /* change order status group

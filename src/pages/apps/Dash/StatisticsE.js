@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 
-const StatisticsE = (): React$Element<React$FragmentType> => {
+const StatisticsE = ({tempomedioE}): React$Element<React$FragmentType> => {
     return (
         <Row>
             <Col xs={12}>
@@ -14,7 +14,7 @@ const StatisticsE = (): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="mdi mdi-clock-time-four-outline text-muted font-24"></i>
                                         <h3>
-                                            <span>40</span>
+                                            <span>{(tempomedioE)}h</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Tempo Médio de Atendimento (TMA)</p>
                                     </Card.Body>

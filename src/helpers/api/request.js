@@ -14,6 +14,10 @@ function endrequests(params: any): any {
     return api.update(`${baseUrl}`, params);
 }
 
+function setscore(params: any): any {
+    const baseUrl = '/request/setscore';
+    return api.update(`${baseUrl}`, params);
+}
 
 
-export { getrequests, endrequests };
+export { getrequests, endrequests, setscore };

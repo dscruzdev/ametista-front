@@ -105,6 +105,7 @@ const PreLoader = React.lazy(() => import('../pages/other/PreLoader'));
 const Timeline = React.lazy(() => import('../pages/other/Timeline'));
 
 const Landing = React.lazy(() => import('../pages/landing'));
+const Agradecimento = React.lazy(() => import('../pages/landing/agradecimento'));
 
 // uikit
 const Accordions = React.lazy(() => import('../pages/uikit/Accordions'));
@@ -243,7 +244,17 @@ const AllRoutes = () => {
                 },
                 {
                     path: 'landing',
-                    element: <LoadComponent component={Landing} />,
+                    children: [
+                        {
+                        path: 'agradecimento',
+                            element: <LoadComponent component={Agradecimento} />,
+                        },
+
+                        {
+                            path: 'index',
+                                element: <LoadComponent component={Landing} />,
+                            }
+                    ]
                 },
             ],
         },

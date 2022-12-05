@@ -8454,6 +8454,11 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
+native-forms-react@^1.9.59:
+  version "1.9.59"
+  resolved "https://registry.yarnpkg.com/native-forms-react/-/native-forms-react-1.9.59.tgz#8c86a060476138fb974c55581cbaebb427ecc9d4"
+  integrity sha512-V3LbLcWzwFCGC0FS2G8zrKtbw4fu4auR0lgS2mdIZq9J0cIfzVSYqhvyYODNHE0mNybC/AUATa8ItkDq/AWUUg==
+
 native-url@^0.2.6:
   version "0.2.6"
   resolved "https://registry.npmjs.org/native-url/-/native-url-0.2.6.tgz"

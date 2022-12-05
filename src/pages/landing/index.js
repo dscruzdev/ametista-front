@@ -23,31 +23,11 @@ const Landing = (): React$Element<React$FragmentType> => {
     return (
         <>
             {/* navbar */}
-            <NavBar />
-
-            {/* hero */}
-            <Hero />
+     
 
             {/* services */}
             <Services services={services} />
 
-            {/* layouts */}
-            <Layouts layouts={layouts} />
-
-            {/* features */}
-            <Features features={features} />
-
-            {/* pricing */}
-            <Pricing plans={plans} />
-
-            {/* faqs */}
-            <FAQ rawFaqs={rawFaqs} />
-
-            {/* contact */}
-            <ContactUs />
-
-            {/* footer */}
-            <Footer />
         </>
     );
 };

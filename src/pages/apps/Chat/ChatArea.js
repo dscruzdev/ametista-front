@@ -16,7 +16,7 @@ import ModalsUploadFile from '../../uikit/ModalsUploadFile';
 
 // default data
 import { messages, messagesConversation } from './data';
-
+const AUTH_SESSION_KEY = 'hyper_user';
 const UserMessage = ({ message, toUser }) => {
     return (
         <li className={classnames('clearfix', { odd: message.from.id === toUser.id })}>
@@ -95,9 +95,12 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
     const [messageId, setMessageId] = useState(1);
     const [unreaded, setUnreaded] = useState(0);
     const [loadedData, setLoadedData] = useState(false);
+    const oldmessages = olderMessages.data;
+    const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
+    
     const [toUser] = useState({
-        id: 9,
-        name: 'Shreyu N',
+        id: userSession.id,
+        name: userSession.username,
         avatar: 'assets/images/users/avatar-7.jpg',
         email: 'support@coderthemes.com',
         phone: '+1 456 9595 9594',
@@ -106,8 +109,8 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
         subject: 'Financeiro',
     });
 
-    const oldmessages = olderMessages.data;
-
+    console.log(userSession)
+    
     /*
      *  Fetches the messages for selected user
      */
@@ -135,7 +138,7 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
-            
+            console.log("recebi")
             toUser.lastMessage = data;
             toUser.totalUnread = unreaded + 1;
             let newUserMessages = [...userMessages];

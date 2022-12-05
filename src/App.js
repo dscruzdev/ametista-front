@@ -17,7 +17,7 @@ import './assets/scss/Saas.scss';
 // import './assets/scss/Creative.scss';
 
 // configure fake backend
-configureFakeBackend();
+//configureFakeBackend();
 
 type AppProps = {};
 

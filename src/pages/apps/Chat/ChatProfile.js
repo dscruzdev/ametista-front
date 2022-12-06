@@ -96,7 +96,7 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
                                     </p>
                                     <p className="mb-0">{user.email}</p>
                                 </Col>
-                                <ModalsTicketEdit />
+                                <ModalsTicketEdit selectedUser={selectedUser}/>
                             </Row>
 
 
@@ -130,7 +130,7 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
 
                             <p className="mt-3 mb-2">
                                 <strong>
-                                    <i className=" uil-comment-message"></i> Assuntos:
+                                    <i className=" uil-comment-message"></i> Assunto:
                                 </strong>
                             </p>
 
@@ -183,8 +183,9 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
                             </p>
 
 
-                            <ModalsWriteComments />
-                            <ModalsComments />
+                            <ModalsWriteComments requestid={requestid}/>
+
+                           <ModalsComments comments={user.requests[0].comments}/>
 
                         </div>
                     </Card.Body>

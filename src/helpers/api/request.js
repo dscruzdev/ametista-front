@@ -19,5 +19,10 @@ function setscore(params: any): any {
     return api.update(`${baseUrl}`, params);
 }
 
+function updateinfos(params: any): any {
+    const baseUrl = '/front/chat';
+    return api.update(`${baseUrl}`, params);
+}
 
-export { getrequests, endrequests, setscore };
+
+export { getrequests, endrequests, setscore, updateinfos };

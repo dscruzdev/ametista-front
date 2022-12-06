@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FormInput } from '../../components';
 import Select from 'react-select';
+import { createcomment } from '../../helpers';
 
 // components
 //import PageTitle from '../../components/PageTitle';
@@ -12,9 +13,16 @@ import Select from 'react-select';
 // images
 //import logodark from '../../assets/images/logo-dark.png';
 
-const ModalWithColoredHeader = () => {
+const ModalWithColoredHeader = ({requestid}) => {
     const [modal, setModal] = useState(false);
     const [headerClassName, setHeaderClassName] = useState('');
+    const [comment, setComment] = useState('');
+
+    const submitComment = (event) => {
+        event.preventDefault();
+        createcomment({ idRequests: requestid, comment: comment })
+        window.location.reload(false);
+    };
 
     /**
      * Show/hide the modal
@@ -30,6 +38,8 @@ const ModalWithColoredHeader = () => {
         setHeaderClassName(className);
         toggle();
     };
+
+
     return (
         <>
                     <Button className="btn-sm mt-1 me-2 text-end" variant="secondary" onClick={() => openModalWithHeaderClass('primary')}>
@@ -43,9 +53,10 @@ const ModalWithColoredHeader = () => {
                             className={classNames('modal-colored-header', 'bg-' + headerClassName)}>
                            
                         </Modal.Header>
+                        <form className="ps-3 pe-3 mt-2" action="#" onSubmit={submitComment}>
                         <Modal.Body>
                         
-                        <form className="ps-3 pe-3 mt-2" action="#">
+                       
                             <div className="mb-3">
                             <FormInput
                                     label="Comentário"
@@ -54,27 +65,30 @@ const ModalWithColoredHeader = () => {
                                     rows="5"
                                     containerClass={'mt-2 mb-3'}
                                     key="textarea"
-                                    
+                                    onChange={event => setComment(event.target.value)}
                                 />
                             </div>
-                        </form>
+                        
                         
                 
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant={headerClassName} onClick={toggle}>
+                            <Button variant={headerClassName} type="submit">
                                 Salvar
                             </Button>
                         </Modal.Footer>
+                        </form>
                     </Modal>
         </>
     );
 };
 
 
-const ModalsWriteComments = (): React$Element<React$FragmentType> => {
+const ModalsWriteComments = ({requestid}): React$Element<React$FragmentType> => {
+    
     return (
         <>
+        
             {/*<PageTitle
                 breadCrumbItems={[
                     { label: 'Base UI', path: '/ui/modals' },
@@ -103,7 +117,7 @@ const ModalsWriteComments = (): React$Element<React$FragmentType> => {
             </Row>*/}
 
             
-                    <ModalWithColoredHeader />
+                    <ModalWithColoredHeader requestid={requestid}/>
 
             {/*<Row>
                 <Col md={6}>

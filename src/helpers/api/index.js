@@ -1,12 +1,12 @@
 // @flow
 import { login, logout, signup, forgotPassword, forgotPasswordConfirm } from './auth';
-import { getrequests, endrequests, setscore } from './request';
+import { getrequests, endrequests, setscore, updateinfos } from './request';
 import { getclients } from './client';
 import { getareas, createarea, deletearea, updatearea } from './area';
 import { createuser, deleteuser, updateuser } from './user';
 import { getlanguages, createlanguage, deletelanguage, updatelanguage } from './language';
 import { getsubjects, createsubject, deletesubject, updatesubject } from './subject';
-import { getcomments } from './comment';
+import { getcomments,createcomment } from './comment';
 import { sendmessage, getmessages } from './conversation';
 
 export {
@@ -28,6 +28,7 @@ export {
     createlanguage,
     createuser,
     deleteuser,
+    updateinfos,
     updateuser,
     deletearea,
     deletelanguage,
@@ -36,5 +37,6 @@ export {
     updatelanguage,
     updatesubject,
     sendmessage,
+    createcomment,
     getmessages
 };

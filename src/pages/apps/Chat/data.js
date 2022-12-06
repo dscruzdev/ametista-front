@@ -20,6 +20,12 @@ const clients = () =>
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json());
 
+        /*const comment= (id) =>
+        console.log(id)
+        fetch("http://localhost:8080/comment") 
+            .then(res => (res.ok ? res : Promise.reject(res)))
+            .then(res => res.json());*/
+
 const users = [
     {
         id: 0,
@@ -289,4 +295,4 @@ for (const user of users) {
     );
 }
 
-export { users, messages, clients, messagesConversation };
+export { users, messages, clients, messagesConversation};

@@ -115,7 +115,7 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                             
                             <p>{user.description}</p>
                             
-                            <ModalsComments />
+                            {/*<ModalsComments />*/}
                             
                         </div>
                     </Card.Body>

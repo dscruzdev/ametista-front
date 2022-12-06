@@ -32,10 +32,6 @@ const ModalsWithPagesArea = (datas) => {
      * Show/hide the modal
      */
 
-    
-
-
-
     const toggleEmployeeEdit = (className) => {
         console.log(datas)
         setHeaderClassName(className);

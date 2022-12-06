@@ -76,17 +76,18 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
         }
     };
     var olderMessages;
+    const AUTH_SESSION_KEY = 'hyper_user';
+    const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
     const joinconversation = async (idRequest) =>{
-        olderMessages = await getmessages({"idRequests":idRequest.idRequests, "uid": "f79b3375-257b-420a-af19-913162987b77"});
+        olderMessages = await getmessages({"idRequests":idRequest.idRequests, "uid": userSession.id});
         onMessagesLoad(olderMessages);
-        console.log(olderMessages);
         socket.emit("join_conversation", idRequest);
     }
 
     if (isPending) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data ) {
-        console.log(data)
+
         return (
             <>
                 <Card>

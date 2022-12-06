@@ -9,6 +9,11 @@ function getcomments(params: any): any {
     return api.get(`${baseUrl}`, params);
 }
 
+function createcomment(params: any): any {
+    const baseUrl = '/comment';
+    return api.create(`${baseUrl}`, params);
+}
 
 
-export { getcomments };
+
+export { getcomments, createcomment };

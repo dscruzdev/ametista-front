@@ -9,7 +9,7 @@ import { getmessages } from '../../../helpers/api/';
 
 // dummy data
 import { users, clients } from './data';
-import { useAsync } from "react-async";
+import { useAsync, useFetch } from "react-async";
 
 type Users = {
     cpf: string,
@@ -32,8 +32,9 @@ type ChatUsersProps = {
 // ChatUsers
 const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): React$Element<React$FragmentType> => {
     const statusFilters = ['Todos', 'Em espera', 'Em andamento'];
-
-    const { data, error, isPending } = useAsync({ promiseFn: clients });
+    const AUTH_SESSION_KEY = 'hyper_user';
+    const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
+    const { data, error, isPending } = useFetch({ promiseFn: clients }, "ds",);
     // const { dataSubject, errorSubject, isPendingSubject } = useAsync({ promiseFn: subjects });
     // const { dataLanguage, errorLanguage, isPendingLanguage } = useAsync({ promiseFn: languages });
     // const { dataRequest, errorRequest, isPendingRequest } = useAsync({ promiseFn: requests });
@@ -76,8 +77,7 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
         }
     };
     var olderMessages;
-    const AUTH_SESSION_KEY = 'hyper_user';
-    const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
+    
     const joinconversation = async (idRequest) =>{
         olderMessages = await getmessages({"idRequests":idRequest.idRequests, "uid": userSession.id});
         onMessagesLoad(olderMessages);

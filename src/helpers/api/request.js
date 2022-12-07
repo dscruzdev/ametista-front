@@ -24,5 +24,10 @@ function updateinfos(params: any): any {
     return api.update(`${baseUrl}`, params);
 }
 
+function frontticket(params: any): any {
+    const baseUrl = '/front/chat/'+params.id;
+    return api.get(`${baseUrl}`, params);
+}
 
-export { getrequests, endrequests, setscore, updateinfos };
+
+export { getrequests, endrequests, setscore, updateinfos, frontticket };

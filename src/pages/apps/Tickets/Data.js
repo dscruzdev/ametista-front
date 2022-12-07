@@ -552,11 +552,16 @@ const products = [
     },
 ];
 
-const requests = () =>
+const requests = (id) =>
     fetch("http://localhost:8080/front/requests")
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json());
 
+
+const clientrequests = () =>
+    fetch("http://localhost:8080/front/clientrequests")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
 // const requests = getrequests();
 
 var orders = [
@@ -3485,4 +3490,4 @@ const sellers = [
     },
 ];
 
-export { products, orders, customers, sellers, requests };
+export { products, orders, customers, sellers, requests, clientrequests };

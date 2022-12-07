@@ -6,6 +6,7 @@ import ModalsComments from '../../uikit/ModalsComments';
 import ModalsFinalizarChamado from '../../uikit/ModalsFinalizarChamado';
 import ModalsWriteComments from '../../uikit/ModalsWriteComments';
 import ModalsTicketEdit from '../../uikit/ModalsTicketEdit';
+
 import io from 'socket.io-client';
 const socket = io.connect("http://localhost:8080");
 type ChatProfileProps = {
@@ -137,7 +138,7 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
                             <p>
                                 {subjectsArray.map((subject, index) => {
                                     return (
-                                        <span key={index} className="badge badge-warning-lighten p-1 font-14 me-1">
+                                        <span key={index} className="badge badge bg-primary bg-primary p-1 font-14 me-1">
                                             {subject}
                                         </span>
                                     );

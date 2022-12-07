@@ -1,49 +1,32 @@
 // @flow
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Dropdown, Button, Row, Col } from 'react-bootstrap';
-import ModalsComments from '../../uikit/ModalsComments';
+import ModalsCommentsChatTicket from '../../uikit/ModalsCommentsChatTicket';
 import ModalsTicketEdit from '../../uikit/ModalsTicketEdit';
 
-type ChatProfileProps = {
-    selectedUser: {
-        id: number,
-        name: string,
-        avatar: string,
-        lastMessage: string,
-        totalUnread?: number,
-        lastMessageOn: string,
-        email: string,
-        phone: string,
-        suject: String;
-        location: string,
-        languages: string,
-        subject: string,
-    },
-};
+
 
 // ChatProfile
-const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$FragmentType> => {
-    const user = selectedUser || {};
-    const subject = user.subject ? user.subject.split(',') : [];
-
+const ChatProfile = ({ selectedUser, loaded }): React$Element<React$FragmentType> => {
+    var idRequests = loaded?selectedUser.data[0].requests[0].idRequests:0;
     return (
         <>
-            {user && (
+             
                 <Card>
                     <Card.Body>
 
                         <div className="mt-3 text-center">
-                            <img src={user.avatar} alt="" className="img-thumbnail avatar-lg rounded-circle" />
-                            <h4>{user.name}</h4>
+                        <img src={'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'} alt="" className="img-thumbnail avatar-lg rounded-circle" />
+                            <h4>{loaded?selectedUser.data[0].name:"Aguardando"}</h4>
                             <Button className="btn-sm mt-1 me-2" variant="primary-light">
                                 <i className="mdi mdi-open-in-app me-1"></i>Reabrir chamado
                             </Button>
+                            <Link to={"../../apps/tickets?id="+idRequests}>
                             <Button className="btn-sm mt-1 me-2" color="primary">
-                                <i className=" uil-arrow-right me-1"></i>Ver todos os chamados
+                                <i className=" uil-arrow-right me-1"></i>Histórico de chamados
                             </Button>
-                            <p className="text-muted mt-2 font-14">
-                                Última interação: <strong>{user.lastMessageOn}</strong>
-                            </p>
+                            </Link>
                         </div>
 
                         <div className="mt-3">
@@ -55,9 +38,9 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                     <i className="uil uil-at"></i> E-mail:
                                 </strong>
                             </p>
-                            <p className="mb-0">{user.email}</p>
+                            <p className="mb-0">{loaded?selectedUser.data[0].email:"Aguardando"}</p>
                             </Col>
-                            <ModalsTicketEdit />
+
                             </Row>
                             
 
@@ -66,28 +49,28 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                     <i className="uil uil-phone"></i> Telefone:
                                 </strong>
                             </p>
-                            <p>{user.phone}</p>
+                            <p>{loaded?selectedUser.data[0].phone:"Aguardando"}</p>
 
                             <p className="mt-3 mb-1">
                                 <strong>
                                     <i className="mdi mdi-badge-account-horizontal-outline"></i> CPF:
                                 </strong>
                             </p>
-                            <p>{user.phone}</p>
+                            <p>{loaded?selectedUser.data[0].cpfClients:"Aguardando"}</p>
 
                             <p className="mt-3 mb-1">
                                 <strong>
                                     <i className="uil uil-globe"></i> Idioma:
                                 </strong>
                             </p>
-                            <p>{user.languages}</p>
+                            <p>{loaded?selectedUser.data[0].requests[0].language:"Aguardando"}</p>
 
                             <p className="mt-3 mb-1">
                                 <strong>
                                     <i className="mdi mdi-identifier"></i> Número do chamado:
                                 </strong>
                             </p>
-                            <p>{user.phone}</p>
+                            <p>{loaded?selectedUser.data[0].requests[0].idRequests:"Aguardando"}</p>
 
                             <p className="mt-3 mb-2">
                                 <strong>
@@ -95,34 +78,29 @@ const ChatProfile = ({ selectedUser }: ChatProfileProps): React$Element<React$Fr
                                 </strong>
                             </p>
 
-                            <p>
-                                {subject.map((subject, index) => {
-                                    return (
-                                        <span key={index} className="badge badge-warning-lighten p-1 font-14 me-1">
-                                            {subject}
+                          <p>
+                                        <span className="badge badge bg-primary bg-primary p-1 font-14 me-1">
+                                            {loaded?selectedUser.data[0].requests[0].subject:"Aguardando"}
                                         </span>
-                                    );
-                                })}
                             </p>
                            
                             <p className="mb-2 mt-2">
                                 <strong>
                                     <i className="uil-align-left"></i> Descrição:
-                                </strong>
-                                
-                                
+                                </strong> 
                             </p>
                             
-                            <p>{user.description}</p>
+                            <p>{loaded?selectedUser.data[0].requests[0].description:"Aguardando"}</p>
                             
-                            {/*<ModalsComments />*/}
+                            <ModalsCommentsChatTicket comments={loaded?selectedUser.data[0].requests[0].comments:["Aguardando"]}/>
                             
                         </div>
                     </Card.Body>
                 </Card>
-            )}
+            
         </>
     );
 };
+
 
 export default ChatProfile;

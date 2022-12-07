@@ -1,6 +1,6 @@
 // @flow
 import { login, logout, signup, forgotPassword, forgotPasswordConfirm } from './auth';
-import { getrequests, endrequests, setscore, updateinfos } from './request';
+import { getrequests, endrequests, setscore, updateinfos, frontticket } from './request';
 import { getclients } from './client';
 import { getareas, createarea, deletearea, updatearea } from './area';
 import { createuser, deleteuser, updateuser } from './user';
@@ -15,6 +15,7 @@ export {
     signup,
     forgotPassword,
     forgotPasswordConfirm,
+    frontticket,
     getclients,
     getcomments,
     getlanguages,

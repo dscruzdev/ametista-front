@@ -11,7 +11,7 @@ import { useAsync } from "react-async";
 
 
 // dummy data
-import { requests } from './Data'
+import { requests, clientrequests } from './Data'
 import { CSVLink } from 'react-csv';
 
 /* order column render */
@@ -80,15 +80,12 @@ const StatusColumn = ({ row }) => {
 const ActionColumn = ({ row }) => {
     return (
         <>
-            <Link to="../../apps/chatticket">
+            <Link to={"../../apps/chatticket?id=" + row.original.idRequests}>
                 <Button variant="primary" className="me-2 mb-1">
                     <i className="mdi mdi-eye"></i>
                 </Button>
             </Link>
-            {/*<Link to="#" className="action-icon">
-                {' '}
-                <i className="mdi mdi-delete"></i>
-    </Link>*/}
+
         </>
     );
 };
@@ -159,7 +156,11 @@ const sizePerPageList = [
 // main component
 const Tickets = (): React$Element<React$FragmentType> => {
     //const [requestList, setResquestList] = useState(requests);
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id')
+
     const { data, error, isPending } = useAsync({ promiseFn: requests });
+
 
     /* change order status group
     const changeRequestStatusGroup = (RequestStatusGroup) => {
@@ -183,7 +184,7 @@ const Tickets = (): React$Element<React$FragmentType> => {
     if (error) return `Something went wrong: ${error.message}`
     if (data) {
         const toexport = [];
-        
+
         data.forEach(request => {
             toexport.push(
                 {
@@ -191,7 +192,7 @@ const Tickets = (): React$Element<React$FragmentType> => {
                 }
             )
         })
-        
+
         var filtrado = data.filter((request) => {
             var data_atual = new Date(request.createdAt)
             return data_atual >= iDate && data_atual <= fDate;
@@ -199,6 +200,13 @@ const Tickets = (): React$Element<React$FragmentType> => {
 
         return (
             <>
+                <Row>
+                    <Col>
+                        <div className="page-title-box">
+                            <h4 className="page-title">Chamados</h4>
+                        </div>
+                    </Col>
+                </Row>
 
                 <Row>
                     <Col xs={12}>

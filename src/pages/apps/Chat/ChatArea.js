@@ -108,8 +108,6 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
         languages: 'English, German, Spanish',
         subject: 'Financeiro',
     });
-
-    console.log(userSession)
     
     /*
      *  Fetches the messages for selected user

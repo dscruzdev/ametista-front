@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import SimpleBar from 'simplebar-react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { sendmessage } from '../../../helpers/api/';
 
 // components
 import { FormInput } from '../../../components';
@@ -14,8 +15,8 @@ import Loader from '../../../components/Loader';
 import ModalsUploadFile from '../../uikit/ModalsUploadFile';
 
 // default data
-import { messages } from './data';
-
+import { messages, messagesConversation } from './data';
+const AUTH_SESSION_KEY = 'hyper_user';
 const UserMessage = ({ message, toUser }) => {
     return (
         <li className={classnames('clearfix', { odd: message.from.id === toUser.id })}>
@@ -88,12 +89,22 @@ type ChatAreaProps = {
 };
 
 // ChatArea
-const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$FragmentType> => {
+const ChatArea = ({ selectedUser, olderMessages, trueCheck, check }: ChatAreaProps): React$Element<React$FragmentType> => {
     const [loading, setLoading] = useState(false);
-    const [userMessages, setUserMessages] = useState([]);
+    const [userMessages2, setUserMessages2] = useState([]);
+    const [messageId, setMessageId] = useState(1);
+    const [unreaded, setUnreaded] = useState(0);
+    const [loadedData, setLoadedData] = useState(false);
+    const oldmessages = olderMessages.data;
+    const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
+    if (check){
+        selectedUser = selectedUser.data[0];
+
+        console.log(selectedUser);
+    }
     const [toUser] = useState({
-        id: 9,
-        name: 'Shreyu N',
+        id: userSession.id,
+        name: userSession.username,
         avatar: 'assets/images/users/avatar-7.jpg',
         email: 'support@coderthemes.com',
         phone: '+1 456 9595 9594',
@@ -105,7 +116,9 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
     /*
      *  Fetches the messages for selected user
      */
-    const getMessagesForUser = useCallback(() => {
+
+
+    /* const getMessagesForUser = useCallback(() => {
         if (selectedUser) {
             setLoading(true);
             setTimeout(() => {
@@ -123,7 +136,35 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
 
     useEffect(() => {
         getMessagesForUser();
-    }, [getMessagesForUser]);
+    }, [getMessagesForUser]); */
+    /* 
+        useEffect(() => {
+            socket.on("receive_message", (data) => {
+                console.log("recebi")
+                toUser.lastMessage = data;
+                toUser.totalUnread = unreaded + 1;
+                let newUserMessages = [...userMessages];
+                newUserMessages.push({
+                    id: messageId,
+                    from: selectedUser,
+                    to: toUser,
+                    message: { type: 'text', value: data },
+                    sendOn: new Date().getHours() + ':' + new Date().getMinutes(),
+                });
+                setUserMessages(newUserMessages);
+                setMessageId(messageId + 1);
+                setUnreaded(unreaded + 1);
+            })
+        }, [messageId, selectedUser, socket, toUser, userMessages, unreaded, oldmessages]); */
+
+    if (olderMessages.length !== 0 && !loadedData) {
+        oldmessages.forEach((message, key) => {
+            message.id = key + 1;
+        });
+        setLoadedData(true);
+        trueCheck();
+        setUserMessages2(oldmessages);
+    }
 
     /*
      * form validation schema
@@ -149,19 +190,22 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
     /**
      * sends the chat message
      */
-    const sendChatMessage = (e, values) => {
+
+   /*  const sendChatMessage = async (e, values) => {
         let newUserMessages = [...userMessages];
         newUserMessages.push({
-            id: userMessages.length + 1,
+            id: oldmessages.length + messageId,
             from: toUser,
             to: selectedUser,
             message: { type: 'text', value: values.target[0].value },
             sendOn: new Date().getHours() + ':' + new Date().getMinutes(),
         });
         setUserMessages(newUserMessages);
+        setMessageId(messageId + 1);
+        sendmessage({ idRequests: selectedUser.requests[selectedUser.requests.length - 1].idRequests, body: values.target[0].value });
+        console.log(newUserMessages);
         reset();
-    };
-
+    }; */
     return (
         <>
             <Card>
@@ -170,7 +214,7 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
 
                     <SimpleBar style={{ height: '538px', width: '100%' }}>
                         <ul className="conversation-list px-3">
-                            {userMessages.map((message, index) => {
+                            {userMessages2.map((message, index) => {
                                 return <UserMessage key={index} message={message} toUser={toUser} />;
                             })}
                         </ul>
@@ -183,7 +227,7 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
                                     noValidate
                                     name="chat-form"
                                     id="chat-form"
-                                    onSubmit={handleSubmit(sendChatMessage)}>
+                                    onSubmit={handleSubmit()}>
                                     <div className="row">
                                         <div className="col mb-2 mb-sm-0">
                                             <FormInput
@@ -199,11 +243,11 @@ const ChatArea = ({ selectedUser }: ChatAreaProps): React$Element<React$Fragment
                                         </div>
                                         <div className="col-sm-auto">
                                             <div className="btn-group">
-                                            <ModalsUploadFile/>
+                                                {/*<ModalsUploadFile />
                                                 <Link to="#" className="btn btn-light">
                                                     {' '}
                                                     <i className="uil uil-smile"></i>{' '}
-                                                </Link>
+                        </Link>*/}
                                                 <button type="submit" className="btn btn-success chat-send btn-block">
                                                     <i className="uil uil-message"></i>
                                                 </button>

@@ -25,8 +25,13 @@ import logo from '../assets/images/logo-light.png';
 //constants
 import * as layoutConstants from '../constants/layout';
 
+const AUTH_SESSION_KEY = 'hyper_user';
+const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
+
 // get the notifications
 const Notifications = [
+
+    
     {
         day: 'Today',
         messages: [
@@ -171,10 +176,10 @@ const Topbar = ({ hideLogo, navCssClasses, openLeftMenuCallBack, topbarDark }: T
 
                         <li className="dropdown notification-list">
                             <ProfileDropdown
-                                profilePic={profilePic}
+                                profilePic={'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'}
                                 menuItems={ProfileMenus}
-                                username={'Joyce Ribeiro'}
-                                userTitle={'Administradora'}
+                                username={userSession.firstName+" "+userSession.lastName}
+                                userTitle={userSession.role}
                             />
                         </li>
                     </ul>

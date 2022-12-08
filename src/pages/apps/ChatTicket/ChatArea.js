@@ -219,45 +219,6 @@ const ChatArea = ({ selectedUser, olderMessages, trueCheck, check }: ChatAreaPro
                             })}
                         </ul>
                     </SimpleBar>
-
-                    <Row className="px-3 pb-3">
-                        <Col>
-                            <div className="mt-2 bg-light p-3 rounded">
-                                <form
-                                    noValidate
-                                    name="chat-form"
-                                    id="chat-form"
-                                    onSubmit={handleSubmit()}>
-                                    <div className="row">
-                                        <div className="col mb-2 mb-sm-0">
-                                            <FormInput
-                                                type="text"
-                                                name="newMessage"
-                                                className="border-0"
-                                                placeholder="Enter your text"
-                                                register={register}
-                                                key="newMessage"
-                                                errors={errors}
-                                                control={control}
-                                            />
-                                        </div>
-                                        <div className="col-sm-auto">
-                                            <div className="btn-group">
-                                                {/*<ModalsUploadFile />
-                                                <Link to="#" className="btn btn-light">
-                                                    {' '}
-                                                    <i className="uil uil-smile"></i>{' '}
-                        </Link>*/}
-                                                <button type="submit" className="btn btn-success chat-send btn-block">
-                                                    <i className="uil uil-message"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </Col>
-                    </Row>
                 </Card.Body>
             </Card>
         </>

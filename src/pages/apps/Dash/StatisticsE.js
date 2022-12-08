@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 
-const StatisticsE = ({tempomedioE}): React$Element<React$FragmentType> => {
+const StatisticsE = ({tempomedioE, tempomedioesperaE, fcrE}): React$Element<React$FragmentType> => {
     return (
         <Row>
             <Col xs={12}>
@@ -26,7 +26,7 @@ const StatisticsE = ({tempomedioE}): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="mdi mdi-progress-clock text-muted font-24"></i>
                                         <h3>
-                                            <span>31</span>
+                                            <span>{(tempomedioesperaE)}h</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">Tempo Médio de Espera (TME)</p>
                                     </Card.Body>
@@ -38,7 +38,7 @@ const StatisticsE = ({tempomedioE}): React$Element<React$FragmentType> => {
                                     <Card.Body className="text-center">
                                         <i className="uil-comment-check text-muted font-24"></i>
                                         <h3>
-                                            <span>70</span>
+                                            <span>{(fcrE)}%</span>
                                         </h3>
                                         <p className="text-muted font-15 mb-0">First Call Resolution (FCR)</p>
                                     </Card.Body>

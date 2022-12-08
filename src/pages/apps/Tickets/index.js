@@ -11,7 +11,8 @@ import { useAsync } from "react-async";
 
 
 // dummy data
-import { requests, clientrequests } from './Data'
+import { requests } from './Data'
+import { clientrequests, frontrequests } from './../../../helpers/'
 import { CSVLink } from 'react-csv';
 
 /* order column render */
@@ -157,9 +158,8 @@ const sizePerPageList = [
 const Tickets = (): React$Element<React$FragmentType> => {
     //const [requestList, setResquestList] = useState(requests);
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id')
-
-    const { data, error, isPending } = useAsync({ promiseFn: requests });
+    const id = urlParams.get('id');
+    
 
 
     /* change order status group
@@ -174,15 +174,26 @@ const Tickets = (): React$Element<React$FragmentType> => {
     };*/
     const [iDate, setIDate] = useState(new Date(0));
     const [fDate, setFDate] = useState(new Date());
+    const [loaded, setLoaded] = useState(false);
+    const [data, setData] = useState(false);
+    const [clientrequestsdata, setClientrequests] = useState(false);
+    if (id && !loaded) {
+        setLoaded(true);
+        clientrequests({id:id}).then(response => {setData(response.data)});
+    }else if (!loaded){
+        setLoaded(true);
+        frontrequests({id:id}).then(response => {setData(response.data)});
+    }
     const getInitialDate = (date) => {
         setIDate(date);
     }
     const getFinalDate = (date) => {
         setFDate(date);
     }
-    if (isPending) return "Loading..."
-    if (error) return `Something went wrong: ${error.message}`
+    
+    if (!data) return "Loading..."
     if (data) {
+        console.log(data);
         const toexport = [];
 
         data.forEach(request => {

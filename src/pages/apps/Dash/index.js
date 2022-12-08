@@ -37,10 +37,6 @@ const Dash = (): React$Element<React$FragmentType> => {
         var totalchamados = 0;
         var totalchamadosM = 0;
         var totalchamadosE = 0;
-        var totalchamadosatendidos =0;
-        var totalchamadosfinalizados =0;
-        var totalchamadosemandamento =0;
-        var totalchamadosaberto =0;
         var totalpositivos =0;
         var totalpositivosE =0;
         var totalcsatM =0;
@@ -69,12 +65,41 @@ const Dash = (): React$Element<React$FragmentType> => {
         var tempomedioE =0;
         var hoursM =0;
         var hoursE =0;
+        var tempomedioesperaM1 =0;
+        var tempomedioesperaM =0;
+        var hoursesperaM =0;
+        var tempomedioesperaE1 =0;
+        var tempomedioesperaE =0;
+        var hoursesperaE =0;
+        var totalfcrM=0;
+        var fcrM1 =0;
+        var fcrM =0;
+        var totalfcrE=0;
+        var fcrE1 =0;
+        var fcrE =0;
         
        filtrado.forEach((request, index) => {
+        
         totalchamados = index + 1;
         if (request.idChannels != "4") {
             totalchamadosM ++;
         }
+
+        if (request.reabertura == 0 && request.idChannels != "4") {
+          totalfcrM ++;  
+        }
+
+        fcrM1 = (totalfcrM/totalchamadosM)*100;
+
+        fcrM = +(fcrM1.toFixed(0))
+
+        if (request.reabertura == 0 && request.idChannels == "4") {
+            totalfcrE ++;  
+          }
+  
+          fcrE1 = (totalfcrE/totalchamadosM)*100;
+  
+          fcrE = +(fcrE1.toFixed(0))
 
         if (request.idChannels == "4") {
             totalchamadosE ++;
@@ -89,7 +114,7 @@ const Dash = (): React$Element<React$FragmentType> => {
         }
         csatM1 = (totalpositivos / totalcsatM)*100;
 
-        csatM = +(csatM1.toFixed(2))
+        csatM = +(csatM1.toFixed(0))
 
         if ((request.CSAT == 4 || request.CSAT == 5) && request.CSAT != null && request.idChannels == "4") {
             totalpositivosE ++;
@@ -151,7 +176,7 @@ const Dash = (): React$Element<React$FragmentType> => {
 
         tempomedioM1 = hoursM/totalchamadosM;
 
-        tempomedioM = +(tempomedioM1.toFixed(2))
+        tempomedioM = +(tempomedioM1.toFixed(0))
 
         if (request.idChannels == "4") { 
             const dataFim = moment(request.endedAt);
@@ -165,7 +190,35 @@ const Dash = (): React$Element<React$FragmentType> => {
 
          tempomedioE1 = hoursE/totalchamadosE;
 
-         tempomedioE = +(tempomedioE1.toFixed(2))
+         tempomedioE = +(tempomedioE1.toFixed(0))
+
+         if (request.idChannels != "4") { 
+            const dataFim = moment(request.openedAt);
+            const dataInicio = moment(request.createdAt);
+ 
+            const tempomedioespera = moment.duration(dataFim.diff(dataInicio));
+ 
+            hoursesperaM += tempomedioespera.asHours();
+            
+         }
+ 
+         tempomedioesperaM1 = hoursesperaM/totalchamadosM;
+ 
+         tempomedioesperaM = +(tempomedioesperaM1.toFixed(0))
+
+         if (request.idChannels == "4") { 
+            const dataFim = moment(request.openedAt);
+            const dataInicio = moment(request.createdAt);
+ 
+            const tempomedioespera = moment.duration(dataFim.diff(dataInicio));
+ 
+            hoursesperaE += tempomedioespera.asHours();
+            
+         }
+ 
+         tempomedioesperaE1 = hoursesperaE/totalchamadosE;
+ 
+         tempomedioesperaE = +(tempomedioesperaE1.toFixed(0))
         
     }    
     )
@@ -213,10 +266,10 @@ const Dash = (): React$Element<React$FragmentType> => {
                                     <Col lg={12}>
                                         <Tab.Content>
                                             <Tab.Pane eventKey="1">
-                                                <MensagensInst tempomedioM={tempomedioM} csatM={csatM} npsM={npsM}/>
+                                                <MensagensInst tempomedioM={tempomedioM} csatM={csatM} npsM={npsM} tempomedioesperaM={tempomedioesperaM} fcrM={fcrM}/>
                                             </Tab.Pane>
                                             <Tab.Pane eventKey="2">
-                                                <Email tempomedioE={tempomedioE} csatE={csatE} npsE={npsE}/>
+                                                <Email tempomedioE={tempomedioE} csatE={csatE} npsE={npsE} tempomedioesperaE={tempomedioesperaE} fcrE={fcrE}/>
                                             </Tab.Pane>
                                         </Tab.Content>
                                     </Col>

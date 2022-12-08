@@ -29,18 +29,17 @@ const clients = () =>
 const users = [
     {
         id: 0,
-        name: 'Wait',
+        name: 'Aguardando...',
         avatar: avatar2,
         lastMessage: 'Tait..',
         totalUnread: 3,
         lastMessageOn: 'wait...',
-        email: 'wait...',
-        phone: 'wait...',
-        subject: 'Financeiro',
-        location: 'California, USA',
-        languages: 'English, German, Spanish',
-        status: 'Em espera',
-        description: 'hsJADHlidhILDJdj',
+        email: 'Aguardando...',
+        phone: 'Aguardando...',
+        subject: 'Aguardando...',
+        language: 'Aguardando...',
+        status: 'Aguardando...',
+        description: 'Aguardando...',
         requests: [
             {
                 idRequests: 0,

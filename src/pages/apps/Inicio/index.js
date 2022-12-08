@@ -61,16 +61,24 @@ const Inicio = (): React$Element<React$FragmentType> => {
         var totalpositivos =0;
         var totalcsat =0;
         var csat =0;
+        var csat1 =0;
         var totalpromotores =0;
         var totaldetratores =0;
         var totalrespondentes =0;
         var ppromotores =0;
         var pdetratores =0;
         var nps =0;
+        var nps1 =0;
         var totalchamadosmessenger =0;
         var totalchamadoswhatsapp =0;
         var totalchamadossms =0;
         var totalchamadosemail =0;
+        var ptotalchamadosfinalizados = 0;
+        var ptotalchamadosemaberto = 0;
+        var ptotalchamadosemandamento = 0;
+        var ptotalchamadosfinalizados1 = 0;
+        var ptotalchamadosemaberto1 = 0;
+        var ptotalchamadosemandamento1 = 0;
         filtrado.forEach((request, index) => {totalchamados = index + 1;
        
         if ((request.CSAT == 4 || request.CSAT == 5) && request.CSAT != null) {
@@ -81,7 +89,9 @@ const Inicio = (): React$Element<React$FragmentType> => {
             totalcsat ++;
             
         }
-        csat = (totalpositivos / totalcsat)*100;
+        csat1 = (totalpositivos / totalcsat)*100;
+
+        csat = +(csat1.toFixed(0))
 
         if ((request.NPS == 9 || request.NPS == 10) && request.CSAT != null) {
             totalpromotores ++;
@@ -97,7 +107,9 @@ const Inicio = (): React$Element<React$FragmentType> => {
 
         pdetratores = (totaldetratores/totalrespondentes)*100;
 
-        nps = ppromotores - pdetratores;
+        nps1 = ppromotores - pdetratores;
+
+        nps = +(nps1.toFixed(0))
 
         if (request.idChannels == "1") { 
             totalchamadosmessenger ++;
@@ -127,6 +139,16 @@ const Inicio = (): React$Element<React$FragmentType> => {
             totalchamadosaberto ++;
         }
 
+        if (request.status == "Em andamento" || request.status == "Finalizado") { 
+            totalchamadosatendidos ++;
+        }
+
+        ptotalchamadosfinalizados1 = (totalchamadosfinalizados/totalchamados)*100;
+        ptotalchamadosfinalizados = +(ptotalchamadosfinalizados1.toFixed(0))
+        ptotalchamadosemaberto1 = (totalchamadosaberto/totalchamados)*100;
+        ptotalchamadosemaberto = +(ptotalchamadosemaberto1.toFixed(0))
+        ptotalchamadosemandamento1 = (totalchamadosemandamento/totalchamados)*100;
+        ptotalchamadosemandamento = +(ptotalchamadosemandamento1.toFixed(0))
         
     }    
         )
@@ -158,7 +180,7 @@ const Inicio = (): React$Element<React$FragmentType> => {
 
             <Row>
                 <Col xl={6} lg={9}>
-                    <Status totalchamados={totalchamados} totalchamadosfinalizados={totalchamadosfinalizados} totalchamadosemandamento={totalchamadosemandamento} totalchamadosaberto={totalchamadosaberto}/>
+                    <Status totalchamados={totalchamados} totalchamadosfinalizados={totalchamadosfinalizados} totalchamadosemandamento={totalchamadosemandamento} totalchamadosaberto={totalchamadosaberto} ptotalchamadosfinalizados={ptotalchamadosfinalizados} ptotalchamadosemaberto={ptotalchamadosemaberto} ptotalchamadosemandamento={ptotalchamadosemandamento}/>
                 </Col>
                 {/*<Col xl={4} lg={6}>
                     <Statistics />

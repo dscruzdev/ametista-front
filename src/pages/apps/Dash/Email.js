@@ -5,7 +5,7 @@ import StatisticsE from './StatisticsE';
 import MetricsSuccessE from './MetricsSuccessE';
 
 // Billing
-const Email = ({tempomedioE, csatE, npsE}): React$Element<React$FragmentType> => {
+const Email = ({tempomedioE, csatE, npsE, tempomedioesperaE, fcrE}): React$Element<React$FragmentType> => {
     /*
      * form validation schema
      */
@@ -13,7 +13,7 @@ const Email = ({tempomedioE, csatE, npsE}): React$Element<React$FragmentType> =>
         <>
             <Row>
                <Col xl={12} lg={12}>
-                    <StatisticsE tempomedioE={tempomedioE}/>
+                    <StatisticsE tempomedioE={tempomedioE} tempomedioesperaE={tempomedioesperaE} fcrE={fcrE}/>
                 </Col>
             </Row>
 

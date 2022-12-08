@@ -6,7 +6,7 @@ import MetricsSuccessM from './MetricsSuccessM';
 
 
 // Billing
-const MensagensInst = ({tempomedioM, csatM, npsM}): React$Element<React$FragmentType> => {
+const MensagensInst = ({tempomedioM, csatM, npsM, tempomedioesperaM, fcrM}): React$Element<React$FragmentType> => {
     /*
      * form validation schema
      */
@@ -14,7 +14,7 @@ const MensagensInst = ({tempomedioM, csatM, npsM}): React$Element<React$Fragment
         <>
             <Row>
                <Col xl={12} lg={12}>
-                    <StatisticsM tempomedioM={tempomedioM}/>
+                    <StatisticsM tempomedioM={tempomedioM} tempomedioesperaM={tempomedioesperaM} fcrM={fcrM}/>
                 </Col>
             </Row>
 

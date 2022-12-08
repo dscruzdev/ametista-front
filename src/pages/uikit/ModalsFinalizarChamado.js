@@ -113,7 +113,6 @@ const ModalWithColoredHeader = ({ selectedUser }: ModalsProps): React$Element<Re
                             </div>
                         </Form.Group>
 
-
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant={headerClassName} onClick={() => { endRequest() }}>

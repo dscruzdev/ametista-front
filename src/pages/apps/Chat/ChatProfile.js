@@ -1,7 +1,9 @@
 // @flow
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Dropdown, Button, Row, Col } from 'react-bootstrap';
 import { endrequests } from '../../../helpers/api'
+
 import ModalsComments from '../../uikit/ModalsComments';
 import ModalsFinalizarChamado from '../../uikit/ModalsFinalizarChamado';
 import ModalsWriteComments from '../../uikit/ModalsWriteComments';
@@ -43,8 +45,9 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
     languages = languages.slice(0, languages.length - 2);
     requestid = requestid.slice(0, requestid.length - 2);
     description = description.slice(0, description.length - 2);
+    console.log(statusarray);
     const endRequest = async (idRequests, cpfClients) => {
-        console.log(idRequests);
+        
         console.log(user.cpfClients);
         var date;
         date = new Date();
@@ -80,10 +83,11 @@ const ChatProfile = ({ selectedUser, socket }: ChatProfileProps): React$Element<
                             <img src={'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'} alt="" className="img-thumbnail avatar-lg rounded-circle" />
                             <h4>{user.name}</h4>
                             <ModalsFinalizarChamado selectedUser={selectedUser}/>
-                            
+                            <Link to={"../../apps/tickets?id="+user.requests[0].idRequests}>
                             <Button className="btn-sm mt-1 me-2" variant="primary">
                                 <i className=" uil-arrow-right me-1"></i>Histórico de chamados
                             </Button>
+                            </Link>
                         </div>
 
                         <div className="mt-3">

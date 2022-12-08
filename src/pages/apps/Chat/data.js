@@ -15,17 +15,12 @@ import avatar9 from '../../../assets/images/users/avatar-9.jpg';
 
 // var dataclients;
 
-const clients = (token) => {
-    if (token) {
-        return (fetch("http://localhost:8080/front/chat?token=" + token)
-            .then(res => (res.ok ? res : Promise.reject(res)))
-            .then(res => res.json()));
-    } else {
-        return (fetch("http://localhost:8080/front/chat")
-            .then(res => (res.ok ? res : Promise.reject(res)))
-            .then(res => res.json()));
-    }
-}
+const clients = (token) =>
+    fetch("http://localhost:8080/front/chat")
+        .then(res => (res.ok ? res : Promise.reject(res)))
+        .then(res => res.json());
+
+
 /*const comment= (id) =>
 console.log(id)
 fetch("http://localhost:8080/comment") 

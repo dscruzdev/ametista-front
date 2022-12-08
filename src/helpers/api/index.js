@@ -8,6 +8,7 @@ import { getlanguages, createlanguage, deletelanguage, updatelanguage } from './
 import { getsubjects, createsubject, deletesubject, updatesubject } from './subject';
 import { getcomments,createcomment } from './comment';
 import { sendmessage, getmessages } from './conversation';
+import { getchat } from './front';
 
 export {
     login,
@@ -16,6 +17,7 @@ export {
     forgotPassword,
     forgotPasswordConfirm,
     frontticket,
+    getchat,
     getclients,
     getcomments,
     getlanguages,

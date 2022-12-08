@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import classnames from 'classnames';
 import SimpleBar from 'simplebar-react';
-import { getmessages } from '../../../helpers/api/';
+import { getmessages, getchat } from '../../../helpers/api/';
 
 
 // dummy data
@@ -34,7 +34,8 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
     const statusFilters = ['Todos', 'Em espera', 'Em andamento'];
     const AUTH_SESSION_KEY = 'hyper_user';
     const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
-    const { data, error, isPending } = useFetch({ promiseFn: clients }, "ds",);
+
+    //const { data, error, isPending } = useAsync({ promiseFn: clients(userSession.token) });
     // const { dataSubject, errorSubject, isPendingSubject } = useAsync({ promiseFn: subjects });
     // const { dataLanguage, errorLanguage, isPendingLanguage } = useAsync({ promiseFn: languages });
     // const { dataRequest, errorRequest, isPendingRequest } = useAsync({ promiseFn: requests });
@@ -43,8 +44,16 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
     //const [selectedUser, setSelectedUser] = useAsync(users[1]);
 
     const [user, setUser] = useState([...users]);
+    const [loaded, setLoaded] = useState(false);
+    const [data, setData] = useState(false);
     const [selectedUser, setSelectedUser] = useState(users[0]);
     const [selectedstatus, setSelectedstatus] = useState('Todos');
+
+    if(!loaded){
+        setLoaded(true);
+        getchat({token:userSession.token}).then((response) => {setData(response.data)});
+    }
+    
 
     /**
      * Filter users
@@ -83,11 +92,10 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
         onMessagesLoad(olderMessages);
         socket.emit("join_conversation", idRequest);
     }
-
-    if (isPending) return "Loading..."
-    if (error) return `Something went wrong: ${error.message}`
-    if (data ) {
-
+    if(!data){
+        return("Carregando")
+    }
+    if(data){
         return (
             <>
                 <Card>
@@ -131,7 +139,7 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
                                                 className="text-body"
                                                 onClick={(e) => {
                                                     activateUser(user);
-                                                    joinconversation({cpfUsers:"222.222.222-22",idRequests:user.requests[user.requests.length-1].idRequests});
+                                                    joinconversation({uid:userSession.id,idRequests:user.requests[user.requests.length-1].idRequests});
                                                 }}>
                                                 <div
                                                     className={classnames('d-flex', 'align-items-start', 'mt-1', 'p-2', {

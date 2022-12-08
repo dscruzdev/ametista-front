@@ -152,7 +152,7 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
             setUnreaded(unreaded + 1);
         })
     }, [messageId, selectedUser, socket, toUser, userMessages, unreaded, oldmessages]);
-
+        console.log(olderMessages);
     if (olderMessages.length !== 0 && !loadedData) {
         oldmessages.forEach((message, key) => {
             message.id = key + 1;

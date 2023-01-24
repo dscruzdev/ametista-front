@@ -21,8 +21,8 @@ const ChatApp = (): React$Element<React$FragmentType> => {
      * On user change
      */
     const onUserChange = (user) => {
-        setSelectedUser(user);
         setCheck(false);
+        setSelectedUser(user);
     };
 
     const trueCheck = () => {

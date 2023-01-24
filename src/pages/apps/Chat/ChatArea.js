@@ -95,9 +95,10 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
     const [messageId, setMessageId] = useState(1);
     const [unreaded, setUnreaded] = useState(0);
     const [loadedData, setLoadedData] = useState(false);
+    const [testId, setTestId] = useState();
     const oldmessages = olderMessages.data;
     const userSession = JSON.parse(sessionStorage.getItem(AUTH_SESSION_KEY));
-    
+
     const [toUser] = useState({
         id: userSession.id,
         name: userSession.username,
@@ -108,11 +109,13 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
         languages: 'English, German, Spanish',
         subject: 'Financeiro',
     });
-    
+
     /*
      *  Fetches the messages for selected user
      */
-
+    socket.on("updateChat", () => {
+        setUserMessages([]);
+    })
 
     const getMessagesForUser = useCallback(() => {
         if (selectedUser) {
@@ -152,15 +155,21 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
             setUnreaded(unreaded + 1);
         })
     }, [messageId, selectedUser, socket, toUser, userMessages, unreaded, oldmessages]);
-        console.log(olderMessages);
+
+    
     if (olderMessages.length !== 0 && !loadedData) {
         oldmessages.forEach((message, key) => {
             message.id = key + 1;
         });
+        setTestId(oldmessages[0]);
+        console.log(oldmessages);
         setLoadedData(true);
         trueCheck();
         setUserMessages(oldmessages);
     }
+
+
+    
 
     /*
      * form validation schema
@@ -190,7 +199,7 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
     const sendChatMessage = async (e, values) => {
         let newUserMessages = [...userMessages];
         newUserMessages.push({
-            id: oldmessages.length+messageId,
+            id: oldmessages.length + messageId,
             from: toUser,
             to: selectedUser,
             message: { type: 'text', value: values.target[0].value },
@@ -202,7 +211,11 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
         console.log(newUserMessages);
         reset();
     };
-
+    // if(oldmessages && testId === oldmessages[0]){
+    //     console.log("Estamos bem aqui");
+    // }
+    console.log(oldmessages);
+    console.log(typeof oldmessages);
     return (
         <>
             <Card>
@@ -249,7 +262,7 @@ const ChatArea = ({ selectedUser, socket, olderMessages, trueCheck, check }: Cha
                                                     <i className="uil uil-message"></i>
                                                 </button>
                                             </div>
-                        </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

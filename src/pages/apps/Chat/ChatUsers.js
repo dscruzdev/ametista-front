@@ -86,7 +86,9 @@ const ChatUsers = ({ onUserSelect, socket, onMessagesLoad }: ChatUsersProps): Re
         }
     };
     var olderMessages;
-    
+    socket.on("updateChat", () => {
+        getchat({token:userSession.token}).then((response) => {setData(response.data)});
+    })
     const joinconversation = async (idRequest) =>{
         olderMessages = await getmessages({"idRequests":idRequest.idRequests, "uid": userSession.id});
         onMessagesLoad(olderMessages);
